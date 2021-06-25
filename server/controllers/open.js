@@ -234,7 +234,8 @@ class openController extends baseController {
       let successNum = 0,
         failedNum = 0,
         len = 0,
-        msg = '';
+        msg = '',
+        failList = [];
       testList.forEach(item => {
         len++;
         if (item.code === 0) {
@@ -242,6 +243,7 @@ class openController extends baseController {
         }
         else {
           failedNum++;
+          failList.push(item);
         }
       });
       if (failedNum === 0) {
@@ -250,19 +252,26 @@ class openController extends baseController {
         msg = `一共 ${len} 测试用例，${successNum} 个验证通过， ${failedNum} 个未通过。`;
       }
 
-      return { msg, len, successNum, failedNum };
+      return { msg, len, successNum, failedNum, failList };
     }
 
     const endTime = new Date().getTime();
     const executionTime = (endTime - startTime) / 1000;
-
-    let reportsResult = {
-      message: getMessage(testList),
-      runTime: executionTime + 's',
-      numbs: testList.length,
-      list: testList
+    
+    let resultMessage = getMessage(testList);
+    let message = {
+        msg: resultMessage.msg,
+        len: resultMessage.len,
+        successNum: resultMessage.successNum,
+        failedNum: resultMessage.failedNum
     };
-
+    let reportsResult = {
+        message: message,
+        runTime: executionTime + 's',
+        numbs: testList.length,
+        list: testList
+    };
+    
     if (ctx.params.email === true && reportsResult.message.failedNum !== 0) {
       let autoTestUrl = `${
         ctx.request.origin
@@ -278,8 +287,12 @@ class openController extends baseController {
         <div>
         <h3>测试结果：</h3>
         <p>${reportsResult.message.msg}</p>
-        <h3>测试结果详情如下：</h3>
+        <h3>测试url如下：</h3>
         <p>${autoTestUrl}</p>
+        <h3>失败用例详情如下：</h3>
+            <div class="col-21">
+                <pre>${JSON.stringify(resultMessage.failList, null, '   ')}</pre>
+            </div>
         </div>
         </body>
         </html>`
