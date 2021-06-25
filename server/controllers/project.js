@@ -626,6 +626,7 @@ class projectController extends baseController {
     await interfaceInst.delByProjectId(id);
     await interfaceCaseInst.delByProjectId(id);
     await interfaceColInst.delByProjectId(id);
+    await this.followModel.delByProjectId(id);
     yapi.emitHook('project_del', id).then();
     let result = await this.Model.del(id);
     ctx.body = yapi.commons.resReturn(result);
