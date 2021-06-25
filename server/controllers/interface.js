@@ -297,6 +297,8 @@ class interfaceController extends baseController {
       this.projectModel.up(params.project_id, { up_time: new Date().getTime() }).then();
     });
 
+    await this.autoAddTag(params);
+
     ctx.body = yapi.commons.resReturn(result);
   }
 
@@ -385,6 +387,45 @@ class interfaceController extends baseController {
     }
     ctx.body = yapi.commons.resReturn(result);
     // return ctx.body = yapi.commons.resReturn(null, 400, 'path第一位必需为 /, 只允许由 字母数字-/_:.! 组成');
+  }
+
+  async autoAddTag(params) {
+    //检查是否提交了目前不存在的tag
+    let tags = params.tag;
+    if (tags && Array.isArray(tags) && tags.length > 0) {
+      let projectData = await this.projectModel.get(params.project_id);
+      let tagsInProject = projectData.tag;
+      let needUpdate = false;
+      if (tagsInProject && Array.isArray(tagsInProject) && tagsInProject.length > 0) {
+        tags.forEach(tag => {
+          if (!_.find(tagsInProject, item => {
+            return item.name === tag;
+          })) {//tag不存在
+            needUpdate = true;
+            tagsInProject.push({
+              name: tag,
+              desc: tag
+            });
+          }
+        });
+      } else {
+        needUpdate = true
+        tagsInProject = []
+        tags.forEach(tag => {
+          tagsInProject.push({
+            name: tag,
+            desc: tag
+          });
+        });
+      }
+      if (needUpdate) {//需要更新tag
+        let data = {
+          tag: tagsInProject,
+          up_time: yapi.commons.time()
+        };
+        await this.projectModel.up(params.project_id, data);
+      }
+    }
   }
 
   /**
@@ -781,6 +822,8 @@ class interfaceController extends baseController {
     }
 
     yapi.emitHook('interface_update', id).then();
+    await this.autoAddTag(params);
+
     ctx.body = yapi.commons.resReturn(result);
     return 1;
   }
