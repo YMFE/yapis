@@ -49,7 +49,7 @@
     "json5": "0.5.1",
     "jsondiffpatch": "0.3.11",
     "jsonwebtoken": "7.4.1",
-    "jsrsasign": "^8.0.12",
+    "jsrsasign": "^10.2.0",
     "koa": "2.0.0",
     "koa-body": "^2.5.0",
     "koa-bodyparser": "3.2.0",
