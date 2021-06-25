@@ -385,7 +385,7 @@ class View extends Component {
               接口名称：
             </Col>
             <Col span={8} className="colName">
-              {title}
+              <span title={title}>{title}</span>
             </Col>
             <Col span={4} className="colKey">
               创&ensp;建&ensp;人：
