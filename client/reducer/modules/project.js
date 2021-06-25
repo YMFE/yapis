@@ -332,6 +332,6 @@ export async function checkProjectName(name, group_id) {
 export async function handleSwaggerUrlData(url) {
   return {
     type: GET_SWAGGER_URL_DATA,
-    payload: axios.get('/api/project/swagger_url?url='+url)
+    payload: axios.get('/api/project/swagger_url?url='+encodeURI(encodeURI(url)))
   };
 }
