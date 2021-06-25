@@ -61,7 +61,7 @@ let routerConfig = {
       method: 'get'
     },
 
-    
+
     {
       action: 'list',
       path: 'list',
@@ -117,6 +117,11 @@ let routerConfig = {
     {
       action: 'reg',
       path: 'reg',
+      method: 'post'
+    },
+    {
+      action: 'add',
+      path: 'add',
       method: 'post'
     },
     {

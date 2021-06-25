@@ -30,6 +30,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@sentry/react": "^5.20.1",
     "ajv": "^5.5.1",
     "ajv-i18n": "^2.2.0",
     "axios": "0.18.1",
@@ -159,7 +160,7 @@
   },
   "config": {
     "ghooks": {
-      "commit-msg": "validate-commit-msg"
+      "commit-msg": "npx validate-commit-msg"
     },
     "validate-commit-msg": {
       "types": [
