@@ -8,3 +8,4 @@ Fork [yapi](https://github.com/YMFE/yapi), 然后修改 docs/documents/plugin-li
 * [import-rap](https://github.com/wxxcarl/yapi-plugin-import-rap) 从rap中导入项目
 * [export-docx-data](https://github.com/inceptiongt/Yapi-plugin-export-docx-data) 数据导出docx文档
 * [import-swagger-customize](https://github.com/follow-my-heart/yapi-plugin-import-swagger-customize) 导入指定swagger接口
+* [autotest](https://github.com/duicym/yapi-plugin-autotest) 定时自动测试发送钉钉插件
