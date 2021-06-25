@@ -81,7 +81,7 @@
     "sha1": "1.1.1",
     "swagger-client": "^3.5.1",
     "tslib": "1.8.0",
-    "underscore": "1.8.3",
+    "underscore": "1.12.1",
     "url": "0.11.0",
     "vm2": "^3.8.4",
     "yapi-plugin-qsso": "^1.1.0"
