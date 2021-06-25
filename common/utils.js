@@ -249,11 +249,12 @@ exports.timeago = function(timestamp) {
 };
 
 // json schema 验证器
-exports.schemaValidator = function(schema, params) {
+exports.schemaValidator = function(schema, params, options) {
   try {
     const ajv = new Ajv({
       format: false,
-      meta: false
+      meta: false,
+      ...options
     });
     let metaSchema = require('ajv/lib/refs/json-schema-draft-04.json');
     ajv.addMetaSchema(metaSchema);
