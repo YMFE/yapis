@@ -72,7 +72,7 @@ hooks = {
     listener: []
   },
   /**
-   * 在运行页面或单个测试也里每次发送请求前调用
+   * 在运行页面或测试用例页接口发送请求前调用
    * 可以用插件针对某个接口的请求头或者数据进行修改或者记录
   */
   before_request: {
@@ -81,14 +81,28 @@ hooks = {
     listener: []
   },
   /**
-   * 在运行页面或单个测试也里每次发送完成后调用
-   * 返回值为响应原始值 + 
+   * 在运行页面或测试用例页接口发送完成后调用
+   * 返回给回调函数的值为响应原始值 + 
    * {
    *   type: 'inter' | 'case',
-   *   projectId: string,
-   *   interfaceId: string
+   *   caseId: string,
+   *   interface: 接口数据
    * }
-  */
+   * 
+   * @info
+   * hook函数为Promise, 会等待值返回后继续
+   * 返回值为指定格式时将作为组件放在最下面展示
+   * { 
+   *    name: '同步数据',
+   *    key: 'sync_schema_resp',
+   *    component: RespSchemaSync,
+   *    // 需要间接传给组件的props参数
+   *    injectData: {
+   *      message: validtor.message,
+   *      schema: transformJsonToSchema(result.res.body)
+   *    }
+   * }
+   */
   after_request: {
     type: 'listener',
     mulit: true,
@@ -108,8 +122,7 @@ hooks = {
    * {
    *   type: 'col',
    *   caseId: string,
-   *   projectId: string,
-   *   interfaceId: string
+   *   interface: 接口数据
    * }
   */
   after_col_request: {

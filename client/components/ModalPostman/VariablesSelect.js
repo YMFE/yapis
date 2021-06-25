@@ -34,7 +34,9 @@ class VariablesSelect extends Component {
     currColId: PropTypes.number,
     fetchVariableParamsList: PropTypes.func,
     clickValue: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.number,
+    envType: PropTypes.string,
+    variableSets: PropTypes.array
   };
   state = {
     records: [],
@@ -57,12 +59,18 @@ class VariablesSelect extends Component {
   }
 
   async componentDidMount() {
-    const { currColId, fetchVariableParamsList, clickValue } = this.props;
-    let result = await fetchVariableParamsList(currColId);
-    let records = result.payload.data.data;
-    this.records = records.sort((a, b) => {
-      return a.index - b.index;
-    });
+    const { currColId, fetchVariableParamsList, clickValue, variableSets, envType } = this.props;
+
+    if (envType === 'case') {
+      let result = await fetchVariableParamsList(currColId);
+      let records = result.payload.data.data;
+      this.records = records.sort((a, b) => {
+        return a.index - b.index;
+      });
+    } else {
+      this.records = variableSets;
+    }
+
     this.handleRecordsData(this.props.id);
 
     if (clickValue) {

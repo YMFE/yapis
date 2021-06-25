@@ -40,7 +40,8 @@ class ModalPostman extends Component {
     handleOk: PropTypes.func,
     inputValue: PropTypes.any,
     envType: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.number,
+    variableSets: PropTypes.array
   };
 
   constructor(props) {
@@ -208,7 +209,7 @@ class ModalPostman extends Component {
   };
 
   render() {
-    const { visible, envType } = this.props;
+    const { visible, envType, variableSets } = this.props;
     const { methodsParamsList, constantInput } = this.state;
 
     const outputParams = () => {
@@ -263,27 +264,27 @@ class ModalPostman extends Component {
                   <Panel header={<h3 className="mock-title">mock数据</h3>} key="2">
                     <MockList click={this.mockClick(index)} clickValue={item.name} />
                   </Panel>
-                  {envType === 'case' && (
-                    <Panel
-                      header={
-                        <h3 className="mock-title">
-                          变量&nbsp;<Tooltip
-                            placement="top"
-                            title="YApi 提供了强大的变量参数功能，你可以在测试的时候使用前面接口的 参数 或 返回值 作为 后面接口的参数，即使接口之间存在依赖，也可以轻松 一键测试~"
-                          >
-                            <Icon type="question-circle-o" />
-                          </Tooltip>
-                        </h3>
-                      }
-                      key="3"
-                    >
-                      <VariablesSelect
-                        id={this.props.id}
-                        click={this.mockClick(index)}
-                        clickValue={item.name}
-                      />
-                    </Panel>
-                  )}
+                  <Panel
+                    header={
+                      <h3 className="mock-title">
+                        变量&nbsp;<Tooltip
+                          placement="top"
+                          title="YApi 提供了强大的变量参数功能，你可以在测试的时候使用前面接口的 参数 或 返回值 作为 后面接口的参数 (使用返回值的header需要手动填写表达式：$.9527.header.cookie[0])，即使接口之间存在依赖，也可以轻松 一键测试~"
+                        >
+                          <Icon type="question-circle-o" />
+                        </Tooltip>
+                      </h3>
+                    }
+                    key="3"
+                  >
+                    <VariablesSelect
+                      id={this.props.id}
+                      click={this.mockClick(index)}
+                      envType={envType}
+                      variableSets={variableSets}
+                      clickValue={item.name}
+                    />
+                  </Panel>
                 </Collapse>
               </Col>
             ) : (

@@ -288,6 +288,7 @@ class InterfaceColContent extends Component {
       this.records[curitem._id] = {
         status: result.status,
         params: result.params,
+        header: result.res_header,
         body: result.res_body
       };
 
@@ -315,8 +316,7 @@ class InterfaceColContent extends Component {
     await plugin.emitHook('before_col_request', Object.assign({}, options, {
       type: 'col',
       caseId: options.caseId,
-      projectId: interfaceData.project_id,
-      interfaceId: interfaceData.interface_id
+      interface: interfaceData
     }));
 
     try {
@@ -339,8 +339,7 @@ class InterfaceColContent extends Component {
       await plugin.emitHook('after_col_request', result, {
         type: 'col',
         caseId: options.caseId,
-        projectId: interfaceData.project_id,
-        interfaceId: interfaceData.interface_id
+        interface: interfaceData
       });
 
       if (options.data && typeof options.data === 'object') {
