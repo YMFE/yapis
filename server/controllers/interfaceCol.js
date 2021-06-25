@@ -334,7 +334,7 @@ class interfaceColController extends baseController {
       }
 
       params.uid = this.getUid();
-      params.index = 0;
+      //params.index = 0;
       params.add_time = yapi.commons.time();
       params.up_time = yapi.commons.time();
       let result = await this.caseModel.save(params);
@@ -385,9 +385,11 @@ class interfaceColController extends baseController {
         return (ctx.body = yapi.commons.resReturn(null, 400, '接口集id不能为空'));
       }
 
+      let maxIndexModel = await this.caseModel.getMaxIndex();
+      let maxIndex = maxIndexModel.index;
       let data = {
         uid: this.getUid(),
-        index: 0,
+        index: maxIndex,
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time(),
         project_id: params.project_id,

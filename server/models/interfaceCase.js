@@ -130,6 +130,10 @@ class interfaceCase extends baseModel {
       }
     );
   }
+  
+  getMaxIndex(){
+    return this.model.findOne().sort({index:-1}).limit(1).exec();
+  }
 }
 
 module.exports = interfaceCase;
