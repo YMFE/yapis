@@ -99,7 +99,7 @@ Footer.defaultProps = {
       ]
     },
     {
-      title: 'Copyright © 2018 YMFE',
+      title: `Copyright © 2018-${new Date().getFullYear()} YMFE`,
       linkList: [
         {
           itemTitle: `版本: ${version} `,
