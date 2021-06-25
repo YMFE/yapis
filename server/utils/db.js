@@ -26,6 +26,15 @@ function connect(callback) {
     options.pass = config.db.pass;
   }
 
+  if (config.db.reconnectTries) {
+    options.reconnectTries = config.db.reconnectTries;
+  }
+
+  if (config.db.reconnectInterval) {
+    options.reconnectInterval = config.db.reconnectInterval;
+  }
+
+
   options = Object.assign({}, options, config.db.options)
 
   var connectString = '';
