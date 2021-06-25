@@ -593,7 +593,6 @@ ${JSON.stringify(schema, null, 2)}`)
   } catch (err) {
     logs.push(convertString(err));
     result.logs = logs;
-    logs.push(err.name + ': ' + err.message)
     return yapi.commons.resReturn(result, 400, err.name + ': ' + err.message);
   }
 };
