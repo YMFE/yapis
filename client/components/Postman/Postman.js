@@ -136,6 +136,7 @@ export default class Run extends Component {
       test_res_header: null,
       test_res_body: null,
       autoPreviewHTML: true,
+      injectList: [],
       ...this.props.data
     };
   }
@@ -158,8 +159,8 @@ export default class Run extends Component {
   handleReqHeader = (value, env) => {
     let index = value
       ? env.findIndex(item => {
-          return item.name === value;
-        })
+        return item.name === value;
+      })
       : 0;
     index = index === -1 ? 0 : index;
 
@@ -217,7 +218,7 @@ export default class Run extends Component {
     }
 
     let example = {}
-    if(this.props.type === 'inter'){
+    if (this.props.type === 'inter') {
       example = ['req_headers', 'req_query', 'req_body_form'].reduce(
         (res, key) => {
           res[key] = (data[key] || []).map(item => {
@@ -334,28 +335,40 @@ export default class Run extends Component {
     let options = handleParams(this.state, this.handleValue),
       result;
 
+    let interfaceData = {
+      ...this.state,
+      pre_script: this.state.pre_script,
+      after_script: this.state.after_script
+    }
 
     await plugin.emitHook('before_request', options, {
       type: this.props.type,
       caseId: options.caseId,
-      projectId: this.props.projectId,
-      interfaceId: this.props.interfaceId
+      interface: interfaceData
     });
 
     try {
       options.taskId = this.props.curUid;
-      result = await crossRequest(options, options.pre_script || this.state.pre_script, options.after_script || this.state.after_script, createContext(
+      result = await crossRequest(options, interfaceData.pre_script, interfaceData.after_script, createContext(
         this.props.curUid,
         this.props.projectId,
         this.props.interfaceId
       ));
 
-      await plugin.emitHook('after_request', result, {
+      let after_reault = await plugin.emitHook('after_request', result, {
         type: this.props.type,
         caseId: options.caseId,
-        projectId: this.props.projectId,
-        interfaceId: this.props.interfaceId
+        interface: interfaceData
       });
+
+      // 将接口返回的对应的组件渲染
+      let result_inject = after_reault.filter((rs) => (rs && rs.component));
+
+      if (result_inject.length) {
+        this.setState({
+          injectList: result_inject
+        });
+      }
 
       result = {
         header: result.res.header,
@@ -424,7 +437,6 @@ export default class Run extends Component {
   };
 
   changeParam = (name, v, index, key) => {
-    
     key = key || 'value';
     const pathParam = deepCopyJson(this.state[name]);
 
@@ -580,8 +592,15 @@ export default class Run extends Component {
       loading,
       case_env,
       inputValue,
-      hasPlugin
+      hasPlugin,
+      injectList
     } = this.state;
+
+    // 展示注入的组件
+    let injectComponent = injectList.length ? injectList.map(({ key, name, injectData, component: InjectComponent }) => {
+      return (<InjectComponent key={key} name={name} {...injectData} />);
+    }) : null;
+
     // console.log(env);
     return (
       <div className="interface-test postman">
@@ -934,7 +953,7 @@ export default class Run extends Component {
                 {this.state.resStatusCode + '  ' + this.state.resStatusText}
               </h2>
               <div>
-                <a rel="noopener noreferrer"  target="_blank" href="https://juejin.im/post/5c888a3e5188257dee0322af">YApi 新版如何查看 http 请求数据</a>
+                <a rel="noopener noreferrer" target="_blank" href="https://juejin.im/post/5c888a3e5188257dee0322af">YApi 新版如何查看 http 请求数据</a>
               </div>
               {this.state.test_valid_msg && (
                 <Alert
@@ -1045,6 +1064,7 @@ export default class Run extends Component {
             </Tabs.TabPane>
           ) : null}
         </Tabs>
+        {injectComponent}
       </div>
     );
   }
