@@ -32,7 +32,7 @@
   "dependencies": {
     "ajv": "^5.5.1",
     "ajv-i18n": "^2.2.0",
-    "axios": "0.18.1",
+    "axios": "0.21.1",
     "compare-versions": "^3.4.0",
     "copy-to-clipboard": "3.0.8",
     "cpu-load": "^1.0.0",
