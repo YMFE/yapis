@@ -10,7 +10,10 @@ exports.ldapQuery = (username, password) => {
 
     //  使用ldapjs库创建一个LDAP客户端
     const client = ldap.createClient({
-      url: ldapLogin.server
+      url: ldapLogin.server,
+      tlsOptions: {
+        rejectUnauthorized: false
+      }
     });
 
     client.once('error', err => {
