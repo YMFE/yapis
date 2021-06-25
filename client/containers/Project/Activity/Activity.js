@@ -4,6 +4,8 @@ import TimeTree from '../../../components/TimeLine/TimeLine';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import intl from "react-intl-universal";
+
 @connect(state => {
   return {
     uid: state.user.uid + '',
@@ -30,10 +32,10 @@ class Activity extends Component {
           <div style={{ display: 'none' }} className="logHead">
             {/*<Breadcrumb />*/}
             <div className="projectDes">
-              <p>高效、易用、可部署的API管理平台</p>
+              <p>{intl.get('Activity.Activity.高效、易用、可部署的')}</p>
             </div>
             <div className="Mockurl">
-              <span>Mock地址：</span>
+              <span>{intl.get('Activity.Activity.Mock地址：')}</span>
               <p>
                 {location.protocol +
                   '//' +
@@ -43,8 +45,7 @@ class Activity extends Component {
               </p>
               <Button type="primary">
                 <a href={`/api/project/download?project_id=${this.props.match.params.id}`}>
-                  下载Mock数据
-                </a>
+                  {intl.get('Activity.Activity.下载Mock数据')}</a>
               </Button>
             </div>
           </div>

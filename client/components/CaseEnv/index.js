@@ -6,6 +6,7 @@ import { Select, Row, Col, Collapse, Icon, Tooltip } from 'antd';
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import './index.scss';
+import intl from "react-intl-universal";
 
 export default class CaseEnv extends React.Component {
   constructor(props) {
@@ -39,8 +40,7 @@ export default class CaseEnv extends React.Component {
           header={
             <span>
               {' '}
-              选择测试用例环境
-              <Tooltip title="默认使用测试用例选择的环境">
+              {intl.get('CaseEnv.index.选择测试用例环境')}<Tooltip title={intl.get('CaseEnv.index.默认使用测试用例选择')}>
                 {' '}
                 <Icon type="question-circle-o" />{' '}
               </Tooltip>
@@ -75,8 +75,7 @@ export default class CaseEnv extends React.Component {
                           onChange={val => this.props.currProjectEnvChange(val, item._id)}
                         >
                           <Option key="default" value="">
-                            默认环境
-                          </Option>
+                            {intl.get('CaseEnv.index.默认环境')}</Option>
 
                           {item.env.map(key => {
                             return (

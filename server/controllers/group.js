@@ -105,7 +105,7 @@ class groupController extends baseController {
       let role = await this.getProjectRole(params.id, 'group');
       result.role = role;
       if (result.type === 'private') {
-        result.group_name = '个人空间';
+        result.group_name = 'My Zone'; // ‘个人空间’
       }
       ctx.body = yapi.commons.resReturn(result);
     }
@@ -452,7 +452,7 @@ class groupController extends baseController {
     }
     if (privateGroup) {
       privateGroup = privateGroup.toObject();
-      privateGroup.group_name = '个人空间';
+      privateGroup.group_name = 'My Zone'; // 个人空间
       privateGroup.role = 'owner';
       newResult.unshift(privateGroup);
     }

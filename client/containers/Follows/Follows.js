@@ -7,6 +7,7 @@ import { getFollowList } from '../../reducer/modules/follow';
 import { setBreadcrumb } from '../../reducer/modules/user';
 import ProjectCard from '../../components/ProjectCard/ProjectCard.js';
 import ErrMsg from '../../components/ErrMsg/ErrMsg.js';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -44,7 +45,7 @@ class Follows extends Component {
   };
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '我的关注' }]);
+    this.props.setBreadcrumb([{ name: intl.get('Follows.Follows.我的关注') }]);
     this.props.getFollowList(this.props.uid).then(res => {
       if (res.payload.data.errcode === 0) {
         this.setState({

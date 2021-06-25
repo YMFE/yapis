@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Home, Group, Project, Follows, AddProject, Login } from './containers/index';
-import { Alert } from 'antd';
+import { Alert, Select } from 'antd';
 import User from './containers/User/User.js';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -13,6 +13,8 @@ import MyPopConfirm from './components/MyPopConfirm/MyPopConfirm';
 import { checkLoginState } from './reducer/modules/user';
 import { requireAuthentication } from './components/AuthenticatedComponent';
 import Notify from './components/Notify/Notify';
+import * as i18nHelper from './i18n';
+
 
 const plugin = require('client/plugin.js');
 
@@ -81,7 +83,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: LOADING_STATUS
+      login: LOADING_STATUS,
+      lng: i18nHelper.getLocale(),
     };
   }
 
@@ -93,6 +96,14 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.checkLoginState();
+  }
+
+  changeLng = (lng) => {
+    i18nHelper.switchLng(lng)
+      .then(() => {
+        // After loading CLDR locale data, start to render
+        this.setState({ lng });
+      });
   }
 
   showConfirm = (msg, callback) => {
@@ -108,13 +119,18 @@ export default class App extends Component {
     if (status === LOADING_STATUS) {
       return <Loading visible />;
     } else {
+
+      const lngSel = <Select value={this.state.lng} onChange={e=>this.changeLng(e)}>
+        {i18nHelper.availableLng.map(k => <Select.Option key={k} value={k}>{k}</Select.Option>)}
+      </Select>
+
       r = (
         <Router getUserConfirmation={this.showConfirm}>
           <div className="g-main">
             <div className="router-main">
               {this.props.curUserRole === 'admin' && <Notify />}
               {alertContent()}
-              {this.props.loginState !== 1 ? <Header /> : null}
+              {this.props.loginState !== 1 ? <Header addone={lngSel} /> : null}
               <div className="router-container">
                 {Object.keys(AppRoute).map(key => {
                   let item = AppRoute[key];
@@ -123,12 +139,12 @@ export default class App extends Component {
                   ) : key === 'home' ? (
                     <Route key={key} exact path={item.path} component={item.component} />
                   ) : (
-                    <Route
-                      key={key}
-                      path={item.path}
-                      component={requireAuthentication(item.component)}
-                    />
-                  );
+                        <Route
+                          key={key}
+                          path={item.path}
+                          component={requireAuthentication(item.component)}
+                        />
+                      );
                 })}
               </div>
               {/* <div className="router-container">

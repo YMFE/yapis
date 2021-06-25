@@ -185,6 +185,7 @@ module.exports = {
 
         baseConfig.module.preLoaders.push({
           test: /\.json$/,
+          exclude: /locales\/.+\.json/,
           loader: 'json-loader'
         });
 

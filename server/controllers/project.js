@@ -227,17 +227,17 @@ class projectController extends baseController {
     let catInst = yapi.getInst(interfaceCatModel);
     if (result._id) {
       await colInst.save({
-        name: '公共测试集',
+        name: 'common set',
         project_id: result._id,
-        desc: '公共测试集',
+        desc: 'common set',
         uid: this.getUid(),
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time()
       });
       await catInst.save({
-        name: '公共分类',
+        name: 'common',
         project_id: result._id,
-        desc: '公共分类',
+        desc: 'common group',
         uid: this.getUid(),
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time()

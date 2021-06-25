@@ -15,6 +15,7 @@ import { autobind } from 'core-decorators';
 import { setBreadcrumb } from '../../../reducer/modules/user';
 
 import './ProjectList.scss';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -127,7 +128,7 @@ class ProjectList extends Component {
     const Follow = () => {
       return followProject.length ? (
         <Row>
-          <h3 className="owner-type">我的关注</h3>
+          <h3 className="owner-type">{intl.get('ProjectList.ProjectList.我的关注')}</h3>
           {followProject.map((item, index) => {
             return (
               <Col xs={8} lg={6} xxl={4} key={index}>
@@ -141,7 +142,7 @@ class ProjectList extends Component {
     const NoFollow = () => {
       return noFollow.length ? (
         <Row style={{ borderBottom: '1px solid #eee', marginBottom: '15px' }}>
-          <h3 className="owner-type">我的项目</h3>
+          <h3 className="owner-type">{intl.get('ProjectList.ProjectList.我的项目')}</h3>
           {noFollow.map((item, index) => {
             return (
               <Col xs={8} lg={6} xxl={4} key={index}>
@@ -168,18 +169,16 @@ class ProjectList extends Component {
       <div style={{ paddingTop: '24px' }} className="m-panel card-panel card-panel-s project-list">
         <Row className="project-list-header">
           <Col span={16} style={{ textAlign: 'left' }}>
-            {this.props.currGroup.group_name} 分组共 ({projectData.length}) 个项目
-          </Col>
+            {this.props.currGroup.group_name} {intl.get('ProjectList.ProjectList.分组共 (')}{projectData.length}{intl.get('ProjectList.ProjectList.) 个项目')}</Col>
           <Col span={8}>
             {isShow ? (
               <Link to="/add-project">
-                <Button type="primary">添加项目</Button>
+                <Button type="primary">{intl.get('ProjectList.ProjectList.添加项目')}</Button>
               </Link>
             ) : (
-              <Tooltip title="您没有权限,请联系该分组组长或管理员">
+              <Tooltip title={intl.get('ProjectList.ProjectList.您没有权限,请联系该')}>
                 <Button type="primary" disabled>
-                  添加项目
-                </Button>
+                  {intl.get('ProjectList.ProjectList.添加项目')}</Button>
               </Tooltip>
             )}
           </Col>

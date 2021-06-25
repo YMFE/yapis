@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Alert, message } from 'antd';
+import intl from "react-intl-universal";
 
 export default class Notify extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class Notify extends Component {
       if (req.status === 200) {
         this.setState({ newVersion: req.data.data[0] });
       } else {
-        message.error('无法获取新版本信息！');
+        message.error(intl.get('Notify.Notify.无法获取新版本信息！'));
       }
     });
   }
@@ -29,14 +30,13 @@ export default class Notify extends Component {
           <Alert
             message={
               <div>
-                当前版本是：{this.state.version}&nbsp;&nbsp;可升级到: {this.state.newVersion}
+                {intl.get('Notify.Notify.当前版本是：')}{this.state.version}{intl.get('Notify.Notify.&nbsp;&nbs')}{this.state.newVersion}
                 &nbsp;&nbsp;&nbsp;
                 <a
                   target="view_window"
                   href="https://github.com/YMFE/yapi/blob/master/CHANGELOG.md"
                 >
-                  版本详情
-                </a>
+                  {intl.get('Notify.Notify.版本详情')}</a>
               </div>
             }
             banner

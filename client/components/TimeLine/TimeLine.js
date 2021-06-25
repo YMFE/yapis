@@ -15,6 +15,7 @@ import 'jsondiffpatch/dist/formatters-styles/annotated.css';
 import 'jsondiffpatch/dist/formatters-styles/html.css';
 import './TimeLine.scss';
 import { timeago } from '../../../common/utils.js';
+import intl from "react-intl-universal";
 
 // const Option = AutoComplete.Option;
 const { Option, OptGroup } = AutoComplete;
@@ -144,12 +145,12 @@ class TimeTree extends Component {
 
     const curDiffData = this.state.curDiffData;
     let logType = {
-      project: '项目',
-      group: '分组',
-      interface: '接口',
-      interface_col: '接口集',
-      user: '用户',
-      other: '其他'
+      project: intl.get('TimeLine.TimeLine.项目'),
+      group: intl.get('TimeLine.TimeLine.分组'),
+      interface: intl.get('TimeLine.TimeLine.接口'),
+      interface_col: intl.get('TimeLine.TimeLine.接口集'),
+      user: intl.get('TimeLine.TimeLine.用户'),
+      other: intl.get('TimeLine.TimeLine.其他')
     };
 
     const children = this.state.apiList.map(item => {
@@ -168,8 +169,7 @@ class TimeTree extends Component {
 
     children.unshift(
       <Option value="" key="all">
-        选择全部
-      </Option>
+        {intl.get('TimeLine.TimeLine.选择全部')}</Option>
     );
 
     if (data && data.length) {
@@ -191,12 +191,12 @@ class TimeTree extends Component {
             <div className="logMesHeade">
               <span className="logoTimeago">{timeago(item.add_time)}</span>
               {/*<span className="logusername"><Link to={`/user/profile/${item.uid}`}><Icon type="user" />{item.username}</Link></span>*/}
-              <span className="logtype">{logType[item.type]}动态</span>
+              <span className="logtype">{logType[item.type]}{intl.get('TimeLine.TimeLine.动态')}</span>
               <span className="logtime">{formatTime(item.add_time)}</span>
             </div>
             <span className="logcontent" dangerouslySetInnerHTML={{ __html: item.content }} />
             <div style={{ padding: '10px 0 0 10px' }}>
-              {interfaceDiff && <Button onClick={() => this.openDiff(item.data)}>改动详情</Button>}
+              {interfaceDiff && <Button onClick={() => this.openDiff(item.data)}>{intl.get('TimeLine.TimeLine.改动详情')}</Button>}
             </div>
           </Timeline.Item>
         );
@@ -206,11 +206,10 @@ class TimeTree extends Component {
     }
     let pending =
       this.props.newsData.total <= this.props.curpage ? (
-        <a className="logbidden">以上为全部内容</a>
+        <a className="logbidden">{intl.get('TimeLine.TimeLine.以上为全部内容')}</a>
       ) : (
         <a className="loggetMore" onClick={this.getMore.bind(this)}>
-          查看更多
-        </a>
+          {intl.get('TimeLine.TimeLine.查看更多')}</a>
       );
     if (this.state.loading) {
       pending = <Spin />;
@@ -221,12 +220,12 @@ class TimeTree extends Component {
       <section className="news-timeline">
         <Modal
           style={{ minWidth: '800px' }}
-          title="Api 改动日志"
+          title={intl.get('TimeLine.TimeLine.Api 改动日志')}
           visible={this.state.visible}
           footer={null}
           onCancel={this.handleCancel}
         >
-          <i>注： 绿色代表新增内容，红色代表删除内容</i>
+          <i>{intl.get('TimeLine.TimeLine.注： 绿色代表新增内')}</i>
           <div className="project-interface-change-content">
             {diffView.map((item, index) => {
               return (
@@ -243,7 +242,7 @@ class TimeTree extends Component {
         </Modal>
         {this.props.type === 'project' && (
           <Row className="news-search">
-            <Col span="3">选择查询的 Api：</Col>
+            <Col span="3">{intl.get('TimeLine.TimeLine.选择查询的 Api：')}</Col>
             <Col span="10">
               <AutoComplete
                 onSelect={this.handleSelectApi}

@@ -4,6 +4,8 @@ import { Form, Input, Select, Button } from 'antd';
 
 import constants from '../../../../constants/variable.js'
 import { handleApiPath, nameLengthLimit } from '../../../../common.js'
+import intl from "react-intl-universal";
+
 const HTTP_METHOD = constants.HTTP_METHOD;
 const HTTP_METHOD_KEYS = Object.keys(HTTP_METHOD);
 
@@ -68,7 +70,7 @@ class AddInterfaceForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
-          label="接口分类"
+          label={intl.get('InterfaceList.AddInterfaceForm.接口分类')}
         >
           {getFieldDecorator('catid', {
             initialValue: this.props.catid ? this.props.catid + '' : this.props.catdata[0]._id + ''
@@ -82,22 +84,22 @@ class AddInterfaceForm extends Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="接口名称"
+          label={intl.get('InterfaceList.AddInterfaceForm.接口名称')}
         >
           {getFieldDecorator('title', {
-            rules: nameLengthLimit('接口')
+            rules: nameLengthLimit(intl.get('InterfaceList.AddInterfaceForm.接口'))
           })(
-            <Input placeholder="接口名称" />
+            <Input placeholder={intl.get('InterfaceList.AddInterfaceForm.接口名称')} />
             )}
         </FormItem>
 
         <FormItem
           {...formItemLayout}
-          label="接口路径"
+          label={intl.get('InterfaceList.AddInterfaceForm.接口路径')}
         >
           {getFieldDecorator('path', {
             rules: [{
-              required: true, message: '请输入接口路径!'
+              required: true, message: intl.get('InterfaceList.AddInterfaceForm.请输入接口路径!')
             }]
           })(
             <Input onBlur={this.handlePath} addonBefore={prefixSelector} placeholder="/path" />
@@ -105,19 +107,18 @@ class AddInterfaceForm extends Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label="注"
+          label={intl.get('InterfaceList.AddInterfaceForm.注')}
         >
-          <span style={{ color: "#929292" }}>详细的接口数据可以在编辑页面中添加</span>
+          <span style={{ color: "#929292" }}>{intl.get('InterfaceList.AddInterfaceForm.详细的接口数据可以在')}</span>
         </FormItem>
         <FormItem className="catModalfoot" wrapperCol={{ span: 24, offset: 8 }} >
-          <Button onClick={this.props.onCancel} style={{ marginRight: "10px" }}  >取消</Button>
+          <Button onClick={this.props.onCancel} style={{ marginRight: "10px" }}  >{intl.get('InterfaceList.AddInterfaceForm.取消')}</Button>
           <Button
             type="primary"
             htmlType="submit"
             disabled={hasErrors(getFieldsError())}
           >
-            提交
-          </Button>
+            {intl.get('InterfaceList.AddInterfaceForm.提交')}</Button>
         </FormItem>
 
       </Form>

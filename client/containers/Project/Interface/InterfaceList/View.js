@@ -11,6 +11,7 @@ import variable from '../../../../constants/variable';
 import constants from '../../../../constants/variable.js';
 import copy from 'copy-to-clipboard';
 import SchemaTable from '../../../../components/SchemaTable/SchemaTable.js';
+import intl from "react-intl-universal";
 
 const HTTP_METHOD = constants.HTTP_METHOD;
 
@@ -39,13 +40,13 @@ class View extends Component {
     if (req_body_type === 'form') {
       const columns = [
         {
-          title: '参数名称',
+          title: intl.get('InterfaceList.View.参数名称'),
           dataIndex: 'name',
           key: 'name',
           width: 140
         },
         {
-          title: '参数类型',
+          title: intl.get('InterfaceList.View.参数类型'),
           dataIndex: 'type',
           key: 'type',
           width: 100,
@@ -53,23 +54,21 @@ class View extends Component {
             text = text || '';
             return text.toLowerCase() === 'text' ? (
               <span>
-                <i className="query-icon text">T</i>文本
-              </span>
+                <i className="query-icon text">T</i>{intl.get('InterfaceList.View.文本')}</span>
             ) : (
               <span>
-                <Icon type="file" className="query-icon" />文件
-              </span>
+                <Icon type="file" className="query-icon" />{intl.get('InterfaceList.View.文件')}</span>
             );
           }
         },
         {
-          title: '是否必须',
+          title: intl.get('InterfaceList.View.是否必须'),
           dataIndex: 'required',
           key: 'required',
           width: 100
         },
         {
-          title: '示例',
+          title: intl.get('InterfaceList.View.示例'),
           dataIndex: 'example',
           key: 'example',
           width: 80,
@@ -78,7 +77,7 @@ class View extends Component {
           }
         },
         {
-          title: '备注',
+          title: intl.get('InterfaceList.View.备注'),
           dataIndex: 'value',
           key: 'value',
           render(_, item) {
@@ -95,7 +94,7 @@ class View extends Component {
             name: item.name,
             value: item.desc,
             example: item.example,
-            required: item.required == 0 ? '否' : '是',
+            required: item.required == 0 ? intl.get('InterfaceList.View.否') : intl.get('InterfaceList.View.是'),
             type: item.type
           });
         });
@@ -157,19 +156,19 @@ class View extends Component {
   req_query(query) {
     const columns = [
       {
-        title: '参数名称',
+        title: intl.get('InterfaceList.View.参数名称'),
         dataIndex: 'name',
         width: 140,
         key: 'name'
       },
       {
-        title: '是否必须',
+        title: intl.get('InterfaceList.View.是否必须'),
         width: 100,
         dataIndex: 'required',
         key: 'required'
       },
       {
-        title: '示例',
+        title: intl.get('InterfaceList.View.示例'),
         dataIndex: 'example',
         key: 'example',
         width: 80,
@@ -178,7 +177,7 @@ class View extends Component {
         }
       },
       {
-        title: '备注',
+        title: intl.get('InterfaceList.View.备注'),
         dataIndex: 'value',
         key: 'value',
         render(_, item) {
@@ -195,7 +194,7 @@ class View extends Component {
           name: item.name,
           value: item.desc,
           example: item.example,
-          required: item.required == 0 ? '否' : '是'
+          required: item.required == 0 ? intl.get('InterfaceList.View.否') : intl.get('InterfaceList.View.是')
         });
       });
     }
@@ -238,16 +237,16 @@ class View extends Component {
 
   copyUrl = url => {
     copy(url);
-    message.success('已经成功复制到剪切板');
+    message.success(intl.get('InterfaceList.View.已经成功复制到剪切板'));
   };
 
   flagMsg = (mock, strice) => {
     if (mock && strice) {
-      return <span>( 全局mock & 严格模式 )</span>;
+      return <span>{intl.get('InterfaceList.View.( 全局mock &')}</span>;
     } else if (!mock && strice) {
-      return <span>( 严格模式 )</span>;
+      return <span>{intl.get('InterfaceList.View.( 严格模式 )')}</span>;
     } else if (mock && !strice) {
-      return <span>( 全局mock )</span>;
+      return <span>{intl.get('InterfaceList.View.( 全局mock )')}</span>;
     } else {
       return;
     }
@@ -260,7 +259,7 @@ class View extends Component {
         dataSource.push({
           key: i,
           name: item.name,
-          required: item.required == 0 ? '否' : '是',
+          required: item.required == 0 ? intl.get('InterfaceList.View.否') : intl.get('InterfaceList.View.是'),
           value: item.value,
           example: item.example,
           desc: item.desc
@@ -281,13 +280,13 @@ class View extends Component {
     }
     const req_params_columns = [
       {
-        title: '参数名称',
+        title: intl.get('InterfaceList.View.参数名称'),
         dataIndex: 'name',
         key: 'name',
         width: 140
       },
       {
-        title: '示例',
+        title: intl.get('InterfaceList.View.示例'),
         dataIndex: 'example',
         key: 'example',
         width: 80,
@@ -296,7 +295,7 @@ class View extends Component {
         }
       },
       {
-        title: '备注',
+        title: intl.get('InterfaceList.View.备注'),
         dataIndex: 'desc',
         key: 'desc',
         render(_, item) {
@@ -307,25 +306,25 @@ class View extends Component {
 
     const columns = [
       {
-        title: '参数名称',
+        title: intl.get('InterfaceList.View.参数名称'),
         dataIndex: 'name',
         key: 'name',
         width: '200px'
       },
       {
-        title: '参数值',
+        title: intl.get('InterfaceList.View.参数值'),
         dataIndex: 'value',
         key: 'value',
         width: '300px'
       },
       {
-        title: '是否必须',
+        title: intl.get('InterfaceList.View.是否必须'),
         dataIndex: 'required',
         key: 'required',
         width: '100px'
       },
       {
-        title: '示例',
+        title: intl.get('InterfaceList.View.示例'),
         dataIndex: 'example',
         key: 'example',
         width: '80px',
@@ -334,7 +333,7 @@ class View extends Component {
         }
       },
       {
-        title: '备注',
+        title: intl.get('InterfaceList.View.备注'),
         dataIndex: 'desc',
         key: 'desc',
         render(_, item) {
@@ -343,8 +342,8 @@ class View extends Component {
       }
     ];
     let status = {
-      undone: '未完成',
-      done: '已完成'
+      undone: intl.get('InterfaceList.View.未完成'),
+      done: intl.get('InterfaceList.View.已完成')
     };
 
     let bodyShow =
@@ -377,19 +376,16 @@ class View extends Component {
     let res = (
       <div className="caseContainer">
         <h2 className="interface-title" style={{ marginTop: 0 }}>
-          基本信息
-        </h2>
+          {intl.get('InterfaceList.View.基本信息')}</h2>
         <div className="panel-view">
           <Row className="row">
             <Col span={4} className="colKey">
-              接口名称：
-            </Col>
+              {intl.get('InterfaceList.View.接口名称：')}</Col>
             <Col span={8} className="colName">
               {title}
             </Col>
             <Col span={4} className="colKey">
-              创&ensp;建&ensp;人：
-            </Col>
+              {intl.get('InterfaceList.View.创&ensp;建&e')}</Col>
             <Col span={8} className="colValue">
               <Link className="user-name" to={'/user/profile/' + uid}>
                 <img src={'/api/user/avatar?uid=' + uid} className="user-img" />
@@ -399,14 +395,12 @@ class View extends Component {
           </Row>
           <Row className="row">
             <Col span={4} className="colKey">
-              状&emsp;&emsp;态：
-            </Col>
+              {intl.get('InterfaceList.View.状&emsp;&em')}</Col>
             <Col span={8} className={'tag-status ' + this.props.curData.status}>
               {status[this.props.curData.status]}
             </Col>
             <Col span={4} className="colKey">
-              更新时间：
-            </Col>
+              {intl.get('InterfaceList.View.更新时间：')}</Col>
             <Col span={8}>{formatTime(up_time)}</Col>
           </Row>
           {safeArray(tag) &&
@@ -422,8 +416,7 @@ class View extends Component {
             )}
           <Row className="row">
             <Col span={4} className="colKey">
-              接口路径：
-            </Col>
+              {intl.get('InterfaceList.View.接口路径：')}</Col>
             <Col
               span={18}
               className="colValue"
@@ -440,7 +433,7 @@ class View extends Component {
                 {this.props.currProject.basepath}
                 {this.props.curData.path}
               </span>
-              <Tooltip title="复制路径">
+              <Tooltip title={intl.get('InterfaceList.View.复制路径')}>
                 <Icon
                   type="copy"
                   className="interface-url-icon"
@@ -452,8 +445,7 @@ class View extends Component {
           </Row>
           <Row className="row">
             <Col span={4} className="colKey">
-              Mock地址：
-            </Col>
+              {intl.get('InterfaceList.View.Mock地址：')}</Col>
             <Col span={18} className="colValue">
               {this.flagMsg(this.props.currProject.is_mock_open, this.props.currProject.strice)}
               <span
@@ -493,7 +485,7 @@ class View extends Component {
               </Row>
             )}
         </div>
-        {this.props.curData.desc && <h2 className="interface-title">备注</h2>}
+        {this.props.curData.desc && <h2 className="interface-title">{intl.get('InterfaceList.View.备注')}</h2>}
         {this.props.curData.desc && (
           <div
             className="tui-editor-contents"
@@ -502,11 +494,10 @@ class View extends Component {
           />
         )}
         <h2 className="interface-title" style={{ display: requestShow ? '' : 'none' }}>
-          请求参数
-        </h2>
+          {intl.get('InterfaceList.View.请求参数')}</h2>
         {req_dataSource.length ? (
           <div className="colHeader">
-            <h3 className="col-title">路径参数：</h3>
+            <h3 className="col-title">{intl.get('InterfaceList.View.路径参数：')}</h3>
             <Table
               bordered
               size="small"
@@ -562,7 +553,7 @@ class View extends Component {
               )}
         </div>
 
-        <h2 className="interface-title">返回数据</h2>
+        <h2 className="interface-title">{intl.get('InterfaceList.View.返回数据')}</h2>
         {this.res_body(
           this.props.curData.res_body_type,
           this.props.curData.res_body,

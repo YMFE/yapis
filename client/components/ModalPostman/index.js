@@ -6,6 +6,7 @@ import MockList from './MockList.js';
 import MethodsList from './MethodsList.js';
 import VariablesSelect from './VariablesSelect.js';
 import { trim } from '../../common.js';
+import intl from "react-intl-universal";
 
 const { handleParamsValue } = require('common/utils.js');
 const Panel = Collapse.Panel;
@@ -170,7 +171,7 @@ class ModalPostman extends Component {
   handleError() {
     return (
       <Alert
-        message="请求“变量集”尚未运行,所以我们无法从其响应中提取的值。您可以在测试集合中测试这些变量。"
+        message={intl.get('ModalPostman.index.请求“变量集”尚未运')}
         type="warning"
       />
     );
@@ -231,8 +232,7 @@ class ModalPostman extends Component {
       <Modal
         title={
           <p>
-            <Icon type="edit" /> 高级参数设置
-          </p>
+            <Icon type="edit" /> {intl.get('ModalPostman.index.高级参数设置')}</p>
         }
         visible={visible}
         onOk={() => this.handleOk(outputParams())}
@@ -240,7 +240,7 @@ class ModalPostman extends Component {
         wrapClassName="modal-postman"
         width={1024}
         maskClosable={false}
-        okText="插入"
+        okText={intl.get('ModalPostman.index.插入')}
       >
         <Row className="modal-postman-form" type="flex">
           {methodsParamsList.map((item, index) => {
@@ -253,23 +253,23 @@ class ModalPostman extends Component {
                   bordered={false}
                   accordion
                 >
-                  <Panel header={<h3 className="mock-title">常量</h3>} key="1">
+                  <Panel header={<h3 className="mock-title">{intl.get('ModalPostman.index.常量')}</h3>} key="1">
                     <Input
-                      placeholder="基础参数值"
+                      placeholder={intl.get('ModalPostman.index.基础参数值')}
                       value={constantInput}
                       onChange={e => this.handleConstantsInput(e.target.value, index)}
                     />
                   </Panel>
-                  <Panel header={<h3 className="mock-title">mock数据</h3>} key="2">
+                  <Panel header={<h3 className="mock-title">{intl.get('ModalPostman.index.mock数据')}</h3>} key="2">
                     <MockList click={this.mockClick(index)} clickValue={item.name} />
                   </Panel>
                   {envType === 'case' && (
                     <Panel
                       header={
                         <h3 className="mock-title">
-                          变量&nbsp;<Tooltip
+                          {intl.get('ModalPostman.index.变量&nbsp;')}<Tooltip
                             placement="top"
-                            title="YApi 提供了强大的变量参数功能，你可以在测试的时候使用前面接口的 参数 或 返回值 作为 后面接口的参数，即使接口之间存在依赖，也可以轻松 一键测试~"
+                            title={intl.get('ModalPostman.index.YApi 提供了强大')}
                           >
                             <Icon type="question-circle-o" />
                           </Tooltip>
@@ -295,7 +295,7 @@ class ModalPostman extends Component {
         </Row>
         <Row className="modal-postman-expression">
           <Col span={6}>
-            <h3 className="title">表达式</h3>
+            <h3 className="title">{intl.get('ModalPostman.index.表达式')}</h3>
           </Col>
           <Col span={18}>
             <span className="expression-item">{outputParams()}</span>
@@ -303,7 +303,7 @@ class ModalPostman extends Component {
         </Row>
         <Row className="modal-postman-preview">
           <Col span={6}>
-            <h3 className="title">预览</h3>
+            <h3 className="title">{intl.get('ModalPostman.index.预览')}</h3>
           </Col>
           <Col span={18}>
             <h3>{this.handleValue(outputParams()) || (outputParams() && this.handleError())}</h3>

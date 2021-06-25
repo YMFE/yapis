@@ -10,6 +10,8 @@ import constants from '../../constants/variable.js';
 import produce from 'immer';
 import { getProject, checkProjectName, copyProjectMsg } from '../../reducer/modules/project';
 import { trim } from '../../common.js';
+import intl from "react-intl-universal";
+
 const confirm = Modal.confirm;
 
 @connect(
@@ -61,7 +63,7 @@ class ProjectCard extends Component {
     });
 
     await this.props.copyProjectMsg(newData);
-    message.success('项目复制成功');
+    message.success(intl.get('ProjectCard.ProjectCard.项目复制成功'));
     this.props.callbackResult();
   };
 
@@ -70,9 +72,9 @@ class ProjectCard extends Component {
     const that = this;
 
     confirm({
-      title: '确认复制 ' + that.props.projectData.name + ' 项目吗？',
-      okText: '确认',
-      cancelText: '取消',
+      title: intl.get('ProjectCard.ProjectCard.确认复制') + that.props.projectData.name + intl.get('ProjectCard.ProjectCard.项目吗？'),
+      okText: intl.get('ProjectCard.ProjectCard.确认'),
+      cancelText: intl.get('ProjectCard.ProjectCard.取消'),
       content: (
         <div style={{ marginTop: '10px', fontSize: '13px', lineHeight: '25px' }}>
           <Alert
@@ -83,9 +85,9 @@ class ProjectCard extends Component {
           />
           <div style={{ marginTop: '16px' }}>
             <p>
-              <b>项目名称:</b>
+              <b>{intl.get('ProjectCard.ProjectCard.项目名称:')}</b>
             </p>
-            <Input id="project_name" placeholder="项目名称" />
+            <Input id="project_name" placeholder={intl.get('ProjectCard.ProjectCard.项目名称')} />
           </div>
         </div>
       ),
@@ -156,7 +158,7 @@ class ProjectCard extends Component {
         >
           <Tooltip
             placement="rightTop"
-            title={projectData.follow || inFollowPage ? '取消关注' : '添加关注'}
+            title={projectData.follow || inFollowPage ? intl.get('ProjectCard.ProjectCard.取消关注') : intl.get('ProjectCard.ProjectCard.添加关注')}
           >
             <Icon
               type={projectData.follow || inFollowPage ? 'star' : 'star-o'}
@@ -166,7 +168,7 @@ class ProjectCard extends Component {
         </div>
         {isShow && (
           <div className="copy-btns" onClick={this.showConfirm}>
-            <Tooltip placement="rightTop" title="复制项目">
+            <Tooltip placement="rightTop" title={intl.get('ProjectCard.ProjectCard.复制项目')}>
               <Icon type="copy" className="icon" />
             </Tooltip>
           </div>

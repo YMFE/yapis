@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { changeStudyTip, finishStudy } from '../../reducer/modules/user.js';
+import intl from "react-intl-universal";
 
 @connect(
   null,
@@ -39,11 +40,10 @@ class GuideBtns extends Component {
     return (
       <div className="btn-container">
         <Button className="btn" type="primary" onClick={this.nextStep}>
-          {this.props.isLast ? '完 成' : '下一步'}
+          {this.props.isLast ? intl.get('GuideBtns.GuideBtns.完 成') : intl.get('GuideBtns.GuideBtns.下一步')}
         </Button>
         <Button className="btn" type="dashed" onClick={this.exitGuide}>
-          退出指引
-        </Button>
+          {intl.get('GuideBtns.GuideBtns.退出指引')}</Button>
       </div>
     );
   }

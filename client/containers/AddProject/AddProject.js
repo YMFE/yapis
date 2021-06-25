@@ -14,6 +14,7 @@ import { pickRandomProperty, handlePath, nameLengthLimit } from '../../common';
 import constants from '../../constants/variable.js';
 import { withRouter } from 'react-router';
 import './Addproject.scss';
+import intl from "react-intl-universal";
 
 const formItemLayout = {
   labelCol: {
@@ -81,7 +82,7 @@ class ProjectList extends Component {
         addProject(values).then(res => {
           if (res.payload.data.errcode == 0) {
             form.resetFields();
-            message.success('创建成功! ');
+            message.success(intl.get('AddProject.AddProject.创建成功!'));
             this.props.history.push('/project/' + res.payload.data.data._id + '/interface/api');
           }
         });
@@ -90,7 +91,7 @@ class ProjectList extends Component {
   }
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '新建项目' }]);
+    this.props.setBreadcrumb([{ name: intl.get('AddProject.AddProject.新建项目') }]);
     if (!this.props.currGroup._id) {
       await this.props.fetchGroupList();
     }
@@ -109,19 +110,19 @@ class ProjectList extends Component {
       <div className="g-row">
         <div className="g-row m-container">
           <Form>
-            <FormItem {...formItemLayout} label="项目名称">
+            <FormItem {...formItemLayout} label={intl.get('AddProject.AddProject.项目名称')}>
               {getFieldDecorator('name', {
-                rules: nameLengthLimit('项目')
+                rules: nameLengthLimit(intl.get('AddProject.AddProject.项目'))
               })(<Input />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="所属分组">
+            <FormItem {...formItemLayout} label={intl.get('AddProject.AddProject.所属分组')}>
               {getFieldDecorator('group', {
                 initialValue: this.state.currGroupId + '',
                 rules: [
                   {
                     required: true,
-                    message: '请选择项目所属的分组!'
+                    message: intl.get('AddProject.AddProject.请选择项目所属的分组')
                   }
                 ]
               })(
@@ -147,8 +148,7 @@ class ProjectList extends Component {
               {...formItemLayout}
               label={
                 <span>
-                  基本路径&nbsp;
-                  <Tooltip title="接口基本路径，为空是根路径">
+                  {intl.get('AddProject.AddProject.基本路径&nbsp;')}<Tooltip title={intl.get('AddProject.AddProject.接口基本路径，为空是')}>
                     <Icon type="question-circle-o" />
                   </Tooltip>
                 </span>
@@ -158,25 +158,25 @@ class ProjectList extends Component {
                 rules: [
                   {
                     required: false,
-                    message: '请输入项目基本路径'
+                    message: intl.get('AddProject.AddProject.请输入项目基本路径')
                   }
                 ]
               })(<Input onBlur={this.handlePath} />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="描述">
+            <FormItem {...formItemLayout} label={intl.get('AddProject.AddProject.描述')}>
               {getFieldDecorator('desc', {
                 rules: [
                   {
                     required: false,
-                    message: '描述不超过144字!',
+                    message: intl.get('AddProject.AddProject.描述不超过144字!'),
                     max: 144
                   }
                 ]
               })(<TextArea rows={4} />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="权限">
+            <FormItem {...formItemLayout} label={intl.get('AddProject.AddProject.权限')}>
               {getFieldDecorator('project_type', {
                 rules: [
                   {
@@ -187,8 +187,8 @@ class ProjectList extends Component {
               })(
                 <RadioGroup>
                   <Radio value="private" className="radio">
-                    <Icon type="lock" />私有<br />
-                    <span className="radio-desc">只有组长和项目开发者可以索引并查看项目信息</span>
+                    <Icon type="lock" />{intl.get('AddProject.AddProject.私有')}<br />
+                    <span className="radio-desc">{intl.get('AddProject.AddProject.只有组长和项目开发者')}</span>
                   </Radio>
                   <br />
                   {/* <Radio value="public" className="radio">
@@ -202,8 +202,7 @@ class ProjectList extends Component {
           <Row>
             <Col sm={{ offset: 6 }} lg={{ offset: 3 }}>
               <Button className="m-btn" icon="plus" type="primary" onClick={this.handleOk}>
-                创建项目
-              </Button>
+                {intl.get('AddProject.AddProject.创建项目')}</Button>
             </Col>
           </Row>
         </div>

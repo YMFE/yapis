@@ -24,6 +24,8 @@ const Dragger = Upload.Dragger;
 import { saveImportData } from '../../../../reducer/modules/interface';
 import { fetchUpdateLogData } from '../../../../reducer/modules/news.js';
 import { handleSwaggerUrlData } from '../../../../reducer/modules/project';
+import intl from "react-intl-universal";
+
 const Option = Select.Option;
 const confirm = Modal.confirm;
 const plugin = require('client/plugin.js');
@@ -140,7 +142,7 @@ class ProjectData extends Component {
   // 本地文件上传
   handleFile = info => {
     if (!this.state.curImportType) {
-      return message.error('请选择导入数据的方式');
+      return message.error(intl.get('ProjectData.ProjectData.请选择导入数据的方式'));
     }
     if (this.state.selectCatid) {
       this.setState({ showLoading: true });
@@ -157,7 +159,7 @@ class ProjectData extends Component {
         }
       };
     } else {
-      message.error('请选择上传的默认分类');
+      message.error(intl.get('ProjectData.ProjectData.请选择上传的默认分类'));
     }
   };
 
@@ -177,13 +179,13 @@ class ProjectData extends Component {
     });
     let domainData = result.payload.data.data;
     const ref = confirm({
-      title: '您确认要进行数据同步????',
+      title: intl.get('ProjectData.ProjectData.您确认要进行数据同步'),
       width: 600,
       okType: 'danger',
       iconType: 'exclamation-circle',
       className: 'dataImport-confirm',
-      okText: '确认',
-      cancelText: '取消',
+      okText: intl.get('ProjectData.ProjectData.确认'),
+      cancelText: intl.get('ProjectData.ProjectData.取消'),
       content: (
         <div className="postman-dataImport-modal">
           <div className="postman-dataImport-modal-content">
@@ -195,7 +197,7 @@ class ProjectData extends Component {
               );
             })}
           </div>
-          <p className="info">温馨提示： 数据同步后，可能会造成原本的修改数据丢失</p>
+          <p className="info">{intl.get('ProjectData.ProjectData.温馨提示： 数据同步')}</p>
         </div>
       ),
       async onOk() {
@@ -246,11 +248,11 @@ class ProjectData extends Component {
   // url导入上传
   onUrlUpload = async () => {
     if (!this.state.curImportType) {
-      return message.error('请选择导入数据的方式');
+      return message.error(intl.get('ProjectData.ProjectData.请选择导入数据的方式'));
     }
 
     if (!this.state.swaggerUrl) {
-      return message.error('url 不能为空');
+      return message.error(intl.get('ProjectData.ProjectData.url 不能为空'));
     }
     if (this.state.selectCatid) {
       this.setState({ showLoading: true });
@@ -271,7 +273,7 @@ class ProjectData extends Component {
         message.error(e.message);
       }
     } else {
-      message.error('请选择上传的默认分类');
+      message.error(intl.get('ProjectData.ProjectData.请选择上传的默认分类'));
     }
   };
 
@@ -321,13 +323,12 @@ class ProjectData extends Component {
             <div className="dataImportCon">
               <div>
                 <h3>
-                  数据导入&nbsp;
-                  <a
+                  {intl.get('ProjectData.ProjectData.数据导入&nbsp;')}<a
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://hellosean1025.github.io/yapi/documents/data.html"
                   >
-                    <Tooltip title="点击查看文档">
+                    <Tooltip title={intl.get('ProjectData.ProjectData.点击查看文档')}>
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </a>
@@ -335,7 +336,7 @@ class ProjectData extends Component {
               </div>
               <div className="dataImportTile">
                 <Select
-                  placeholder="请选择导入数据的方式"
+                  placeholder={intl.get('ProjectData.ProjectData.请选择导入数据的方式')}
                   value={this.state.curImportType}
                   onChange={this.handleImportType}
                 >
@@ -353,7 +354,7 @@ class ProjectData extends Component {
                   value={this.state.selectCatid + ''}
                   showSearch
                   style={{ width: '100%' }}
-                  placeholder="请选择数据导入的默认分类"
+                  placeholder={intl.get('ProjectData.ProjectData.请选择数据导入的默认')}
                   optionFilterProp="children"
                   onChange={this.selectChange.bind(this)}
                   filterOption={(input, option) =>
@@ -371,21 +372,18 @@ class ProjectData extends Component {
               </div>
               <div className="dataSync">
                 <span className="label">
-                  数据同步&nbsp;
-                  <Tooltip
+                  {intl.get('ProjectData.ProjectData.数据同步&nbsp;')}<Tooltip
                     title={
                       <div>
-                        <h3 style={{ color: 'white' }}>普通模式</h3>
-                        <p>不导入已存在的接口</p>
+                        <h3 style={{ color: 'white' }}>{intl.get('ProjectData.ProjectData.普通模式')}</h3>
+                        <p>{intl.get('ProjectData.ProjectData.不导入已存在的接口')}</p>
                         <br />
-                        <h3 style={{ color: 'white' }}>智能合并</h3>
+                        <h3 style={{ color: 'white' }}>{intl.get('ProjectData.ProjectData.智能合并')}</h3>
                         <p>
-                          已存在的接口，将合并返回数据的 response，适用于导入了 swagger
-                          数据，保留对数据结构的改动
-                        </p>
+                          {intl.get('ProjectData.ProjectData.已存在的接口，将合并')}</p>
                         <br />
-                        <h3 style={{ color: 'white' }}>完全覆盖</h3>
-                        <p>不保留旧数据，完全使用新数据，适用于接口定义完全交给后端定义</p>
+                        <h3 style={{ color: 'white' }}>{intl.get('ProjectData.ProjectData.完全覆盖')}</h3>
+                        <p>{intl.get('ProjectData.ProjectData.不保留旧数据，完全使')}</p>
                       </div>
                     }
                   >
@@ -393,9 +391,9 @@ class ProjectData extends Component {
                   </Tooltip>{' '}
                 </span>
                 <Select value={this.state.dataSync} onChange={this.onChange}>
-                  <Option value="normal">普通模式</Option>
-                  <Option value="good">智能合并</Option>
-                  <Option value="merge">完全覆盖</Option>
+                  <Option value="normal">{intl.get('ProjectData.ProjectData.普通模式')}</Option>
+                  <Option value="good">{intl.get('ProjectData.ProjectData.智能合并')}</Option>
+                  <Option value="merge">{intl.get('ProjectData.ProjectData.完全覆盖')}</Option>
                 </Select>
 
                 {/* <Switch checked={this.state.dataSync} onChange={this.onChange} /> */}
@@ -403,8 +401,7 @@ class ProjectData extends Component {
               {this.state.curImportType === 'swagger' && (
                 <div className="dataSync">
                   <span className="label">
-                    开启url导入&nbsp;
-                    <Tooltip title="swagger url 导入">
+                    {intl.get('ProjectData.ProjectData.开启url导入&nb')}<Tooltip title={intl.get('ProjectData.ProjectData.swagger ur')}>
                       <Icon type="question-circle-o" />
                     </Tooltip>{' '}
                     &nbsp;&nbsp;
@@ -425,17 +422,16 @@ class ProjectData extends Component {
                     onClick={this.onUrlUpload}
                     loading={this.state.showLoading}
                   >
-                    上传
-                  </Button>
+                    {intl.get('ProjectData.ProjectData.上传')}</Button>
                 </div>
               ) : (
                 <div className="import-content">
-                  <Spin spinning={this.state.showLoading} tip="上传中...">
+                  <Spin spinning={this.state.showLoading} tip={intl.get('ProjectData.ProjectData.上传中...')}>
                     <Dragger {...uploadMess}>
                       <p className="ant-upload-drag-icon">
                         <Icon type="inbox" />
                       </p>
-                      <p className="ant-upload-text">点击或者拖拽文件到上传区域</p>
+                      <p className="ant-upload-text">{intl.get('ProjectData.ProjectData.点击或者拖拽文件到上')}</p>
                       <p
                         className="ant-upload-hint"
                         onClick={e => {
@@ -461,10 +457,10 @@ class ProjectData extends Component {
               }}
             >
               <div>
-                <h3>数据导出</h3>
+                <h3>{intl.get('ProjectData.ProjectData.数据导出')}</h3>
               </div>
               <div className="dataImportTile">
-                <Select placeholder="请选择导出数据的方式" onChange={this.handleExportType}>
+                <Select placeholder={intl.get('ProjectData.ProjectData.请选择导出数据的方式')} onChange={this.handleExportType}>
                   {Object.keys(exportDataModule).map(name => {
                     return (
                       <Option key={name} value={name}>
@@ -477,8 +473,8 @@ class ProjectData extends Component {
 
               <div className="dataExport">
                 <RadioGroup defaultValue="all" onChange={this.handleChange}>
-                  <Radio value="all">全部接口</Radio>
-                  <Radio value="open">公开接口</Radio>
+                  <Radio value="all">{intl.get('ProjectData.ProjectData.全部接口')}</Radio>
+                  <Radio value="open">{intl.get('ProjectData.ProjectData.公开接口')}</Radio>
                 </RadioGroup>
               </div>
               <div className="export-content">
@@ -491,7 +487,7 @@ class ProjectData extends Component {
                       href={exportHref}>
                       <Button className="export-button" type="primary" size="large">
                         {' '}
-                        导出{' '}
+                        {intl.get('ProjectData.ProjectData.导出')}{' '}
                       </Button>
                     </a>
                     <Checkbox
@@ -500,8 +496,7 @@ class ProjectData extends Component {
                       className="wiki-btn"
                       disabled={this.state.curExportType === 'json'}
                     >
-                      添加wiki&nbsp;
-                      <Tooltip title="开启后 html 和 markdown 数据导出会带上wiki数据">
+                      {intl.get('ProjectData.ProjectData.添加wiki&nbs')}<Tooltip title={intl.get('ProjectData.ProjectData.开启后 html 和')}>
                         <Icon type="question-circle-o" />
                       </Tooltip>{' '}
                     </Checkbox>
@@ -509,7 +504,7 @@ class ProjectData extends Component {
                 ) : (
                   <Button disabled className="export-button" type="primary" size="large">
                     {' '}
-                    导出{' '}
+                    {intl.get('ProjectData.ProjectData.导出')}{' '}
                   </Button>
                 )}
               </div>

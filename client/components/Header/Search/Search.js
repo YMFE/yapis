@@ -9,6 +9,8 @@ import { setCurrGroup, fetchGroupMsg } from '../../../reducer/modules/group';
 import { changeMenuItem } from '../../../reducer/modules/menu';
 
 import { fetchInterfaceListMenu } from '../../../reducer/modules/interface';
+import intl from "react-intl-universal";
+
 const Option = AutoComplete.Option;
 
 @connect(
@@ -45,14 +47,14 @@ export default class Srch extends Component {
   };
 
   onSelect = async (value, option) => {
-    if (option.props.type === '分组') {
+    if (option.props.type === intl.get('Search.Search.分组')) {
       this.props.changeMenuItem('/group');
       this.props.history.push('/group/' + option.props['id']);
       this.props.setCurrGroup({ group_name: value, _id: option.props['id'] - 0 });
-    } else if (option.props.type === '项目') {
+    } else if (option.props.type === intl.get('Search.Search.项目')) {
       await this.props.fetchGroupMsg(option.props['groupId']);
       this.props.history.push('/project/' + option.props['id']);
-    } else if (option.props.type === '接口') {
+    } else if (option.props.type === intl.get('Search.Search.接口')) {
       await this.props.fetchInterfaceListMenu(option.props['projectId']);
       this.props.history.push(
         '/project/' + option.props['projectId'] + '/interface/api/' + option.props['id']
@@ -73,7 +75,7 @@ export default class Srch extends Component {
                   dataSource.push(
                     <Option
                       key={`分组${item._id}`}
-                      type="分组"
+                      type={intl.get('Search.Search.分组')}
                       value={`${item.groupName}`}
                       id={`${item._id}`}
                     >
@@ -85,7 +87,7 @@ export default class Srch extends Component {
                   dataSource.push(
                     <Option
                       key={`项目${item._id}`}
-                      type="项目"
+                      type={intl.get('Search.Search.项目')}
                       id={`${item._id}`}
                       groupId={`${item.groupId}`}
                     >
@@ -97,7 +99,7 @@ export default class Srch extends Component {
                   dataSource.push(
                     <Option
                       key={`接口${item._id}`}
-                      type="接口"
+                      type={intl.get('Search.Search.接口')}
                       id={`${item._id}`}
                       projectId={`${item.projectId}`}
                     >
@@ -114,7 +116,7 @@ export default class Srch extends Component {
             dataSource: dataSource
           });
         } else {
-          console.log('查询项目或分组失败');
+          console.log(intl.get('Search.Search.查询项目或分组失败'));
         }
       })
       .catch(err => {
@@ -148,7 +150,7 @@ export default class Srch extends Component {
         >
           <Input
             prefix={<Icon type="search" className="srch-icon" />}
-            placeholder="搜索分组/项目/接口"
+            placeholder={intl.get('Search.Search.搜索分组/项目/接口')}
             className="search-input"
           />
         </AutoComplete>

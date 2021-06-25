@@ -14,6 +14,8 @@ import {
 } from '../../../reducer/modules/group.js';
 import ErrMsg from '../../../components/ErrMsg/ErrMsg.js';
 import UsernameAutoComplete from '../../../components/UsernameAutoComplete/UsernameAutoComplete.js';
+import intl from "react-intl-universal";
+
 const Option = Select.Option;
 
 function arrayAddKey(arr) {
@@ -189,7 +191,7 @@ class MemberList extends Component {
     const columns = [
       {
         title:
-          this.props.currGroup.group_name + ' 分组成员 (' + this.state.userInfo.length + ') 人',
+          this.props.currGroup.group_name + intl.get('MemberList.MemberList.分组成员 (') + this.state.userInfo.length + intl.get('MemberList.MemberList.) 人'),
         dataIndex: 'username',
         key: 'username',
         render: (text, record) => {
@@ -215,8 +217,7 @@ class MemberList extends Component {
           this.state.role === 'owner' || this.state.role === 'admin' ? (
             <div className="btn-container">
               <Button className="btn" type="primary" onClick={this.showAddMemberModal}>
-                添加成员
-              </Button>
+                {intl.get('MemberList.MemberList.添加成员')}</Button>
             </div>
           ) : (
             ''
@@ -232,15 +233,15 @@ class MemberList extends Component {
                   className="select"
                   onChange={this.changeUserRole}
                 >
-                  <Option value={'owner-' + record.uid}>组长</Option>
-                  <Option value={'dev-' + record.uid}>开发者</Option>
-                  <Option value={'guest-' + record.uid}>访客</Option>
+                  <Option value={'owner-' + record.uid}>{intl.get('MemberList.MemberList.组长')}</Option>
+                  <Option value={'dev-' + record.uid}>{intl.get('MemberList.MemberList.开发者')}</Option>
+                  <Option value={'guest-' + record.uid}>{intl.get('MemberList.MemberList.访客')}</Option>
                 </Select>
                 <Popconfirm
                   placement="topRight"
-                  title="你确定要删除吗? "
+                  title={intl.get('MemberList.MemberList.你确定要删除吗?')}
                   onConfirm={this.deleteConfirm(record.uid)}
-                  okText="确定"
+                  okText={intl.get('MemberList.MemberList.确定')}
                   cancelText=""
                 >
                   <Button type="danger" icon="delete" className="btn-danger" />
@@ -251,11 +252,11 @@ class MemberList extends Component {
           } else {
             // 非管理员可以看到权限 但无法修改
             if (record.role === 'owner') {
-              return '组长';
+              return intl.get('MemberList.MemberList.组长');
             } else if (record.role === 'dev') {
-              return '开发者';
+              return intl.get('MemberList.MemberList.开发者');
             } else if (record.role === 'guest') {
-              return '访客';
+              return intl.get('MemberList.MemberList.访客');
             } else {
               return '';
             }
@@ -283,14 +284,14 @@ class MemberList extends Component {
       <div className="m-panel">
         {this.state.visible ? (
           <Modal
-            title="添加成员"
+            title={intl.get('MemberList.MemberList.添加成员')}
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernamelabel">用户名: </div>
+                <div className="label usernamelabel">{intl.get('MemberList.MemberList.用户名:')}</div>
               </Col>
               <Col span="15">
                 <UsernameAutoComplete callbackState={this.onUserSelect} />
@@ -298,13 +299,13 @@ class MemberList extends Component {
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernameauth">权限: </div>
+                <div className="label usernameauth">{intl.get('MemberList.MemberList.权限:')}</div>
               </Col>
               <Col span="15">
                 <Select defaultValue="dev" className="select" onChange={this.changeNewMemberRole}>
-                  <Option value="owner">组长</Option>
-                  <Option value="dev">开发者</Option>
-                  <Option value="guest">访客</Option>
+                  <Option value="owner">{intl.get('MemberList.MemberList.组长')}</Option>
+                  <Option value="dev">{intl.get('MemberList.MemberList.开发者')}</Option>
+                  <Option value="guest">{intl.get('MemberList.MemberList.访客')}</Option>
                 </Select>
               </Col>
             </Row>

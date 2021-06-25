@@ -5,20 +5,21 @@ import PropTypes from 'prop-types';
 import { schemaTransformToTable } from '../../../common/schema-transformTo-table.js';
 import _ from 'underscore';
 import './index.scss';
+import intl from "react-intl-universal";
 
 const messageMap = {
-  desc: '备注',
-  default: '实例',
-  maximum: '最大值',
-  minimum: '最小值',
-  maxItems: '最大数量',
-  minItems: '最小数量',
-  maxLength: '最大长度',
-  minLength: '最小长度',
-  enum: '枚举',
-  enumDesc: '枚举备注',
-  uniqueItems: '元素是否都不同',
-  itemType: 'item 类型',
+  desc: intl.get('SchemaTable.SchemaTable.备注'),
+  default: intl.get('SchemaTable.SchemaTable.实例'),
+  maximum: intl.get('SchemaTable.SchemaTable.最大值'),
+  minimum: intl.get('SchemaTable.SchemaTable.最小值'),
+  maxItems: intl.get('SchemaTable.SchemaTable.最大数量'),
+  minItems: intl.get('SchemaTable.SchemaTable.最小数量'),
+  maxLength: intl.get('SchemaTable.SchemaTable.最大长度'),
+  minLength: intl.get('SchemaTable.SchemaTable.最小长度'),
+  enum: intl.get('SchemaTable.SchemaTable.枚举'),
+  enumDesc: intl.get('SchemaTable.SchemaTable.枚举备注'),
+  uniqueItems: intl.get('SchemaTable.SchemaTable.元素是否都不同'),
+  itemType: intl.get('SchemaTable.SchemaTable.item 类型'),
   format: 'format',
   itemFormat: 'format',
   mock: 'mock'
@@ -26,13 +27,13 @@ const messageMap = {
 
 const columns = [
   {
-    title: '名称',
+    title: intl.get('SchemaTable.SchemaTable.名称'),
     dataIndex: 'name',
     key: 'name',
     width: 200
   },
   {
-    title: '类型',
+    title: intl.get('SchemaTable.SchemaTable.类型'),
     dataIndex: 'type',
     key: 'type',
     width: 100,
@@ -46,16 +47,16 @@ const columns = [
     }
   },
   {
-    title: '是否必须',
+    title: intl.get('SchemaTable.SchemaTable.是否必须'),
     dataIndex: 'required',
     key: 'required',
     width: 80,
     render: text => {
-      return <div>{text ? '必须' : '非必须'}</div>;
+      return <div>{text ? intl.get('SchemaTable.SchemaTable.必须') : intl.get('SchemaTable.SchemaTable.非必须')}</div>;
     }
   },
   {
-    title: '默认值',
+    title: intl.get('SchemaTable.SchemaTable.默认值'),
     dataIndex: 'default',
     key: 'default',
     width: 80,
@@ -64,7 +65,7 @@ const columns = [
     }
   },
   {
-    title: '备注',
+    title: intl.get('SchemaTable.SchemaTable.备注'),
     dataIndex: 'desc',
     key: 'desc',
     render: (text, item) => {
@@ -76,7 +77,7 @@ const columns = [
     }
   },
   {
-    title: '其他信息',
+    title: intl.get('SchemaTable.SchemaTable.其他信息'),
     dataIndex: 'sub',
     key: 'sub',
     width: 180,

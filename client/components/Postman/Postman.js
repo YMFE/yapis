@@ -26,6 +26,8 @@ import CheckCrossInstall, { initCrossRequest } from './CheckCrossInstall.js';
 import './Postman.scss';
 import ProjectEnv from '../../containers/Project/Setting/ProjectEnv/index.js';
 import json5 from 'json5';
+import intl from "react-intl-universal";
+
 const { handleParamsValue, ArrayToObject, schemaValidator } = require('common/utils.js');
 const {
   handleParams,
@@ -47,27 +49,27 @@ const Panel = Collapse.Panel;
 export const InsertCodeMap = [
   {
     code: 'assert.equal(status, 200)',
-    title: '断言 httpCode 等于 200'
+    title: intl.get('Postman.Postman.断言 httpCod')
   },
   {
     code: 'assert.equal(body.code, 0)',
-    title: '断言返回数据 code 是 0'
+    title: intl.get('Postman.Postman.断言返回数据 cod')
   },
   {
     code: 'assert.notEqual(status, 404)',
-    title: '断言 httpCode 不是 404'
+    title: intl.get('Postman.Postman.断言 httpCod')
   },
   {
     code: 'assert.notEqual(body.code, 40000)',
-    title: '断言返回数据 code 不是 40000'
+    title: intl.get('Postman.Postman.断言返回数据 cod')
   },
   {
     code: 'assert.deepEqual(body, {"code": 0})',
-    title: '断言对象 body 等于 {"code": 0}'
+    title: intl.get('Postman.Postman.断言对象 body')
   },
   {
     code: 'assert.notDeepEqual(body, {"code": 0})',
-    title: '断言对象 body 不等于 {"code": 0}'
+    title: intl.get('Postman.Postman.断言对象 body')
   }
 ];
 
@@ -79,12 +81,12 @@ const ParamsNameComponent = props => {
       <div>
         {example && (
           <div>
-            示例： <span className="table-desc">{example}</span>
+            {intl.get('Postman.Postman.示例：')}<span className="table-desc">{example}</span>
           </div>
         )}
         {desc && (
           <div>
-            备注： <span className="table-desc">{desc}</span>
+            {intl.get('Postman.Postman.备注：')}<span className="table-desc">{desc}</span>
           </div>
         )}
       </div>
@@ -598,7 +600,7 @@ export default class Run extends Component {
 
         {this.state.envModalVisible && (
           <Modal
-            title="环境设置"
+            title={intl.get('Postman.Postman.环境设置')}
             visible={this.state.envModalVisible}
             onOk={this.handleEnvOk}
             onCancel={this.handleEnvCancel}
@@ -628,10 +630,9 @@ export default class Run extends Component {
                   {item.name + '：' + item.domain}
                 </Option>
               ))}
-              <Option value="环境配置" disabled style={{ cursor: 'pointer', color: '#2395f1' }}>
+              <Option value={intl.get('Postman.Postman.环境配置')} disabled style={{ cursor: 'pointer', color: '#2395f1' }}>
                 <Button type="primary" onClick={this.showEnvModal}>
-                  环境配置
-                </Button>
+                  {intl.get('Postman.Postman.环境配置')}</Button>
               </Option>
             </Select>
 
@@ -648,9 +649,9 @@ export default class Run extends Component {
             placement="bottom"
             title={(() => {
               if (hasPlugin) {
-                return '发送请求';
+                return intl.get('Postman.Postman.发送请求');
               } else {
-                return '请安装 cross-request 插件';
+                return intl.get('Postman.Postman.请安装 cross-');
               }
             })()}
           >
@@ -661,18 +662,18 @@ export default class Run extends Component {
               style={{ marginLeft: 10 }}
               icon={loading ? 'loading' : ''}
             >
-              {loading ? '取消' : '发送'}
+              {loading ? intl.get('Postman.Postman.取消') : intl.get('Postman.Postman.发送')}
             </Button>
           </Tooltip>
 
           <Tooltip
             placement="bottom"
             title={() => {
-              return this.props.type === 'inter' ? '保存到测试集' : '更新该用例';
+              return this.props.type === 'inter' ? intl.get('Postman.Postman.保存到测试集') : intl.get('Postman.Postman.更新该用例');
             }}
           >
             <Button onClick={this.props.save} type="primary" style={{ marginLeft: 10 }}>
-              {this.props.type === 'inter' ? '保存' : '更新'}
+              {this.props.type === 'inter' ? intl.get('Postman.Postman.保存') : intl.get('Postman.Postman.更新')}
             </Button>
           </Tooltip>
         </div>
@@ -698,7 +699,7 @@ export default class Run extends Component {
                     value={item.value}
                     className="value"
                     onChange={e => this.changeParam('req_params', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder={intl.get('Postman.Postman.参数值')}
                     id={`req_params_${index}`}
                     addonAfter={
                       <Icon
@@ -716,8 +717,7 @@ export default class Run extends Component {
               icon="plus"
               onClick={this.addPathParam}
             >
-              添加Path参数
-            </Button>
+              {intl.get('Postman.Postman.添加Path参数')}</Button>
           </Panel>
           <Panel
             header="QUERY PARAMETERS"
@@ -751,7 +751,7 @@ export default class Run extends Component {
                     value={item.value}
                     className="value"
                     onChange={e => this.changeParam('req_query', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder={intl.get('Postman.Postman.参数值')}
                     id={`req_query_${index}`}
                     addonAfter={
                       <Icon
@@ -764,8 +764,7 @@ export default class Run extends Component {
               );
             })}
             <Button style={{ display: 'none' }} type="primary" icon="plus" onClick={this.addQuery}>
-              添加Query参数
-            </Button>
+              {intl.get('Postman.Postman.添加Query参数')}</Button>
           </Panel>
           <Panel header="HEADERS" key="2" className={req_headers.length === 0 ? 'hidden' : ''}>
             {req_headers.map((item, index) => {
@@ -784,7 +783,7 @@ export default class Run extends Component {
                     disabled={!!item.abled}
                     className="value"
                     onChange={e => this.changeParam('req_headers', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder={intl.get('Postman.Postman.参数值')}
                     id={`req_headers_${index}`}
                     addonAfter={
                       !item.abled && (
@@ -799,13 +798,12 @@ export default class Run extends Component {
               );
             })}
             <Button style={{ display: 'none' }} type="primary" icon="plus" onClick={this.addHeader}>
-              添加Header
-            </Button>
+              {intl.get('Postman.Postman.添加Header')}</Button>
           </Panel>
           <Panel
             header={
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Tooltip title="F9 全屏编辑">BODY(F9)</Tooltip>
+                <Tooltip title={intl.get('Postman.Postman.F9 全屏编辑')}>BODY(F9)</Tooltip>
               </div>
             }
             key="3"
@@ -824,9 +822,8 @@ export default class Run extends Component {
                   <Button
                     onClick={() => this.showModal(this.state.req_body_other, 0, 'req_body_other')}
                   >
-                    高级参数设置
-                  </Button>
-                  <Tooltip title="高级参数设置只在json字段值中生效">
+                    {intl.get('Postman.Postman.高级参数设置')}</Button>
+                  <Tooltip title={intl.get('Postman.Postman.高级参数设置只在js')}>
                     {'  '}
                     <Icon type="question-circle-o" />
                   </Tooltip>
@@ -872,7 +869,7 @@ export default class Run extends Component {
                         )}
                         <span className="eq-symbol">=</span>
                         {item.type === 'file' ? (
-                          '因Chrome最新版安全策略限制，不再支持文件上传'
+                          intl.get('Postman.Postman.因Chrome最新版')
                           // <Input
                           //   type="file"
                           //   id={'file_' + index}
@@ -885,7 +882,7 @@ export default class Run extends Component {
                             value={item.value}
                             className="value"
                             onChange={e => this.changeBody(e.target.value, index)}
-                            placeholder="参数值"
+                            placeholder={intl.get('Postman.Postman.参数值')}
                             id={`req_body_form_${index}`}
                             addonAfter={
                               <Icon
@@ -904,8 +901,7 @@ export default class Run extends Component {
                     icon="plus"
                     onClick={this.addBody}
                   >
-                    添加Form参数
-                  </Button>
+                    {intl.get('Postman.Postman.添加Form参数')}</Button>
                 </div>
               )}
             {HTTP_METHOD[method].request_body &&
@@ -934,14 +930,14 @@ export default class Run extends Component {
                 {this.state.resStatusCode + '  ' + this.state.resStatusText}
               </h2>
               <div>
-                <a rel="noopener noreferrer"  target="_blank" href="https://juejin.im/post/5c888a3e5188257dee0322af">YApi 新版如何查看 http 请求数据</a>
+                <a rel="noopener noreferrer"  target="_blank" href="https://juejin.im/post/5c888a3e5188257dee0322af">{intl.get('Postman.Postman.YApi 新版如何查')}</a>
               </div>
               {this.state.test_valid_msg && (
                 <Alert
                   message={
                     <span>
                       Warning &nbsp;
-                      <Tooltip title="针对定义为 json schema 的返回数据进行格式校验">
+                      <Tooltip title={intl.get('Postman.Postman.针对定义为 json')}>
                         <Icon type="question-circle-o" />
                       </Tooltip>
                     </span>
@@ -978,7 +974,7 @@ export default class Run extends Component {
                     <Checkbox
                       checked={this.state.autoPreviewHTML}
                       onChange={e => this.setState({ autoPreviewHTML: e.target.checked })}>
-                      <span>自动预览HTML</span>
+                      <span>{intl.get('Postman.Postman.自动预览HTML')}</span>
                     </Checkbox>
                   </div>
                   {
@@ -1001,17 +997,16 @@ export default class Run extends Component {
           {this.props.type === 'case' ? (
             <Tabs.TabPane
               className="response-test"
-              tab={<Tooltip title="测试脚本，可断言返回结果，使用方法请查看文档">Test</Tooltip>}
+              tab={<Tooltip title={intl.get('Postman.Postman.测试脚本，可断言返回')}>Test</Tooltip>}
               key="test"
             >
               <h3 style={{ margin: '5px' }}>
-                &nbsp;是否开启:&nbsp;
-                <Switch
+                {intl.get('Postman.Postman.&nbsp;是否开启')}<Switch
                   checked={this.state.enable_script}
                   onChange={e => this.setState({ enable_script: e })}
                 />
               </h3>
-              <p style={{ margin: '10px' }}>注：Test 脚本只有做自动化测试才执行</p>
+              <p style={{ margin: '10px' }}>{intl.get('Postman.Postman.注：Test 脚本只')}</p>
               <Row>
                 <Col span="18">
                   <AceEditor

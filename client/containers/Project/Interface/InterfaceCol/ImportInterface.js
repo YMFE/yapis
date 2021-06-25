@@ -5,6 +5,7 @@ import variable from '../../../../constants/variable';
 import { connect } from 'react-redux';
 const Option = Select.Option;
 import { fetchInterfaceListMenu } from '../../../../reducer/modules/interface.js';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -150,17 +151,17 @@ export default class ImportInterface extends Component {
 
     const columns = [
       {
-        title: '接口名称',
+        title: intl.get('InterfaceCol.ImportInterface.接口名称'),
         dataIndex: 'title',
         width: '30%'
       },
       {
-        title: '接口路径',
+        title: intl.get('InterfaceCol.ImportInterface.接口路径'),
         dataIndex: 'path',
         width: '40%'
       },
       {
-        title: '请求方法',
+        title: intl.get('InterfaceCol.ImportInterface.请求方法'),
         dataIndex: 'method',
         render: item => {
           let methodColor = variable.METHOD_COLOR[item ? item.toLowerCase() : 'get'];
@@ -181,8 +182,8 @@ export default class ImportInterface extends Component {
       {
         title: (
           <span>
-            状态{' '}
-            <Tooltip title="筛选满足条件的接口集合">
+            {intl.get('InterfaceCol.ImportInterface.状态')}{' '}
+            <Tooltip title={intl.get('InterfaceCol.ImportInterface.筛选满足条件的接口集')}>
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -192,19 +193,19 @@ export default class ImportInterface extends Component {
           return (
             text &&
             (text === 'done' ? (
-              <span className="tag-status done">已完成</span>
+              <span className="tag-status done">{intl.get('InterfaceCol.ImportInterface.已完成')}</span>
             ) : (
-              <span className="tag-status undone">未完成</span>
+              <span className="tag-status undone">{intl.get('InterfaceCol.ImportInterface.未完成')}</span>
             ))
           );
         },
         filters: [
           {
-            text: '已完成',
+            text: intl.get('InterfaceCol.ImportInterface.已完成'),
             value: 'done'
           },
           {
-            text: '未完成',
+            text: intl.get('InterfaceCol.ImportInterface.未完成'),
             value: 'undone'
           }
         ],
@@ -221,7 +222,7 @@ export default class ImportInterface extends Component {
     return (
       <div>
         <div className="select-project">
-          <span>选择要导入的项目： </span>
+          <span>{intl.get('InterfaceCol.ImportInterface.选择要导入的项目：')}</span>
           <Select value={this.state.project} style={{ width: 200 }} onChange={this.onChange}>
             {projectList.map(item => {
               return item.projectname ? (

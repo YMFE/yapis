@@ -15,6 +15,8 @@ const { TextArea } = Input;
 import { trim } from '../../../common.js';
 import _ from 'underscore';
 import './GroupSetting.scss';
+import intl from "react-intl-universal";
+
 const confirm = Modal.confirm;
 
 @connect(
@@ -131,7 +133,7 @@ class GroupSetting extends Component {
     });
 
     if (!res.payload.data.errcode) {
-      message.success('修改成功！');
+      message.success(intl.get('GroupSetting.GroupSetting.修改成功！'));
       await this.props.fetchGroupList(this.props.groupList);
       this.props.updateGroupList(this.props.groupList);
       const currGroup = _.find(this.props.groupList, group => {
@@ -150,7 +152,7 @@ class GroupSetting extends Component {
     const { currGroup } = that.props;
     const res = await this.props.deleteGroup({ id: currGroup._id });
     if (!res.payload.data.errcode) {
-      message.success('删除成功');
+      message.success(intl.get('GroupSetting.GroupSetting.删除成功'));
       await that.props.fetchGroupList();
       const currGroup = that.props.groupList[0] || { group_name: '', group_desc: '' };
       that.setState({ groupList: that.props.groupList });
@@ -162,16 +164,16 @@ class GroupSetting extends Component {
   showConfirm = () => {
     const that = this;
     confirm({
-      title: '确认删除 ' + that.props.currGroup.group_name + ' 分组吗？',
+      title: intl.get('GroupSetting.GroupSetting.确认删除') + that.props.currGroup.group_name + intl.get('GroupSetting.GroupSetting.分组吗？'),
       content: (
         <div style={{ marginTop: '10px', fontSize: '13px', lineHeight: '25px' }}>
           <Alert
-            message="警告：此操作非常危险,会删除该分组下面所有项目和接口，并且无法恢复!"
+            message={intl.get('GroupSetting.GroupSetting.警告：此操作非常危险')}
             type="warning"
           />
           <div style={{ marginTop: '16px' }}>
             <p>
-              <b>请输入分组名称确认此操作:</b>
+              <b>{intl.get('GroupSetting.GroupSetting.请输入分组名称确认此')}</b>
             </p>
             <Input id="group_name" />
           </div>
@@ -180,7 +182,7 @@ class GroupSetting extends Component {
       onOk() {
         const groupName = trim(document.getElementById('group_name').value);
         if (that.props.currGroup.group_name !== groupName) {
-          message.error('分组名称有误');
+          message.error(intl.get('GroupSetting.GroupSetting.分组名称有误'));
           return new Promise((resolve, reject) => {
             reject('error');
           });
@@ -208,12 +210,11 @@ class GroupSetting extends Component {
       <div className="m-panel card-panel card-panel-s panel-group">
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            分组名：
-          </Col>
+            {intl.get('GroupSetting.GroupSetting.分组名：')}</Col>
           <Col span={20}>
             <Input
               size="large"
-              placeholder="请输入分组名称"
+              placeholder={intl.get('GroupSetting.GroupSetting.请输入分组名称')}
               value={this.state.currGroupName}
               onChange={this.changeName}
             />
@@ -221,13 +222,12 @@ class GroupSetting extends Component {
         </Row>
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            简介：
-          </Col>
+            {intl.get('GroupSetting.GroupSetting.简介：')}</Col>
           <Col span={20}>
             <TextArea
               size="large"
               rows={3}
-              placeholder="请输入分组描述"
+              placeholder={intl.get('GroupSetting.GroupSetting.请输入分组描述')}
               value={this.state.currGroupDesc}
               onChange={this.changeDesc}
             />
@@ -235,14 +235,13 @@ class GroupSetting extends Component {
         </Row>
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            接口自定义字段&nbsp;
-            <Tooltip title={'可以在接口中添加 额外字段 数据'}>
+            {intl.get('GroupSetting.GroupSetting.接口自定义字段&nb')}<Tooltip title={intl.get('GroupSetting.GroupSetting.可以在接口中添加 额')}>
               <Icon type="question-circle-o" style={{ width: '10px' }} />
             </Tooltip> ：
           </Col>
           <Col span={12} style={{ position: 'relative' }}>
             <Input
-              placeholder="请输入自定义字段名称"
+              placeholder={intl.get('GroupSetting.GroupSetting.请输入自定义字段名称')}
               style={{ borderColor: this.state.custom_field1_rule ? '#f5222d' : '' }}
               value={this.state.custom_field1_name}
               onChange={this.changeCustomName}
@@ -251,17 +250,15 @@ class GroupSetting extends Component {
               className="custom-field-rule"
               style={{ display: this.state.custom_field1_rule ? 'block' : 'none' }}
             >
-              自定义字段名称不能为空
-            </div>
+              {intl.get('GroupSetting.GroupSetting.自定义字段名称不能为')}</div>
           </Col>
           <Col span={2} className="label">
-            开启：
-          </Col>
+            {intl.get('GroupSetting.GroupSetting.开启：')}</Col>
           <Col span={6}>
             <Switch
               checked={this.state.custom_field1_enable}
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren={intl.get('GroupSetting.GroupSetting.开')}
+              unCheckedChildren={intl.get('GroupSetting.GroupSetting.关')}
               onChange={this.changeCustomEnable}
             />
           </Col>
@@ -269,8 +266,7 @@ class GroupSetting extends Component {
         <Row type="flex" justify="center" className="row save">
           <Col span={4} className="save-button">
             <Button className="m-btn btn-save" icon="save" type="primary" onClick={this.editGroup}>
-              保 存
-            </Button>
+              {intl.get('GroupSetting.GroupSetting.保 存')}</Button>
           </Col>
         </Row>
         {/* 只有超级管理员能删除分组 */}
@@ -278,22 +274,20 @@ class GroupSetting extends Component {
           <Row type="flex" justify="center" className="danger-container">
             <Col span={24} className="title">
               <h2 className="content">
-                <Icon type="exclamation-circle-o" /> 危险操作
-              </h2>
+                <Icon type="exclamation-circle-o" /> {intl.get('GroupSetting.GroupSetting.危险操作')}</h2>
               <Button onClick={this.toggleDangerOptions}>
-                查 看<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
+                {intl.get('GroupSetting.GroupSetting.查 看')}<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
               </Button>
             </Col>
             {this.state.showDangerOptions ? (
               <Card hoverable={true} className="card-danger" style={{ width: '100%' }}>
                 <div className="card-danger-content">
-                  <h3>删除分组</h3>
-                  <p>分组一旦删除，将无法恢复数据，请慎重操作！</p>
-                  <p>只有超级管理员有权限删除分组。</p>
+                  <h3>{intl.get('GroupSetting.GroupSetting.删除分组')}</h3>
+                  <p>{intl.get('GroupSetting.GroupSetting.分组一旦删除，将无法')}</p>
+                  <p>{intl.get('GroupSetting.GroupSetting.只有超级管理员有权限')}</p>
                 </div>
                 <Button type="danger" ghost className="card-danger-btn" onClick={this.showConfirm}>
-                  删除
-                </Button>
+                  {intl.get('GroupSetting.GroupSetting.删除')}</Button>
               </Card>
             ) : null}
           </Row>

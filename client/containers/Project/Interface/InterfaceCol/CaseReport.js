@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Tabs } from 'antd';
+import intl from "react-intl-universal";
+
 const TabPane = Tabs.TabPane;
 function jsonFormat(json) {
   // console.log('json',json)
@@ -94,12 +96,11 @@ const CaseReport = function(props) {
             </Row>
           ) : null}
         </TabPane>
-        <TabPane className="case-report-pane" tab="验证结果" key="valid">
+        <TabPane className="case-report-pane" tab={intl.get('InterfaceCol.CaseReport.验证结果')} key="valid">
           {props.validRes ? (
             <Row className="case-report">
               <Col className="case-report-title" span="6">
-                验证结果
-              </Col>
+                {intl.get('InterfaceCol.CaseReport.验证结果')}</Col>
               <Col span="18"><pre>
                 {validRes}  
               </pre></Col>

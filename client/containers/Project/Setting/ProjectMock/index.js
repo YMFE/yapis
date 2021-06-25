@@ -5,6 +5,7 @@ import { Form, Switch, Button, Icon, Tooltip, message } from 'antd';
 import AceEditor from '../../../../components/AceEditor/AceEditor';
 const FormItem = Form.Item;
 import { updateProjectMock, getProject } from '../../../../reducer/modules/project';
+import intl from "react-intl-universal";
 
 const formItemLayout = {
   labelCol: {
@@ -63,10 +64,10 @@ export default class ProjectMock extends Component {
     let result = await this.props.updateProjectMock(params);
 
     if (result.payload.data.errcode === 0) {
-      message.success('保存成功');
+      message.success(intl.get('ProjectMock.index.保存成功'));
       await this.props.getProject(this.props.projectId);
     } else {
-      message.success('保存失败, ' + result.payload.data.errmsg);
+      message.success(intl.get('ProjectMock.index.保存失败,') + result.payload.data.errmsg);
     }
   };
 
@@ -97,12 +98,12 @@ export default class ProjectMock extends Component {
           <FormItem
             label={
               <span>
-                是否开启&nbsp;<a
+                {intl.get('ProjectMock.index.是否开启&nbsp;')}<a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://hellosean1025.github.io/yapi/documents/project.html#%E5%85%A8%E5%B1%80mock"
                 >
-                  <Tooltip title="点击查看文档">
+                  <Tooltip title={intl.get('ProjectMock.index.点击查看文档')}>
                     <Icon type="question-circle-o" />
                   </Tooltip>
                 </a>
@@ -113,11 +114,11 @@ export default class ProjectMock extends Component {
             <Switch
               checked={this.state.is_mock_open}
               onChange={this.onChange}
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren={intl.get('ProjectMock.index.开')}
+              unCheckedChildren={intl.get('ProjectMock.index.关')}
             />
           </FormItem>
-          <FormItem label="Mock脚本" {...formItemLayout}>
+          <FormItem label={intl.get('ProjectMock.index.Mock脚本')} {...formItemLayout}>
             <AceEditor
               data={this.state.project_mock_script}
               onChange={this.handleMockJsInput}
@@ -126,8 +127,7 @@ export default class ProjectMock extends Component {
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" onClick={this.handleSubmit}>
-              保存
-            </Button>
+              {intl.get('ProjectMock.index.保存')}</Button>
           </FormItem>
         </Form>
       </div>

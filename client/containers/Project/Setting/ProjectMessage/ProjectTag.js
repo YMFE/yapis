@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Row, Col, Input } from 'antd';
 import './ProjectTag.scss';
-
+import intl from "react-intl-universal";
 
 class ProjectTag extends Component {
   static propTypes = {
@@ -82,7 +82,7 @@ class ProjectTag extends Component {
           </Col>
           <Col span={12}>
             <Input
-              placeholder="请输入tag 描述信息"
+              placeholder={intl.get('ProjectMessage.ProjectTag.请输入tag 描述信')}
               style={{ width: '90%', marginRight: 8 }}
               onChange={e => this.handleChange(e.target.value, index, name, 'desc')}
               value={item.desc || ''}

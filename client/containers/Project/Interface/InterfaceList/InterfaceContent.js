@@ -8,6 +8,8 @@ import { Prompt } from 'react-router';
 import { fetchInterfaceData } from '../../../../reducer/modules/interface.js';
 import { withRouter } from 'react-router-dom';
 import Run from './Run/Run.js';
+import intl from "react-intl-universal";
+
 const plugin = require('client/plugin.js');
 
 const TabPane = Tabs.TabPane;
@@ -34,7 +36,7 @@ class Content extends Component {
   };
   constructor(props) {
     super(props);
-    this.title = 'YApi-高效、易用、功能强大的可视化接口管理平台';
+    this.title = intl.get('InterfaceList.InterfaceContent.YApi-高效、易用');
     this.state = {
       curtab: 'view',
       visible: false,
@@ -114,15 +116,15 @@ class Content extends Component {
     let InterfaceTabs = {
       view: {
         component: View,
-        name: '预览'
+        name: intl.get('InterfaceList.InterfaceContent.预览')
       },
       edit: {
         component: Edit,
-        name: '编辑'
+        name: intl.get('InterfaceList.InterfaceContent.编辑')
       },
       run: {
         component: Run,
-        name: '运行'
+        name: intl.get('InterfaceList.InterfaceContent.运行')
       }
     };
 
@@ -153,26 +155,24 @@ class Content extends Component {
           when={this.state.curtab === 'edit' && this.props.editStatus ? true : false}
           message={() => {
             // this.showModal();
-            return '离开页面会丢失当前编辑的内容，确定要离开吗？';
+            return intl.get('InterfaceList.InterfaceContent.离开页面会丢失当前编');
           }}
         />
         {tabs}
         {tabContent}
         {this.state.visible && (
           <Modal
-            title="你即将离开编辑页面"
+            title={intl.get('InterfaceList.InterfaceContent.你即将离开编辑页面')}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={[
               <Button key="back" onClick={this.handleCancel}>
-                取 消
-              </Button>,
+                {intl.get('InterfaceList.InterfaceContent.取 消')}</Button>,
               <Button key="submit" onClick={this.handleOk}>
-                确 定
-              </Button>
+                {intl.get('InterfaceList.InterfaceContent.确 定')}</Button>
             ]}
           >
-            <p>离开页面会丢失当前编辑的内容，确定要离开吗？</p>
+            <p>{intl.get('InterfaceList.InterfaceContent.离开页面会丢失当前编')}</p>
           </Modal>
         )}
       </div>

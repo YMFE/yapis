@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Input } from 'antd';
 import constants from '../../constants/variable.js';
+import intl from "react-intl-universal";
+
 const wordList = constants.MOCK_SOURCE;
 const Search = Input.Search;
 
@@ -43,7 +45,7 @@ class MockList extends Component {
         <Search
           onChange={this.onFilter}
           value={filter}
-          placeholder="搜索mock数据"
+          placeholder={intl.get('ModalPostman.MockList.搜索mock数据')}
           className="mock-search"
         />
         {list.map((item, index) => {

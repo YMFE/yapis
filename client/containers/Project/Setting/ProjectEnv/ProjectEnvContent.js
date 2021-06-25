@@ -5,6 +5,7 @@ import { Icon, Row, Col, Form, Input, Select, Button, AutoComplete, Tooltip } fr
 const FormItem = Form.Item;
 const Option = Select.Option;
 import constants from 'client/constants/variable.js';
+import intl from "react-intl-universal";
 
 const initMap = {
   header: [
@@ -179,7 +180,7 @@ class ProjectEnvContent extends Component {
                   style={{ width: '200px' }}
                   allowClear={true}
                   dataSource={constants.HTTP_REQUEST_HEADER}
-                  placeholder="请输入header名称"
+                  placeholder={intl.get('ProjectEnv.ProjectEnvContent.请输入header名')}
                   onChange={() => this.addHeader(item, index, 'header')}
                   filterOption={(inputValue, option) =>
                     option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
@@ -193,7 +194,7 @@ class ProjectEnvContent extends Component {
               {getFieldDecorator('header[' + index + '].value', {
                 validateTrigger: ['onChange', 'onBlur'],
                 initialValue: item.value || ''
-              })(<Input placeholder="请输入参数内容" style={{ width: '90%', marginRight: 8 }} />)}
+              })(<Input placeholder={intl.get('ProjectEnv.ProjectEnvContent.请输入参数内容')} style={{ width: '90%', marginRight: 8 }} />)}
             </FormItem>
           </Col>
           <Col span={2} className={index === headerLength ? ' env-last-row' : null}>
@@ -234,7 +235,7 @@ class ProjectEnvContent extends Component {
               {getFieldDecorator(`${name}[${index}].value`, {
                 validateTrigger: ['onChange', 'onBlur'],
                 initialValue: item.value || ''
-              })(<Input placeholder="请输入参数内容" style={{ width: '90%', marginRight: 8 }} />)}
+              })(<Input placeholder={intl.get('ProjectEnv.ProjectEnvContent.请输入参数内容')} style={{ width: '90%', marginRight: 8 }} />)}
             </FormItem>
           </Col>
           <Col span={2} className={index === length ? ' env-last-row' : null}>
@@ -255,11 +256,11 @@ class ProjectEnvContent extends Component {
     const envTpl = data => {
       return (
         <div>
-          <h3 className="env-label">环境名称</h3>
+          <h3 className="env-label">{intl.get('ProjectEnv.ProjectEnvContent.环境名称')}</h3>
           <FormItem required={false}>
             {getFieldDecorator('env.name', {
               validateTrigger: ['onChange', 'onBlur'],
-              initialValue: data.name === '新环境' ? '' : data.name || '',
+              initialValue: data.name === intl.get('ProjectEnv.ProjectEnvContent.新环境') ? '' : data.name || '',
               rules: [
                 {
                   required: false,
@@ -267,14 +268,14 @@ class ProjectEnvContent extends Component {
                   validator(rule, value, callback) {
                     if (value) {
                       if (value.length === 0) {
-                        callback('请输入环境名称');
+                        callback(intl.get('ProjectEnv.ProjectEnvContent.请输入环境名称'));
                       } else if (!/\S/.test(value)) {
-                        callback('请输入环境名称');
+                        callback(intl.get('ProjectEnv.ProjectEnvContent.请输入环境名称'));
                       } else {
                         return callback();
                       }
                     } else {
-                      callback('请输入环境名称');
+                      callback(intl.get('ProjectEnv.ProjectEnvContent.请输入环境名称'));
                     }
                   }
                 }
@@ -282,12 +283,12 @@ class ProjectEnvContent extends Component {
             })(
               <Input
                 onChange={e => this.props.handleEnvInput(e.target.value)}
-                placeholder="请输入环境名称"
+                placeholder={intl.get('ProjectEnv.ProjectEnvContent.请输入环境名称')}
                 style={{ width: '90%', marginRight: 8 }}
               />
             )}
           </FormItem>
-          <h3 className="env-label">环境域名</h3>
+          <h3 className="env-label">{intl.get('ProjectEnv.ProjectEnvContent.环境域名')}</h3>
           <FormItem required={false}>
             {getFieldDecorator('env.domain', {
               validateTrigger: ['onChange', 'onBlur'],
@@ -299,21 +300,21 @@ class ProjectEnvContent extends Component {
                   validator(rule, value, callback) {
                     if (value) {
                       if (value.length === 0) {
-                        callback('请输入环境域名!');
+                        callback(intl.get('ProjectEnv.ProjectEnvContent.请输入环境域名!'));
                       } else if (/\s/.test(value)) {
-                        callback('环境域名不允许出现空格!');
+                        callback(intl.get('ProjectEnv.ProjectEnvContent.环境域名不允许出现空'));
                       } else {
                         return callback();
                       }
                     } else {
-                      callback('请输入环境域名!');
+                      callback(intl.get('ProjectEnv.ProjectEnvContent.请输入环境域名!'));
                     }
                   }
                 }
               ]
             })(
               <Input
-                placeholder="请输入环境域名"
+                placeholder={intl.get('ProjectEnv.ProjectEnvContent.请输入环境域名')}
                 style={{ width: '90%', marginRight: 8 }}
                 addonBefore={getFieldDecorator('env.protocol', {
                   initialValue: data.domain ? data.domain.split('//')[0] + '//' : 'http://',
@@ -349,7 +350,7 @@ class ProjectEnvContent extends Component {
               href="https://hellosean1025.github.io/yapi/documents/project.html#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"
               style={{ marginLeft: 8 }}
             >
-              <Tooltip title="点击查看文档">
+              <Tooltip title={intl.get('ProjectEnv.ProjectEnvContent.点击查看文档')}>
                 <Icon type="question-circle-o" style={{fontSize: '13px'}}/>
               </Tooltip>
             </a>
@@ -372,8 +373,7 @@ class ProjectEnvContent extends Component {
             size="large"
             onClick={this.handleOk}
           >
-            保 存
-          </Button>
+            {intl.get('ProjectEnv.ProjectEnvContent.保 存')}</Button>
         </div>
       </div>
     );

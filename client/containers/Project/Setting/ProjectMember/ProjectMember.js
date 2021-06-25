@@ -29,6 +29,7 @@ import {
 } from '../../../../reducer/modules/project.js';
 import UsernameAutoComplete from '../../../../components/UsernameAutoComplete/UsernameAutoComplete.js';
 import '../Setting.scss';
+import intl from "react-intl-universal";
 
 const Option = Select.Option;
 
@@ -238,7 +239,7 @@ class ProjectMember extends Component {
     const columns = [
       {
         title:
-          this.props.projectMsg.name + ' 项目成员 (' + this.state.projectMemberList.length + ') 人',
+          this.props.projectMsg.name + intl.get('ProjectMember.ProjectMember.项目成员 (') + this.state.projectMemberList.length + intl.get('ProjectMember.ProjectMember.) 人'),
         dataIndex: 'username',
         key: 'username',
         render: (text, record) => {
@@ -246,12 +247,12 @@ class ProjectMember extends Component {
             <div className="m-user">
               <img src={'/api/user/avatar?uid=' + record.uid} className="m-user-img" />
               <p className="m-user-name">{text}</p>
-              <Tooltip placement="top" title="消息通知">
+              <Tooltip placement="top" title={intl.get('ProjectMember.ProjectMember.消息通知')}>
                 <span>
                   <Switch
                     size="small"
-                    checkedChildren="开"
-                    unCheckedChildren="关"
+                    checkedChildren={intl.get('ProjectMember.ProjectMember.开')}
+                    unCheckedChildren={intl.get('ProjectMember.ProjectMember.关')}
                     checked={record.email_notice}
                     disabled={!(isEmailChangeEable || record.uid === this.props.uid)}
                     onChange={e => this.changeEmailNotice(e, record.uid)}
@@ -267,11 +268,9 @@ class ProjectMember extends Component {
           this.state.role === 'owner' || this.state.role === 'admin' ? (
             <div className="btn-container">
               <Button className="btn" type="primary" icon="plus" onClick={this.showAddMemberModal}>
-                添加成员
-              </Button>
+                {intl.get('ProjectMember.ProjectMember.添加成员')}</Button>
               <Button className="btn" icon="plus" onClick={this.showImportMemberModal}>
-                批量导入成员
-              </Button>
+                {intl.get('ProjectMember.ProjectMember.批量导入成员')}</Button>
             </div>
           ) : (
             ''
@@ -287,15 +286,15 @@ class ProjectMember extends Component {
                   className="select"
                   onChange={this.changeUserRole}
                 >
-                  <Option value={'owner-' + record.uid}>组长</Option>
-                  <Option value={'dev-' + record.uid}>开发者</Option>
-                  <Option value={'guest-' + record.uid}>访客</Option>
+                  <Option value={'owner-' + record.uid}>{intl.get('ProjectMember.ProjectMember.组长')}</Option>
+                  <Option value={'dev-' + record.uid}>{intl.get('ProjectMember.ProjectMember.开发者')}</Option>
+                  <Option value={'guest-' + record.uid}>{intl.get('ProjectMember.ProjectMember.访客')}</Option>
                 </Select>
                 <Popconfirm
                   placement="topRight"
-                  title="你确定要删除吗? "
+                  title={intl.get('ProjectMember.ProjectMember.你确定要删除吗?')}
                   onConfirm={this.deleteConfirm(record.uid)}
-                  okText="确定"
+                  okText={intl.get('ProjectMember.ProjectMember.确定')}
                   cancelText=""
                 >
                   <Button type="danger" icon="delete" className="btn-danger" />
@@ -305,11 +304,11 @@ class ProjectMember extends Component {
           } else {
             // 非管理员可以看到权限 但无法修改
             if (record.role === 'owner') {
-              return '组长';
+              return intl.get('ProjectMember.ProjectMember.组长');
             } else if (record.role === 'dev') {
-              return '开发者';
+              return intl.get('ProjectMember.ProjectMember.开发者');
             } else if (record.role === 'guest') {
-              return '访客';
+              return intl.get('ProjectMember.ProjectMember.访客');
             } else {
               return '';
             }
@@ -329,14 +328,14 @@ class ProjectMember extends Component {
         <div className="m-panel">
           {this.state.visible ? (
             <Modal
-              title="添加成员"
+              title={intl.get('ProjectMember.ProjectMember.添加成员')}
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
               <Row gutter={6} className="modal-input">
                 <Col span="5">
-                  <div className="label usernamelabel">用户名: </div>
+                  <div className="label usernamelabel">{intl.get('ProjectMember.ProjectMember.用户名:')}</div>
                 </Col>
                 <Col span="15">
                   <UsernameAutoComplete callbackState={this.onUserSelect} />
@@ -344,13 +343,13 @@ class ProjectMember extends Component {
               </Row>
               <Row gutter={6} className="modal-input">
                 <Col span="5">
-                  <div className="label usernamelabel">权限: </div>
+                  <div className="label usernamelabel">{intl.get('ProjectMember.ProjectMember.权限:')}</div>
                 </Col>
                 <Col span="15">
                   <Select defaultValue="dev" className="select" onChange={this.changeNewMemberRole}>
-                    <Option value="owner">组长</Option>
-                    <Option value="dev">开发者</Option>
-                    <Option value="guest">访客</Option>
+                    <Option value="owner">{intl.get('ProjectMember.ProjectMember.组长')}</Option>
+                    <Option value="dev">{intl.get('ProjectMember.ProjectMember.开发者')}</Option>
+                    <Option value="guest">{intl.get('ProjectMember.ProjectMember.访客')}</Option>
                   </Select>
                 </Col>
               </Row>
@@ -359,20 +358,20 @@ class ProjectMember extends Component {
             ''
           )}
           <Modal
-            title="批量导入成员"
+            title={intl.get('ProjectMember.ProjectMember.批量导入成员')}
             visible={this.state.modalVisible}
             onOk={this.handleModalOk}
             onCancel={this.handleModalCancel}
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernamelabel">项目名: </div>
+                <div className="label usernamelabel">{intl.get('ProjectMember.ProjectMember.项目名:')}</div>
               </Col>
               <Col span="15">
                 <Select
                   showSearch
                   style={{ width: 200 }}
-                  placeholder="请选择项目名称"
+                  placeholder={intl.get('ProjectMember.ProjectMember.请选择项目名称')}
                   optionFilterProp="children"
                   onChange={this.handleChange}
                 >
@@ -392,7 +391,7 @@ class ProjectMember extends Component {
           <Card
             bordered={false}
             title={
-              this.state.groupName + ' 分组成员 ' + '(' + this.state.groupMemberList.length + ') 人'
+              this.state.groupName + intl.get('ProjectMember.ProjectMember.分组成员') + '(' + this.state.groupMemberList.length + intl.get('ProjectMember.ProjectMember.) 人')
             }
             hoverable={true}
             className="setting-group"
@@ -415,7 +414,7 @@ class ProjectMember extends Component {
                       {item.username}
                       {item.uid === this.props.uid ? (
                         <Badge
-                          count={'我'}
+                          count={intl.get('ProjectMember.ProjectMember.我')}
                           style={{
                             backgroundColor: '#689bd0',
                             fontSize: '13px',
@@ -425,9 +424,9 @@ class ProjectMember extends Component {
                         />
                       ) : null}
                     </p>
-                    {item.role === 'owner' ? <p className="item-role">组长</p> : null}
-                    {item.role === 'dev' ? <p className="item-role">开发者</p> : null}
-                    {item.role === 'guest' ? <p className="item-role">访客</p> : null}
+                    {item.role === 'owner' ? <p className="item-role">{intl.get('ProjectMember.ProjectMember.组长')}</p> : null}
+                    {item.role === 'dev' ? <p className="item-role">{intl.get('ProjectMember.ProjectMember.开发者')}</p> : null}
+                    {item.role === 'guest' ? <p className="item-role">{intl.get('ProjectMember.ProjectMember.访客')}</p> : null}
                   </div>
                 );
               })

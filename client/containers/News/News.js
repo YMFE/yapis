@@ -7,6 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { Button } from 'antd';
 import { getMockUrl } from '../../reducer/modules/news.js';
 import Subnav from '../../components/Subnav/Subnav.js';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -43,18 +44,18 @@ class News extends Component {
     return (
       <div>
         <Subnav
-          default={'动态'}
+          default={intl.get('News.News.动态')}
           data={[
             {
-              name: '动态',
+              name: intl.get('News.News.动态'),
               path: '/news'
             },
             {
-              name: '测试',
+              name: intl.get('News.News.测试'),
               path: '/follow'
             },
             {
-              name: '设置',
+              name: intl.get('News.News.设置'),
               path: '/follow'
             }
           ]}
@@ -64,9 +65,9 @@ class News extends Component {
             <div className="logHead">
               <Breadcrumb />
               <div className="Mockurl">
-                <span>Mock地址：</span>
+                <span>{intl.get('News.News.Mock地址：')}</span>
                 <p>{this.state.mockURL}</p>
-                <Button type="primary">下载Mock数据</Button>
+                <Button type="primary">{intl.get('News.News.下载Mock数据')}</Button>
               </div>
             </div>
             <NewsTimeline />

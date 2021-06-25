@@ -5,6 +5,8 @@ import { Tabs } from 'antd';
 import LoginForm from './Login';
 import RegForm from './Reg';
 import './Login.scss';
+import intl from "react-intl-universal";
+
 const TabPane = Tabs.TabPane;
 
 @connect(state => ({
@@ -31,11 +33,11 @@ export default class LoginWrap extends Component {
         className="login-form"
         tabBarStyle={{ border: 'none' }}
       >
-        <TabPane tab="登录" key="1">
+        <TabPane tab={intl.get('Login.LoginWrap.登录')} key="1">
           <LoginForm />
         </TabPane>
-        <TabPane tab={"注册"} key="2">
-          {canRegister ? <RegForm /> : <div style={{minHeight: 200}}>管理员已禁止注册，请联系管理员</div>}
+        <TabPane tab={intl.get('Login.LoginWrap.注册')} key="2">
+          {canRegister ? <RegForm /> : <div style={{minHeight: 200}}>{intl.get('Login.LoginWrap.管理员已禁止注册，请')}</div>}
         </TabPane>
       </Tabs>
     );

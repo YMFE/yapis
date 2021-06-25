@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Icon, Input, Tooltip } from 'antd';
 import PropTypes from 'prop-types';
 import './Label.scss';
+import intl from "react-intl-universal";
 
 export default class Label extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class Label extends Component {
               <div>
                 <p>
                   {this.props.desc} &nbsp;&nbsp;
-                  <Tooltip title="编辑简介">
+                  <Tooltip title={intl.get('Label.Label.编辑简介')}>
                     <Icon onClick={this.toggle} className="interface-delete-icon" type="edit" />
                   </Tooltip>
                 </p>

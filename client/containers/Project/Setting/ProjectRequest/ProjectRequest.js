@@ -6,6 +6,7 @@ const FormItem = Form.Item;
 import './project-request.scss';
 import AceEditor from 'client/components/AceEditor/AceEditor';
 import { updateProjectScript, getProject } from '../../../../reducer/modules/project';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -41,10 +42,10 @@ export default class ProjectRequest extends Component {
       after_script: this.state.after_script
     });
     if (result.payload.data.errcode === 0) {
-      message.success('保存成功');
+      message.success(intl.get('ProjectRequest.ProjectRequest.保存成功'));
       await this.props.getProject(this.props.projectId);
     } else {
-      message.success('保存失败, ' + result.payload.data.errmsg);
+      message.success(intl.get('ProjectRequest.ProjectRequest.保存失败,') + result.payload.data.errmsg);
     }
   };
 
@@ -78,7 +79,7 @@ export default class ProjectRequest extends Component {
     return (
       <div className="project-request">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label="Pre-request Script(请求参数处理脚本)">
+          <FormItem {...formItemLayout} label={intl.get('ProjectRequest.ProjectRequest.Pre-reques')}>
             <AceEditor
               data={pre_script}
               onChange={editor => this.setState({ pre_script: editor.text })}
@@ -86,7 +87,7 @@ export default class ProjectRequest extends Component {
               className="request-editor"
             />
           </FormItem>
-          <FormItem {...formItemLayout} label="Pre-response Script(响应数据处理脚本)">
+          <FormItem {...formItemLayout} label={intl.get('ProjectRequest.ProjectRequest.Pre-respon')}>
             <AceEditor
               data={after_script}
               onChange={editor => this.setState({ after_script: editor.text })}
@@ -96,8 +97,7 @@ export default class ProjectRequest extends Component {
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             <Button onClick={this.handleSubmit} type="primary">
-              保存
-            </Button>
+              {intl.get('ProjectRequest.ProjectRequest.保存')}</Button>
           </FormItem>
         </Form>
       </div>

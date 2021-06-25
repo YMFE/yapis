@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Table, Popconfirm, message, Input } from 'antd';
 import axios from 'axios';
+import intl from "react-intl-universal";
 
 const Search = Input.Search;
 const limit = 20;
@@ -76,7 +77,7 @@ class List extends Component {
       .then(
         res => {
           if (res.data.errcode === 0) {
-            message.success('已删除此用户');
+            message.success(intl.get('User.List.已删除此用户'));
             let userlist = this.state.data;
             userlist = userlist.filter(item => {
               return item._id != uid;
@@ -95,7 +96,7 @@ class List extends Component {
   };
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '用户管理' }]);
+    this.props.setBreadcrumb([{ name: intl.get('User.List.用户管理') }]);
   }
 
   handleSearch = value => {
@@ -135,7 +136,7 @@ class List extends Component {
     }
     let columns = [
       {
-        title: '用户名',
+        title: intl.get('User.List.用户名'),
         dataIndex: 'username',
         key: 'username',
         width: 180,
@@ -149,19 +150,19 @@ class List extends Component {
         key: 'email'
       },
       {
-        title: '用户角色',
+        title: intl.get('User.List.用户角色'),
         dataIndex: 'role',
         key: 'role',
         width: 150
       },
       {
-        title: '更新日期',
+        title: intl.get('User.List.更新日期'),
         dataIndex: 'up_time',
         key: 'up_time',
         width: 160
       },
       {
-        title: '功能',
+        title: intl.get('User.List.功能'),
         key: 'action',
         width: '90px',
         render: item => {
@@ -169,16 +170,15 @@ class List extends Component {
             <span>
               {/* <span className="ant-divider" /> */}
               <Popconfirm
-                title="确认删除此用户?"
+                title={intl.get('User.List.确认删除此用户?')}
                 onConfirm={() => {
                   this.confirm(item._id);
                 }}
-                okText="确定"
-                cancelText="取消"
+                okText={intl.get('User.List.确定')}
+                cancelText={intl.get('User.List.取消')}
               >
                 <a style={{ display: 'block', textAlign: 'center' }} href="#">
-                  删除
-                </a>
+                  {intl.get('User.List.删除')}</a>
               </Popconfirm>
             </span>
           );
@@ -209,11 +209,11 @@ class List extends Component {
     return (
       <section className="user-table">
         <div className="user-search-wrapper">
-          <h2 style={{ marginBottom: '10px' }}>用户总数：{this.state.total}位</h2>
+          <h2 style={{ marginBottom: '10px' }}>{intl.get('User.List.用户总数：')}{this.state.total}{intl.get('User.List.位')}</h2>
           <Search
             onChange={e => this.handleSearch(e.target.value)}
             onSearch={this.handleSearch}
-            placeholder="请输入用户名"
+            placeholder={intl.get('User.List.请输入用户名')}
           />
         </div>
         <Table

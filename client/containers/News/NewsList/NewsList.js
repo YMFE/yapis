@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Menu } from 'antd';
 import { fetchNewsData } from '../../../reducer/modules/news.js';
+import intl from "react-intl-universal";
 
 const logList = [
   {
-    name: '用户'
+    name: intl.get('NewsList.NewsList.用户')
   },
   {
-    name: '分组'
+    name: intl.get('NewsList.NewsList.分组')
   },
   {
-    name: '接口'
+    name: intl.get('NewsList.NewsList.接口')
   },
   {
-    name: '项目'
+    name: intl.get('NewsList.NewsList.项目')
   }
 ];
 @connect(
@@ -58,7 +59,7 @@ class NewsList extends Component {
   render() {
     return (
       <div className="logList">
-        <h3>日志类型</h3>
+        <h3>{intl.get('NewsList.NewsList.日志类型')}</h3>
         <Menu
           mode="inline"
           selectedKeys={[`${this.state.selectedKeys}`]}

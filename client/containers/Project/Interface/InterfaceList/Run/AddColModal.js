@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import { fetchInterfaceColList } from '../../../../../reducer/modules/interfaceCol';
+import intl from "react-intl-universal";
 
 const { TextArea } = Input;
 const Panel = Collapse.Panel;
@@ -56,7 +57,7 @@ export default class AddColModal extends Component {
     const project_id = this.props.match.params.id;
     const res = await axios.post('/api/col/add_col', { name, desc, project_id });
     if (!res.data.errcode) {
-      message.success('添加集合成功');
+      message.success(intl.get('Run.AddColModal.添加集合成功'));
       await this.props.fetchInterfaceColList(project_id);
 
       this.setState({ id: res.data.data._id });
@@ -75,24 +76,24 @@ export default class AddColModal extends Component {
     return (
       <Modal
         className="add-col-modal"
-        title="添加到集合"
+        title={intl.get('Run.AddColModal.添加到集合')}
         visible={this.props.visible}
         onOk={() => this.props.onOk(id, this.state.caseName)}
         onCancel={this.props.onCancel}
       >
         <Row gutter={6} className="modal-input">
           <Col span="5">
-            <div className="label">接口用例名：</div>
+            <div className="label">{intl.get('Run.AddColModal.接口用例名：')}</div>
           </Col>
           <Col span="15">
             <Input
-              placeholder="请输入接口用例名称"
+              placeholder={intl.get('Run.AddColModal.请输入接口用例名称')}
               value={this.state.caseName}
               onChange={e => this.setState({ caseName: e.target.value })}
             />
           </Col>
         </Row>
-        <p>请选择添加到的集合：</p>
+        <p>{intl.get('Run.AddColModal.请选择添加到的集合：')}</p>
         <ul className="col-list">
           {interfaceColList.length ? (
             interfaceColList.map(col => (
@@ -106,18 +107,18 @@ export default class AddColModal extends Component {
               </li>
             ))
           ) : (
-            <span>暂无集合，请添加！</span>
+            <span>{intl.get('Run.AddColModal.暂无集合，请添加！')}</span>
           )}
         </ul>
         <Collapse>
-          <Panel header="添加新集合">
+          <Panel header={intl.get('Run.AddColModal.添加新集合')}>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">集合名：</div>
+                <div className="label">{intl.get('Run.AddColModal.集合名：')}</div>
               </Col>
               <Col span="15">
                 <Input
-                  placeholder="请输入集合名称"
+                  placeholder={intl.get('Run.AddColModal.请输入集合名称')}
                   value={this.state.addColName}
                   onChange={e => this.setState({ addColName: e.target.value })}
                 />
@@ -125,12 +126,12 @@ export default class AddColModal extends Component {
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">简介：</div>
+                <div className="label">{intl.get('Run.AddColModal.简介：')}</div>
               </Col>
               <Col span="15">
                 <TextArea
                   rows={3}
-                  placeholder="请输入集合描述"
+                  placeholder={intl.get('Run.AddColModal.请输入集合描述')}
                   value={this.state.addColDesc}
                   onChange={e => this.setState({ addColDesc: e.target.value })}
                 />
@@ -138,8 +139,7 @@ export default class AddColModal extends Component {
             </Row>
             <Row type="flex" justify="end">
               <Button style={{ float: 'right' }} type="primary" onClick={this.addCol}>
-                添 加
-              </Button>
+                {intl.get('Run.AddColModal.添 加')}</Button>
             </Row>
           </Panel>
         </Collapse>

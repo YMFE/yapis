@@ -7,6 +7,9 @@
 文档：
 <p><a target="_blank" href="https://hellosean1025.github.io/yapi">hellosean1025.github.io/yapi</a></p>
 
+### internationalization
+The international version is at feat/intl branch, checkout it.
+
 ### 平台介绍
 ![avatar](yapi-base-flow.jpg)
 

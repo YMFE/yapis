@@ -2,6 +2,7 @@ import React, { PureComponent as Component } from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
 import axios from 'axios';
+import intl from "react-intl-universal";
 
 const Option = Select.Option;
 
@@ -106,10 +107,10 @@ class UsernameAutoComplete extends Component {
       <Select
         mode="multiple"
         style={{ width: '100%' }}
-        placeholder="请输入用户名"
+        placeholder={intl.get('UsernameAutoComplete.UsernameAutoComplete.请输入用户名')}
         filterOption={false}
         optionLabelProp="children"
-        notFoundContent={fetching ? <span style={{ color: 'red' }}> 当前用户不存在</span> : null}
+        notFoundContent={fetching ? <span style={{ color: 'red' }}> {intl.get('UsernameAutoComplete.UsernameAutoComplete.当前用户不存在')}</span> : null}
         onSearch={this.handleSearch}
         onChange={this.handleChange}
       >

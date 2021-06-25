@@ -1,6 +1,7 @@
 import './MockDoc.scss';
 import React, { PureComponent as Component } from 'react';
 import PropTypes from 'prop-types';
+import intl from "react-intl-universal";
 
 // 组件用法 <MockDoc mock= mockData doc= docData />
 // mockData: mock数据 格式为json
@@ -38,21 +39,20 @@ class MockDoc extends Component {
               ? mes.push(
                   <span key={i} className="keymes">
                     {' '}
-                    / /类型：{item.mes.type}
+                    {intl.get('MockDoc.MockDoc./ /类型：')}{item.mes.type}
                   </span>
                 )
               : '';
             item.mes.required
               ? mes.push(
                   <span key={i + 1} className="keymes">
-                    必有字段
-                  </span>
+                    {intl.get('MockDoc.MockDoc.必有字段')}</span>
                 )
               : '';
             item.mes.desc
               ? mes.push(
                   <span key={i + 2} className="keymes">
-                    备注：{item.mes.desc}
+                    {intl.get('MockDoc.MockDoc.备注：')}{item.mes.desc}
                   </span>
                 )
               : '';
@@ -92,14 +92,14 @@ MockDoc.defaultProps = {
     }
   },
   doc: [
-    { type: 'strisng', key: 'ersrcode', required: true, desc: '错误编码' },
-    { type: 'number', key: 'data[]', required: true, desc: '返回数据' },
-    { type: 'object', key: 'data[].name', required: true, desc: '数据名' },
-    { type: 'object', key: 'data[].name1[].name3', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data1', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3.err', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3.arr[]', required: true, desc: '数据名1' }
+    { type: 'strisng', key: 'ersrcode', required: true, desc: intl.get('MockDoc.MockDoc.错误编码') },
+    { type: 'number', key: 'data[]', required: true, desc: intl.get('MockDoc.MockDoc.返回数据') },
+    { type: 'object', key: 'data[].name', required: true, desc: intl.get('MockDoc.MockDoc.数据名') },
+    { type: 'object', key: 'data[].name1[].name3', required: true, desc: intl.get('MockDoc.MockDoc.数据名1') },
+    { type: 'object', key: 'data1', required: true, desc: intl.get('MockDoc.MockDoc.数据名1') },
+    { type: 'object', key: 'data3.err', required: true, desc: intl.get('MockDoc.MockDoc.数据名1') },
+    { type: 'object', key: 'data3', required: true, desc: intl.get('MockDoc.MockDoc.数据名1') },
+    { type: 'object', key: 'data3.arr[]', required: true, desc: intl.get('MockDoc.MockDoc.数据名1') }
   ]
 };
 function produceSpace(count) {

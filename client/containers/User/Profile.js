@@ -5,6 +5,7 @@ import { formatTime } from '../../common.js';
 import PropTypes from 'prop-types';
 import { setBreadcrumb, setImageUrl } from '../../reducer/modules/user';
 import { connect } from 'react-redux';
+import intl from "react-intl-universal";
 
 const EditButton = props => {
   const { isAdmin, isOwner, onClick, name, admin } = props;
@@ -20,8 +21,7 @@ const EditButton = props => {
           onClick(name, true);
         }}
       >
-        修改
-      </Button>
+        {intl.get('User.Profile.修改')}</Button>
     );
   } else if (isAdmin) {
     // 管理员
@@ -32,8 +32,7 @@ const EditButton = props => {
           onClick(name, true);
         }}
       >
-        修改
-      </Button>
+        {intl.get('User.Profile.修改')}</Button>
     );
   } else {
     return null;
@@ -117,7 +116,7 @@ class Profile extends Component {
       if (curUid === +id) {
         this.props.setBreadcrumb([{ name: res.data.data.username }]);
       } else {
-        this.props.setBreadcrumb([{ name: '管理: ' + res.data.data.username }]);
+        this.props.setBreadcrumb([{ name: intl.get('User.Profile.管理:') + res.data.data.username }]);
       }
     });
   };
@@ -139,7 +138,7 @@ class Profile extends Component {
           });
 
           this.handleEdit(name + 'Edit', false);
-          message.success('更新用户信息成功');
+          message.success(intl.get('User.Profile.更新用户信息成功'));
         } else {
           message.error(data.errmsg);
         }
@@ -177,7 +176,7 @@ class Profile extends Component {
     let password = document.getElementById('password').value;
     let verify_pass = document.getElementById('verify_pass').value;
     if (password != verify_pass) {
-      return message.error('两次输入的密码不一样');
+      return message.error(intl.get('User.Profile.两次输入的密码不一样'));
     }
     let params = {
       uid: this.state.userinfo.uid,
@@ -190,7 +189,7 @@ class Profile extends Component {
         let data = res.data;
         if (data.errcode === 0) {
           this.handleEdit('secureEdit', false);
-          message.success('修改密码成功');
+          message.success(intl.get('User.Profile.修改密码成功'));
           if (this.props.curUid === this.state.userinfo.uid) {
             location.reload();
           }
@@ -210,7 +209,7 @@ class Profile extends Component {
     const Option = Select.Option;
     let userinfo = this.state.userinfo;
     let _userinfo = this.state._userinfo;
-    let roles = { admin: '管理员', member: '会员' };
+    let roles = { admin: intl.get('User.Profile.管理员'), member: intl.get('User.Profile.会员') };
     let userType = '';
     if (this.props.userType === 'third') {
       userType = false;
@@ -246,7 +245,7 @@ class Profile extends Component {
             value={_userinfo.username}
             name="username"
             onChange={this.changeUserinfo}
-            placeholder="用户名"
+            placeholder={intl.get('User.Profile.用户名')}
           />
           <ButtonGroup className="edit-buttons">
             <Button
@@ -255,8 +254,7 @@ class Profile extends Component {
                 this.handleEdit('usernameEdit', false);
               }}
             >
-              取消
-            </Button>
+              {intl.get('User.Profile.取消')}</Button>
             <Button
               className="edit-button"
               onClick={() => {
@@ -264,8 +262,7 @@ class Profile extends Component {
               }}
               type="primary"
             >
-              确定
-            </Button>
+              {intl.get('User.Profile.确定')}</Button>
           </ButtonGroup>
         </div>
       );
@@ -305,8 +302,7 @@ class Profile extends Component {
                 this.handleEdit('emailEdit', false);
               }}
             >
-              取消
-            </Button>
+              {intl.get('User.Profile.取消')}</Button>
             <Button
               className="edit-button"
               type="primary"
@@ -314,8 +310,7 @@ class Profile extends Component {
                 this.updateUserinfo('email');
               }}
             >
-              确定
-            </Button>
+              {intl.get('User.Profile.确定')}</Button>
           </ButtonGroup>
         </div>
       );
@@ -330,8 +325,8 @@ class Profile extends Component {
     } else {
       roleEditHtml = (
         <Select defaultValue={_userinfo.role} onChange={this.changeRole} style={{ width: 150 }}>
-          <Option value="admin">管理员</Option>
-          <Option value="member">会员</Option>
+          <Option value="admin">{intl.get('User.Profile.管理员')}</Option>
+          <Option value="member">{intl.get('User.Profile.会员')}</Option>
         </Select>
       );
     }
@@ -346,8 +341,7 @@ class Profile extends Component {
               this.handleEdit('secureEdit', true);
             }}
           >
-            修改
-          </Button>
+            {intl.get('User.Profile.修改')}</Button>
         );
       }
       secureEditHtml = btn;
@@ -358,13 +352,13 @@ class Profile extends Component {
             style={{
               display: this.props.curRole === 'admin' && userinfo.role != 'admin' ? 'none' : ''
             }}
-            placeholder="旧的密码"
+            placeholder={intl.get('User.Profile.旧的密码')}
             type="password"
             name="old_password"
             id="old_password"
           />
-          <Input placeholder="新的密码" type="password" name="password" id="password" />
-          <Input placeholder="确认密码" type="password" name="verify_pass" id="verify_pass" />
+          <Input placeholder={intl.get('User.Profile.新的密码')} type="password" name="password" id="password" />
+          <Input placeholder={intl.get('User.Profile.确认密码')} type="password" name="verify_pass" id="verify_pass" />
           <ButtonGroup className="edit-buttons">
             <Button
               className="edit-button"
@@ -372,11 +366,9 @@ class Profile extends Component {
                 this.handleEdit('secureEdit', false);
               }}
             >
-              取消
-            </Button>
+              {intl.get('User.Profile.取消')}</Button>
             <Button className="edit-button" onClick={this.updatePassword} type="primary">
-              确定
-            </Button>
+              {intl.get('User.Profile.确定')}</Button>
           </ButtonGroup>
         </div>
       );
@@ -385,15 +377,15 @@ class Profile extends Component {
       <div className="user-profile">
         <div className="user-item-body">
           {userinfo.uid === this.props.curUid ? (
-            <h3>个人设置</h3>
+            <h3>{intl.get('User.Profile.个人设置')}</h3>
           ) : (
-            <h3>{userinfo.username} 资料设置</h3>
+            <h3>{userinfo.username} {intl.get('User.Profile.资料设置')}</h3>
           )}
 
           <Row className="avatarCon" type="flex" justify="start">
             <Col span={24}>
               {userinfo.uid === this.props.curUid ? (
-                <AvatarUpload uid={userinfo.uid}>点击上传头像</AvatarUpload>
+                <AvatarUpload uid={userinfo.uid}>{intl.get('User.Profile.点击上传头像')}</AvatarUpload>
               ) : (
                 <div className="avatarImg">
                   <img src={`/api/user/avatar?uid=${userinfo.uid}`} />
@@ -403,12 +395,12 @@ class Profile extends Component {
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>用户id</Col>
+            <Col span={4}>{intl.get('User.Profile.用户id')}</Col>
             <Col span={12}>{userinfo.uid}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>用户名</Col>
+            <Col span={4}>{intl.get('User.Profile.用户名')}</Col>
             <Col span={12}>{userNameEditHtml}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
@@ -423,7 +415,7 @@ class Profile extends Component {
             justify="start"
           >
             <div className="maoboli" />
-            <Col span={4}>角色</Col>
+            <Col span={4}>{intl.get('User.Profile.角色')}</Col>
             <Col span={12}>{roleEditHtml}</Col>
           </Row>
           <Row
@@ -433,24 +425,24 @@ class Profile extends Component {
             justify="start"
           >
             <div className="maoboli" />
-            <Col span={4}>登陆方式</Col>
-            <Col span={12}>{userinfo.type === 'site' ? '站点登陆' : '第三方登陆'}</Col>
+            <Col span={4}>{intl.get('User.Profile.登陆方式')}</Col>
+            <Col span={12}>{userinfo.type === 'site' ? intl.get('User.Profile.站点登陆') : intl.get('User.Profile.第三方登陆')}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>创建账号时间</Col>
+            <Col span={4}>{intl.get('User.Profile.创建账号时间')}</Col>
             <Col span={12}>{formatTime(userinfo.add_time)}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>更新账号时间</Col>
+            <Col span={4}>{intl.get('User.Profile.更新账号时间')}</Col>
             <Col span={12}>{formatTime(userinfo.up_time)}</Col>
           </Row>
 
           {userType ? (
             <Row className="user-item" type="flex" justify="start">
               <div className="maoboli" />
-              <Col span={4}>密码</Col>
+              <Col span={4}>{intl.get('User.Profile.密码')}</Col>
               <Col span={12}>{secureEditHtml}</Col>
             </Row>
           ) : (
@@ -509,7 +501,7 @@ class AvatarUpload extends Component {
       <div className="avatar-box">
         <Tooltip
           placement="right"
-          title={<div>点击头像更换 (只支持jpg、png格式且大小不超过200kb的图片)</div>}
+          title={<div>{intl.get('User.Profile.点击头像更换 (只支')}</div>}
         >
           <div>
             <Upload
@@ -537,11 +529,11 @@ function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg';
   const isPNG = file.type === 'image/png';
   if (!isJPG && !isPNG) {
-    message.error('图片的格式只能为 jpg、png！');
+    message.error(intl.get('User.Profile.图片的格式只能为 j'));
   }
   const isLt2M = file.size / 1024 / 1024 < 0.2;
   if (!isLt2M) {
-    message.error('图片必须小于 200kb!');
+    message.error(intl.get('User.Profile.图片必须小于 200'));
   }
 
   return (isPNG || isJPG) && isLt2M;

@@ -12,18 +12,20 @@ const { Header } = Layout;
 import LogoSVG from '../LogoSVG/index.js';
 import Breadcrumb from '../Breadcrumb/Breadcrumb.js';
 import GuideBtns from '../GuideBtns/GuideBtns.js';
+import intl from "react-intl-universal";
+
 const plugin = require('client/plugin.js');
 
 let HeaderMenu = {
   user: {
     path: '/user/profile',
-    name: '个人中心',
+    name: intl.get('Header.Header.个人中心'),
     icon: 'user',
     adminFlag: false
   },
   solution: {
     path: '/user/list',
-    name: '用户管理',
+    name: intl.get('Header.Header.用户管理'),
     icon: 'solution',
     adminFlag: true
   }
@@ -41,7 +43,7 @@ const MenuUser = props => (
       }
       return (
         <Menu.Item key={key}>
-          {item.name === '个人中心' ? (
+          {item.name === intl.get('Header.Header.个人中心') ? (
             <Link to={item.path + `/${props.uid}`}>
               <Icon type={item.icon} />
               {item.name}
@@ -57,8 +59,7 @@ const MenuUser = props => (
     })}
     <Menu.Item key="9">
       <a onClick={props.logout}>
-        <Icon type="logout" />退出
-      </a>
+        <Icon type="logout" />{intl.get('Header.Header.退出')}</a>
     </Menu.Item>
   </Menu>
 );
@@ -66,30 +67,27 @@ const MenuUser = props => (
 const tipFollow = (
   <div className="title-container">
     <h3 className="title">
-      <Icon type="star" /> 关注
-    </h3>
-    <p>这里是你的专属收藏夹，便于你找到自己的项目</p>
+      <Icon type="star" /> {intl.get('Header.Header.关注')}</h3>
+    <p>{intl.get('Header.Header.这里是你的专属收藏夹')}</p>
   </div>
 );
 const tipAdd = (
   <div className="title-container">
     <h3 className="title">
-      <Icon type="plus-circle" /> 新建项目
-    </h3>
-    <p>在任何页面都可以快速新建项目</p>
+      <Icon type="plus-circle" /> {intl.get('Header.Header.新建项目')}</h3>
+    <p>{intl.get('Header.Header.在任何页面都可以快速')}</p>
   </div>
 );
 const tipDoc = (
   <div className="title-container">
     <h3 className="title">
-      使用文档 <Tag color="orange">推荐!</Tag>
+      {intl.get('Header.Header.使用文档')}<Tag color="orange">{intl.get('Header.Header.推荐!')}</Tag>
     </h3>
     <p>
-      初次使用 YApi，强烈建议你阅读{' '}
+      {intl.get('Header.Header.初次使用 YApi，')}{' '}
       <a target="_blank" href="https://hellosean1025.github.io/yapi/" rel="noopener noreferrer">
-        使用文档
-      </a>
-      ，我们为你提供了通俗易懂的快速入门教程，更有详细的使用说明，欢迎阅读！{' '}
+        {intl.get('Header.Header.使用文档')}</a>
+      {intl.get('Header.Header.，我们为你提供了通俗')}{' '}
     </p>
   </div>
 );
@@ -118,7 +116,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 1 && !props.study}
       >
-        <Tooltip placement="bottom" title={'我的关注'}>
+        <Tooltip placement="bottom" title={intl.get('Header.Header.我的关注')}>
           <li className="toolbar-li">
             <Link to="/follow">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="star" />
@@ -134,7 +132,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 2 && !props.study}
       >
-        <Tooltip placement="bottom" title={'新建项目'}>
+        <Tooltip placement="bottom" title={intl.get('Header.Header.新建项目')}>
           <li className="toolbar-li">
             <Link to="/add-project">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="plus-circle" />
@@ -150,7 +148,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 3 && !props.study}
       >
-        <Tooltip placement="bottom" title={'使用文档'}>
+        <Tooltip placement="bottom" title={intl.get('Header.Header.使用文档')}>
           <li className="toolbar-li">
             <a target="_blank" href="https://hellosean1025.github.io/yapi" rel="noopener noreferrer">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="question-circle" />
@@ -242,13 +240,17 @@ export default class HeaderCom extends Component {
     location: PropTypes.object,
     study: PropTypes.bool,
     studyTip: PropTypes.number,
-    imageUrl: PropTypes.any
+    imageUrl: PropTypes.any,
+    addone: PropTypes.oneOfType([
+      undefined,
+      PropTypes.ReactNodeLike
+    ]),
   };
   linkTo = e => {
     if (e.key != '/doc') {
       this.props.changeMenuItem(e.key);
       if (!this.props.login) {
-        message.info('请先登录', 1);
+        message.info(intl.get('Header.Header.请先登录'), 1);
       }
     }
   };
@@ -263,7 +265,7 @@ export default class HeaderCom extends Component {
         if (res.payload.data.errcode == 0) {
           this.props.history.push('/');
           this.props.changeMenuItem('/');
-          message.success('退出成功! ');
+          message.success(intl.get('Header.Header.退出成功!'));
         } else {
           message.error(res.payload.data.errmsg);
         }
@@ -293,7 +295,7 @@ export default class HeaderCom extends Component {
   };
 
   render() {
-    const { login, user, msg, uid, role, studyTip, study, imageUrl } = this.props;
+    const { login, user, msg, uid, role, studyTip, study, imageUrl, addone } = this.props;
     return (
       <Header className="header-box m-header">
         <div className="content g-row">
@@ -309,6 +311,7 @@ export default class HeaderCom extends Component {
             className="user-toolbar"
             style={{ position: 'relative', zIndex: this.props.studyTip > 0 ? 3 : 1 }}
           >
+            {addone}
             {login ? (
               <ToolUser
                 {...{ studyTip, study, user, msg, uid, role, imageUrl }}

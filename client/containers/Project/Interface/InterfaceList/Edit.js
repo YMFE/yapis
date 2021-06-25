@@ -13,6 +13,7 @@ import { message, Modal } from 'antd';
 import './Edit.scss';
 import { withRouter, Link } from 'react-router-dom';
 import ProjectTag from '../../Setting/ProjectMessage/ProjectTag.js';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -64,7 +65,7 @@ class InterfaceEdit extends Component {
     this.props.fetchInterfaceData(params.id).then();
     if (result.data.errcode === 0) {
       this.props.updateInterfaceData(params);
-      message.success('保存成功');
+      message.success(intl.get('InterfaceList.Edit.保存成功'));
     } else {
       message.error(result.data.errmsg);
     }
@@ -130,14 +131,14 @@ class InterfaceEdit extends Component {
           curdata: this.props.curdata,
           status: 1
         });
-        console.warn('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+        console.warn(intl.get('InterfaceList.Edit.websocket'));
       };
     } catch (e) {
       this.setState({
         curdata: this.props.curdata,
         status: 1
       });
-      console.error('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+      console.error(intl.get('InterfaceList.Edit.websocket'));
     }
   }
 
@@ -162,7 +163,7 @@ class InterfaceEdit extends Component {
 
     if (result.data.errcode === 0) {
       await this.props.getProject(id);
-      message.success('保存成功');
+      message.success(intl.get('InterfaceList.Edit.保存成功'));
     } else {
       message.error(result.data.errmsg);
     }
@@ -204,18 +205,18 @@ class InterfaceEdit extends Component {
             <Link to={'/user/profile/' + this.state.curdata.uid}>
               <b>{this.state.curdata.username}</b>
             </Link>
-            <span>正在编辑该接口，请稍后再试...</span>
+            <span>{intl.get('InterfaceList.Edit.正在编辑该接口，请稍')}</span>
           </div>
         ) : null}
-        {this.state.status === 0 && '正在加载，请耐心等待...'}
+        {this.state.status === 0 && intl.get('InterfaceList.Edit.正在加载，请耐心等待')}
 
         <Modal
-          title="Tag 设置"
+          title={intl.get('InterfaceList.Edit.Tag 设置')}
           width={680}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          okText="保存"
+          okText={intl.get('InterfaceList.Edit.保存')}
         >
           <div className="tag-modal-center">
             <ProjectTag tagMsg={tag} ref={this.tagSubmit} />

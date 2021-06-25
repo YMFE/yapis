@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import intl from "react-intl-universal";
 
 const LogoSVG = props => {
   let length = props.length;
@@ -30,8 +31,8 @@ const LogoSVG = props => {
           />
         </filter>
       </defs>
-      <g id="首页" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g id="大屏幕">
+      <g id={intl.get('LogoSVG.index.首页')} stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g id={intl.get('LogoSVG.index.大屏幕')}>
           <g id="Icon">
             <circle id="Oval-1" fill="url(#linearGradient-1)" cx="32" cy="32" r="32" />
             <path

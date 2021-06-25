@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { formatTime } from '../../../common.js';
 import { fetchNewsData } from '../../../reducer/modules/news.js';
 import { timeago } from '../../../../common/utils';
+import intl from "react-intl-universal";
+
 // timeago(new Date().getTime() - 40);
 
 @connect(
@@ -69,11 +71,10 @@ class NewsTimeline extends Component {
       data = '';
     }
     let pending = this.state.bidden ? (
-      <a className={this.state.bidden}>以上为全部内容</a>
+      <a className={this.state.bidden}>{intl.get('NewsTimeline.NewsTimeline.以上为全部内容')}</a>
     ) : (
       <a className="loggetMore" onClick={this.getMore.bind(this)}>
-        查看更多
-      </a>
+        {intl.get('NewsTimeline.NewsTimeline.查看更多')}</a>
     );
     if (this.state.loading) {
       pending = <Spin />;

@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import LogoSVG from '../../components/LogoSVG/index.js';
 import { changeMenuItem } from '../../reducer/modules/menu';
+import intl from "react-intl-universal";
+
 const plugin = require('client/plugin.js');
 
 const ThirdLogin = plugin.emitHook('third_login');
@@ -32,8 +34,7 @@ const HomeGuest = () => (
                 href="https://hellosean1025.github.io/yapi"
                 className="item"
               >
-                使用文档
-              </a>
+                {intl.get('Home.Home.使用文档')}</a>
             </div>
           </Col>
         </Row>
@@ -45,14 +46,13 @@ const HomeGuest = () => (
                 <span className="name">YAPI</span>
               </div>
               <div className="detail">
-                高效、易用、功能强大的API管理平台<br />
-                <span className="desc">旨在为开发、产品、测试人员提供更优雅的接口管理服务</span>
+                {intl.get('Home.Home.高效、易用、功能强大')}<br />
+                <span className="desc">{intl.get('Home.Home.旨在为开发、产品、测')}</span>
               </div>
               <div className="btn-group">
                 <Link to="/login">
                   <Button type="primary" className="btn-home btn-login">
-                    登录 / 注册
-                  </Button>
+                    {intl.get('Home.Home.登录 / 注册')}</Button>
                 </Link>
                 {ThirdLogin != null ? <ThirdLogin /> : null}
               </div>
@@ -68,27 +68,25 @@ const HomeGuest = () => (
     </div>
     <div className="feat-part section-feature">
       <div className="container home-section">
-        <h3 className="title">为API开发者设计的管理平台</h3>
+        <h3 className="title">{intl.get('Home.Home.为API开发者设计的')}</h3>
         <span className="desc">
-          YApi让接口开发更简单高效，让接口的管理更具可读性、可维护性，让团队协作更合理。
-        </span>
+          {intl.get('Home.Home.YApi让接口开发更')}</span>
         <Row key="feat-motion-row">
           <Col span={8} className="section-item" key="feat-wrapper-1">
             <Icon type="appstore-o" className="img" />
-            <h4 className="title">项目管理</h4>
-            <span className="desc">提供基本的项目分组，项目管理，接口管理功能</span>
+            <h4 className="title">{intl.get('Home.Home.项目管理')}</h4>
+            <span className="desc">{intl.get('Home.Home.提供基本的项目分组，')}</span>
           </Col>
           <Col span={8} className="section-item" key="feat-wrapper-2">
             <Icon type="api" className="img" />
-            <h4 className="title">接口管理</h4>
+            <h4 className="title">{intl.get('Home.Home.接口管理')}</h4>
             <span className="desc">
-              友好的接口文档，基于websocket的多人协作接口编辑功能和类postman测试工具，让多人协作成倍提升开发效率
-            </span>
+              {intl.get('Home.Home.友好的接口文档，基于')}</span>
           </Col>
           <Col span={8} className="section-item" key="feat-wrapper-3">
             <Icon type="database" className="img" />
             <h4 className="title">MockServer</h4>
-            <span className="desc">基于Mockjs，使用简单功能强大</span>
+            <span className="desc">{intl.get('Home.Home.基于Mockjs，使')}</span>
           </Col>
         </Row>
       </div>
@@ -100,16 +98,13 @@ const HomeGuest = () => (
         <div className="m-bg-mask m-bg-mask2" />
       </div>
       <div className="container skew-container">
-        <h3 className="title">功能强大的 Mock 服务</h3>
-        <span className="desc">你想要的 Mock 服务都在这里</span>
+        <h3 className="title">{intl.get('Home.Home.功能强大的 Mock')}</h3>
+        <span className="desc">{intl.get('Home.Home.你想要的 Mock')}</span>
         <Row className="row-card">
           <Col lg={12} xs={24} className="section-card">
-            <Card title="Mock 规则">
+            <Card title={intl.get('Home.Home.Mock 规则')}>
               <p className="mock-desc">
-                通过学习一些简单的 Mock
-                模板规则即可轻松编写接口，这将大大提高定义接口的效率，并且无需为编写 Mock 数据烦恼:
-                所有的数据都可以实时随机生成。
-              </p>
+                {intl.get('Home.Home.通过学习一些简单的')}</p>
               <div className="code">
                 <ol start="1">
                   <li className="item">
@@ -193,11 +188,9 @@ const HomeGuest = () => (
             </Card>
           </Col>
           <Col lg={12} xs={24} className="section-card mock-after">
-            <Card title="生成的 Mock 数据">
+            <Card title={intl.get('Home.Home.生成的 Mock 数')}>
               <p className="mock-desc">
-                生成的 Mock 数据可以直接用 ajax
-                请求使用，也可以通过服务器代理使用（不需要修改项目一行代码）
-              </p>
+                {intl.get('Home.Home.生成的 Mock 数')}</p>
               <div className="code">
                 <ol start="1">
                   <li className="alt">
@@ -285,34 +278,31 @@ const HomeGuest = () => (
           <Col lg={7} xs={10} className="section-card">
             <Card>
               <div className="section-block block-first">
-                <h4>超级管理员(* N)</h4>
-                <p className="item"> - 创建分组</p>
-                <p className="item"> - 分配组长</p>
-                <p className="item"> - 管理所有成员信息</p>
+                <h4>{intl.get('Home.Home.超级管理员(* N)')}</h4>
+                <p className="item"> {intl.get('Home.Home.- 创建分组')}</p>
+                <p className="item"> {intl.get('Home.Home.- 分配组长')}</p>
+                <p className="item"> {intl.get('Home.Home.- 管理所有成员信息')}</p>
               </div>
               <div className="section-block block-second">
-                <h4>组长(* N)</h4>
-                <p className="item"> - 创建项目</p>
-                <p className="item"> - 管理分组或项目的信息</p>
-                <p className="item"> - 管理开发者与成员</p>
+                <h4>{intl.get('Home.Home.组长(* N)')}</h4>
+                <p className="item"> {intl.get('Home.Home.- 创建项目')}</p>
+                <p className="item"> {intl.get('Home.Home.- 管理分组或项目的')}</p>
+                <p className="item"> {intl.get('Home.Home.- 管理开发者与成员')}</p>
               </div>
               <div className="section-block block-third">
-                <h4>开发者(* N) / 成员(* N)</h4>
-                <p className="item"> - 不允许创建分组</p>
-                <p className="item"> - 不允许修改分组或项目信息</p>
+                <h4>{intl.get('Home.Home.开发者(* N) /')}</h4>
+                <p className="item"> {intl.get('Home.Home.- 不允许创建分组')}</p>
+                <p className="item"> {intl.get('Home.Home.- 不允许修改分组或')}</p>
               </div>
             </Card>
           </Col>
           <Col lg={17} xs={14} className="section-card manage-word">
             <Icon type="team" className="icon" />
-            <h3 className="title">扁平化管理模式</h3>
+            <h3 className="title">{intl.get('Home.Home.扁平化管理模式')}</h3>
             <p className="desc">
-              接口管理的逻辑较为复杂，操作频率高，层层审批将严重拖慢生产效率，因此传统的金字塔管理模式并不适用。
-            </p>
+              {intl.get('Home.Home.接口管理的逻辑较为复')}</p>
             <p className="desc">
-              YAPI
-              将扁平化管理模式的思想引入到产品的权限管理中，超级管理员拥有最高的权限，并将权限分配给若干组长，超级管理员只需管理组长即可，实际上管理YAPI各大分组与项目的是“组长”。组长对分组或项目负责，一般由BU负责人/项目负责人担任。
-            </p>
+              {intl.get('Home.Home.YAPI')}</p>
           </Col>
         </Row>
       </div>
@@ -360,20 +350,18 @@ class Home extends Component {
         <div className="row-tip">
           <div className="container">
             <div className="tip-title">
-              <h3 className="title">准备好使用了吗？</h3>
-              <p className="desc">注册账号尽请使用吧，查看使用文档了解更多信息</p>
+              <h3 className="title">{intl.get('Home.Home.准备好使用了吗？')}</h3>
+              <p className="desc">{intl.get('Home.Home.注册账号尽请使用吧，')}</p>
             </div>
             <div className="tip-btns">
               <div className="btn-group">
                 <Link to="/login">
                   <Button type="primary" className="btn-home btn-login">
-                    登录 / 注册
-                  </Button>
+                    {intl.get('Home.Home.登录 / 注册')}</Button>
                 </Link>
                 <Button className="btn-home btn-home-normal">
                   <a target="_blank" rel="noopener noreferrer" href="https://hellosean1025.github.io/yapi">
-                    使用文档
-                  </a>
+                    {intl.get('Home.Home.使用文档')}</a>
                 </Button>
               </div>
             </div>

@@ -16,6 +16,8 @@ import InterfaceColContent from './InterfaceCol/InterfaceColContent.js';
 import InterfaceCaseContent from './InterfaceCol/InterfaceCaseContent.js';
 import { getProject } from '../../../reducer/modules/project';
 import { setColData } from '../../../reducer/modules/interfaceCol.js';
+import intl from "react-intl-universal";
+
 const contentRouter = {
   path: '/project/:id/interface/:action/:actionId',
   exact: true
@@ -100,8 +102,8 @@ class Interface extends Component {
         <Sider style={{ height: '100%' }} width={300}>
           <div className="left-menu">
             <Tabs type="card" className="tabs-large" activeKey={activeKey} onChange={this.onChange}>
-              <Tabs.TabPane tab="接口列表" key="api" />
-              <Tabs.TabPane tab="测试集合" key="colOrCase" />
+              <Tabs.TabPane tab={intl.get('Interface.Interface.接口列表')} key="api" />
+              <Tabs.TabPane tab={intl.get('Interface.Interface.测试集合')} key="colOrCase" />
             </Tabs>
             {activeKey === 'api' ? (
               <InterfaceMenu

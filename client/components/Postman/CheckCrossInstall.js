@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'antd';
 import PropTypes from 'prop-types';
+import intl from "react-intl-universal";
 
 exports.initCrossRequest = function (fn) {
   let startTime = 0;
@@ -33,9 +34,7 @@ function CheckCrossInstall(props) {
         <Alert
           message={
             <div>
-              重要：当前的接口测试服务，需安装免费测试增强插件,仅支持 chrome
-              浏览器，选择下面任意一种安装方式：
-              {/* <div>
+              {intl.get('Postman.CheckCrossInstall.重要：当前的接口测试')}{/* <div>
                 <a
                   target="blank"
                   href="https://chrome.google.com/webstore/detail/cross-request/cmnlfmgbjmaciiopcgodlhpiklaghbok?hl=en-US"
@@ -46,7 +45,7 @@ function CheckCrossInstall(props) {
               <div>
                 <a target="blank" href="https://juejin.im/post/5e3bbd986fb9a07ce152b53d">
                   {' '}
-                  [谷歌请求插件详细安装教程]{' '}
+                  {intl.get('Postman.CheckCrossInstall.[谷歌请求插件详细安')}{' '}
                 </a>
               </div>
             </div>

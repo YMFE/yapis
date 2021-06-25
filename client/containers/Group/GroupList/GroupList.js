@@ -19,14 +19,14 @@ import {
 import _ from 'underscore';
 
 import './GroupList.scss';
+import intl from "react-intl-universal";
 
 const tip = (
   <div className="title-container">
-    <h3 className="title">欢迎使用 YApi ~</h3>
+    <h3 className="title">{intl.get('GroupList.GroupList.欢迎使用 YApi')}</h3>
     <p>
-      这里的 <b>“个人空间”</b>{' '}
-      是你自己才能看到的分组，你拥有这个分组的全部权限，可以在这个分组里探索 YApi 的功能。
-    </p>
+      {intl.get('GroupList.GroupList.这里的')}<b>{intl.get('GroupList.GroupList.“个人空间”')}</b>{' '}
+      {intl.get('GroupList.GroupList.是你自己才能看到的分')}</p>
   </div>
 );
 
@@ -216,20 +216,20 @@ export default class GroupList extends Component {
           <div className="curr-group">
             <div className="curr-group-name">
               <span className="name">{currGroup.group_name}</span>
-              <Tooltip title="添加分组">
+              <Tooltip title={intl.get('GroupList.GroupList.添加分组')}>
                 <a className="editSet">
                   <Icon className="btn" type="folder-add" onClick={this.showModal} />
                 </a>
               </Tooltip>
             
             </div>
-            <div className="curr-group-desc">简介: {currGroup.group_desc}</div>
+            <div className="curr-group-desc">{intl.get('GroupList.GroupList.简介:')}{currGroup.group_desc}</div>
           </div>
 
           <div className="group-operate">
             <div className="search">
               <Search
-                placeholder="搜索分类"
+                placeholder={intl.get('GroupList.GroupList.搜索分类')}
                 onChange={this.searchGroup}
                 onSearch={v => this.searchGroup(null, v)}
               />
@@ -279,7 +279,7 @@ export default class GroupList extends Component {
         </div>
         {this.state.addGroupModalVisible ? (
           <Modal
-            title="添加分组"
+            title={intl.get('GroupList.GroupList.添加分组')}
             visible={this.state.addGroupModalVisible}
             onOk={this.addGroup}
             onCancel={this.hideModal}
@@ -287,23 +287,23 @@ export default class GroupList extends Component {
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">分组名：</div>
+                <div className="label">{intl.get('GroupList.GroupList.分组名：')}</div>
               </Col>
               <Col span="15">
-                <Input placeholder="请输入分组名称" onChange={this.inputNewGroupName} />
+                <Input placeholder={intl.get('GroupList.GroupList.请输入分组名称')} onChange={this.inputNewGroupName} />
               </Col>
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">简介：</div>
+                <div className="label">{intl.get('GroupList.GroupList.简介：')}</div>
               </Col>
               <Col span="15">
-                <TextArea rows={3} placeholder="请输入分组描述" onChange={this.inputNewGroupDesc} />
+                <TextArea rows={3} placeholder={intl.get('GroupList.GroupList.请输入分组描述')} onChange={this.inputNewGroupDesc} />
               </Col>
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">组长：</div>
+                <div className="label">{intl.get('GroupList.GroupList.组长：')}</div>
               </Col>
               <Col span="15">
                 <UsernameAutoComplete callbackState={this.onUserSelect} />

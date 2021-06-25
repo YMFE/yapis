@@ -14,6 +14,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 import './ProjectList.scss';
+import intl from "react-intl-universal";
 
 // layout
 const formItemLayout = {
@@ -116,7 +117,7 @@ class UpDateModal extends Component {
           .then(res => {
             if (res.payload.data.errcode == 0) {
               changeUpdateModal(false, -1);
-              message.success('修改成功! ');
+              message.success(intl.get('ProjectList.UpDateModal.修改成功!'));
               fetchProjectList(currGroup._id).then(() => {
                 changeTableLoading(false);
               });
@@ -191,7 +192,7 @@ class UpDateModal extends Component {
       return (
         <Row key={index} type="flex" justify="space-between" align={index === 0 ? 'middle' : 'top'}>
           <Col span={10} offset={2}>
-            <FormItem label={index === 0 ? <span>环境名称</span> : ''} required={false} key={index}>
+            <FormItem label={index === 0 ? <span>{intl.get('ProjectList.UpDateModal.环境名称')}</span> : ''} required={false} key={index}>
               {getFieldDecorator(`envs-name-${index}`, {
                 validateTrigger: ['onChange', 'onBlur'],
                 initialValue: envMessage.length !== 0 ? k.name : '',
@@ -202,26 +203,26 @@ class UpDateModal extends Component {
                     validator(rule, value, callback) {
                       if (value) {
                         if (value.length === 0) {
-                          callback('请输入环境域名');
+                          callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                         } else if (!/\S/.test(value)) {
-                          callback('请输入环境域名');
+                          callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                         } else if (/prd/.test(value)) {
-                          callback('环境域名不能是"prd"');
+                          callback(intl.get('ProjectList.UpDateModal.环境域名不能是pr'));
                         } else {
                           return callback();
                         }
                       } else {
-                        callback('请输入环境域名');
+                        callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                       }
                     }
                   }
                 ]
-              })(<Input placeholder="请输入环境名称" style={{ width: '90%', marginRight: 8 }} />)}
+              })(<Input placeholder={intl.get('ProjectList.UpDateModal.请输入环境名称')} style={{ width: '90%', marginRight: 8 }} />)}
             </FormItem>
           </Col>
           <Col span={10}>
             <FormItem
-              label={index === 0 ? <span>环境域名</span> : ''}
+              label={index === 0 ? <span>{intl.get('ProjectList.UpDateModal.环境域名')}</span> : ''}
               required={false}
               key={secondIndex}
             >
@@ -232,25 +233,25 @@ class UpDateModal extends Component {
                   {
                     required: false,
                     whitespace: true,
-                    message: '请输入环境域名',
+                    message: intl.get('ProjectList.UpDateModal.请输入环境域名'),
                     validator(rule, value, callback) {
                       if (value) {
                         if (value.length === 0) {
-                          callback('请输入环境域名');
+                          callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                         } else if (!/\S/.test(value)) {
-                          callback('请输入环境域名');
+                          callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                         } else {
                           return callback();
                         }
                       } else {
-                        callback('请输入环境域名');
+                        callback(intl.get('ProjectList.UpDateModal.请输入环境域名'));
                       }
                     }
                   }
                 ]
               })(
                 <Input
-                  placeholder="请输入环境域名"
+                  placeholder={intl.get('ProjectList.UpDateModal.请输入环境域名')}
                   style={{ width: '90%', marginRight: 8 }}
                   addonBefore={getFieldDecorator(`envs-protocol-${index}`, {
                     initialValue:
@@ -289,19 +290,19 @@ class UpDateModal extends Component {
     });
     return (
       <Modal
-        title="修改项目"
+        title={intl.get('ProjectList.UpDateModal.修改项目')}
         visible={isUpdateModalShow}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
         <Form>
-          <FormItem {...formItemLayout} label="项目名称">
+          <FormItem {...formItemLayout} label={intl.get('ProjectList.UpDateModal.项目名称')}>
             {getFieldDecorator('name', {
               initialValue: initFormValues.name,
               rules: [
                 {
                   required: true,
-                  message: '请输入项目名称!'
+                  message: intl.get('ProjectList.UpDateModal.请输入项目名称!')
                 }
               ]
             })(<Input />)}
@@ -311,8 +312,7 @@ class UpDateModal extends Component {
             {...formItemLayout}
             label={
               <span>
-                线上域名&nbsp;
-                <Tooltip title="将根据配置的线上域名访问mock数据">
+                {intl.get('ProjectList.UpDateModal.线上域名&nbsp;')}<Tooltip title={intl.get('ProjectList.UpDateModal.将根据配置的线上域名')}>
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
@@ -323,7 +323,7 @@ class UpDateModal extends Component {
               rules: [
                 {
                   required: true,
-                  message: '请输入项目线上域名!'
+                  message: intl.get('ProjectList.UpDateModal.请输入项目线上域名!')
                 }
               ]
             })(
@@ -342,8 +342,7 @@ class UpDateModal extends Component {
             {...formItemLayout}
             label={
               <span>
-                基本路径&nbsp;
-                <Tooltip title="基本路径为空表示根路径">
+                {intl.get('ProjectList.UpDateModal.基本路径&nbsp;')}<Tooltip title={intl.get('ProjectList.UpDateModal.基本路径为空表示根路')}>
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
@@ -354,19 +353,19 @@ class UpDateModal extends Component {
               rules: [
                 {
                   required: false,
-                  message: '请输入项目基本路径! '
+                  message: intl.get('ProjectList.UpDateModal.请输入项目基本路径!')
                 }
               ]
             })(<Input />)}
           </FormItem>
 
-          <FormItem {...formItemLayout} label="描述">
+          <FormItem {...formItemLayout} label={intl.get('ProjectList.UpDateModal.描述')}>
             {getFieldDecorator('desc', {
               initialValue: initFormValues.desc,
               rules: [
                 {
                   required: false,
-                  message: '请输入描述!'
+                  message: intl.get('ProjectList.UpDateModal.请输入描述!')
                 }
               ]
             })(<TextArea rows={4} />)}
@@ -375,8 +374,7 @@ class UpDateModal extends Component {
           {formItems}
           <FormItem {...formItemLayoutWithOutLabel}>
             <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-              <Icon type="plus" /> 添加环境配置
-            </Button>
+              <Icon type="plus" /> {intl.get('ProjectList.UpDateModal.添加环境配置')}</Button>
           </FormItem>
         </Form>
       </Modal>

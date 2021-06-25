@@ -15,6 +15,7 @@ import {
 import { Postman } from '../../../../components';
 
 import './InterfaceCaseContent.scss';
+import intl from "react-intl-universal";
 
 @connect(
   state => {
@@ -153,7 +154,7 @@ export default class InterfaceCaseContent extends Component {
     if (res.data.errcode) {
       message.error(res.data.errmsg);
     } else {
-      message.success('更新成功');
+      message.success(intl.get('InterfaceCol.InterfaceCaseContent.更新成功'));
       this.props.fetchCaseData(id);
     }
   };
@@ -190,7 +191,7 @@ export default class InterfaceCaseContent extends Component {
       <div style={{ padding: '6px 0' }} className="case-content">
         <div className="case-title">
           {!isEditingCasename && (
-            <Tooltip title="点击编辑" placement="bottom">
+            <Tooltip title={intl.get('InterfaceCol.InterfaceCaseContent.点击编辑')} placement="bottom">
               <div className="case-name" onClick={this.triggerEditCasename}>
                 {currCase.casename}
               </div>
@@ -211,8 +212,7 @@ export default class InterfaceCaseContent extends Component {
               className="text"
               to={`/project/${currCase.project_id}/interface/api/${currCase.interface_id}`}
             >
-              对应接口
-            </Link>
+              {intl.get('InterfaceCol.InterfaceCaseContent.对应接口')}</Link>
           </span>
         </div>
         <div>
@@ -220,7 +220,7 @@ export default class InterfaceCaseContent extends Component {
             <Postman
               data={data}
               type="case"
-              saveTip="更新保存修改"
+              saveTip={intl.get('InterfaceCol.InterfaceCaseContent.更新保存修改')}
               save={this.updateCase}
               ref={this.savePostmanRef}
               interfaceId={currCase.interface_id}

@@ -3,6 +3,7 @@ import React, { PureComponent as Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 import { Icon } from 'antd';
+import intl from "react-intl-universal";
 
 const version = process.env.version;
 class Footer extends Component {
@@ -69,13 +70,13 @@ Footer.defaultProps = {
       iconType: 'github',
       linkList: [
         {
-          itemTitle: 'YApi 源码仓库',
+          itemTitle: intl.get('Footer.Footer.YApi 源码仓库'),
           itemLink: 'https://github.com/YMFE/yapi'
         }
       ]
     },
     {
-      title: '团队',
+      title: intl.get('Footer.Footer.团队'),
       iconType: 'team',
       linkList: [
         {
@@ -85,7 +86,7 @@ Footer.defaultProps = {
       ]
     },
     {
-      title: '反馈',
+      title: intl.get('Footer.Footer.反馈'),
       iconType: 'aliwangwang-o',
       linkList: [
         {
@@ -102,11 +103,11 @@ Footer.defaultProps = {
       title: 'Copyright © 2018 YMFE',
       linkList: [
         {
-          itemTitle: `版本: ${version} `,
+          itemTitle: intl.get('Footer.Footer.版本')+`: ${version} `,
           itemLink: 'https://github.com/YMFE/yapi/blob/master/CHANGELOG.md'
         },
         {
-          itemTitle: '使用文档',
+          itemTitle: intl.get('Footer.Footer.使用文档'),
           itemLink: 'https://hellosean1025.github.io/yapi/'
         }
       ]

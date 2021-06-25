@@ -11,6 +11,7 @@ import AddColModal from './AddColModal';
 // } from '../../../reducer/modules/group.js'
 
 import './Run.scss';
+import intl from "react-intl-universal";
 
 @connect(state => ({
   currInterface: state.inter.curdata,
@@ -75,7 +76,7 @@ export default class Run extends Component {
     if (res.data.errcode) {
       message.error(res.data.errmsg);
     } else {
-      message.success('添加成功');
+      message.success(intl.get('Run.Run.添加成功'));
       this.setState({ saveCaseModalVisible: false });
     }
   };
@@ -94,7 +95,7 @@ export default class Run extends Component {
           data={data}
           id={currProject._id}
           type="inter"
-          saveTip="保存到集合"
+          saveTip={intl.get('Run.Run.保存到集合')}
           save={() => this.setState({ saveCaseModalVisible: true })}
           ref={this.savePostmanRef}
           interfaceId={currInterface._id}

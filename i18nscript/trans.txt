@@ -1,0 +1,791 @@
+You haven't followed the project yet.
+go first
+"Project Square"
+Take a look around, where you can add concerns.
+The project doesn't have an interface yet.
+Add an interface to the "Interface List" on the left.
+This item has no members yet.
+The subgroup has no members yet.
+There's no project for that subgroup yet.
+Please click the Add Project button in the upper right corner to create a new project.
+No data available
+Take a stroll elsewhere first!
+No changes.
+This operation does not change the Api data
+string (computer science)
+natural number
+floating point
+character
+boolean
+domain name
+ip address
+current time
+timestamp
+date
+time
+date and time
+Picture link
+Image data
+color
+Color hex
+Color rgba
+Color rgb
+Color hsl
+integer (math.)
+Large text
+sentences
+words
+Large Chinese text
+Chinese title
+TITLE
+names
+Name in Chinese
+Chinese surname
+Chinese name
+English Surname
+English name
+Chinese sentences
+Chinese phrase
+Addresses
+provinces
+cities
+region
+Convert to uppercase
+Convert to lowercase
+Selection (enumeration)
+disrupt an array
+protocols
+Selecting a test case environment
+Use the environment selected by the test case by default
+default environment
+YApi source code repository
+Team
+feedback
+User documentation
+Completed
+the next step
+Withdrawal guidelines
+personal center
+user management
+withdraw
+focus
+This is your own favorite place to find your projects!
+New projects
+Quickly create a project from any page
+User documentation
+Recommended!
+First time user of YApi, highly recommended reading!
+, we've got an easy-to-understand quick-start tutorial for you, with even more detailed instructions on how to use it, read on!
+My concern.
+Please login first
+Exit successful!
+Grouping
+item
+interface
+Query item or group failure
+Search groups/projects/interfaces
+Editorial Profile
+first page
+large screen
+/ / Type.
+Required fields
+Remark.
+error code
+Back to data
+data name
+Data name 1
+The request "Variable set" has not been run yet, so we cannot extract values from its response. You can test these variables in a test set.
+Advanced parameter settings
+insertion
+constants
+Basic parameter values
+mock data
+Variables&nbsp;
+YApi provides powerful variable parameters, you can use the parameters or return values of the previous interface during testing even if there is a dependency between the interfaces, you can easily test them with one click~!
+expression (math.)
+preview
+md5 encryption
+All letters are lowercase.
+Data length
+Capture part of a string
+sha encryption
+base64 encryption
+base64 decryption
+connection string
+left-hand link
+All letters become uppercase.
+String to number conversion
+Please enter the parameters
+please select
+methodology
+more
+Search mock data
+You're about to leave the editing page.
+Abolition
+determine
+No new version information available!
+The current version is.
+&nbsp;&nbsp;Upgradeable to:
+Version Details
+Important: The current interface testing service requires the installation of a free test enhancements plug-in, which is only available for Chrome. Any of the following installation methods.
+[Google Request Plugin Detailed Installation Tutorial]
+Assertion that httpCode is not 404
+Assertion return code not 40000
+The assertion object body is not equal to {"code": 0}
+Example.
+Remark.
+Environmental settings
+Environmental configuration
+send a request
+Please install the cross-request plugin.
+cancel
+send
+Save to Test Set
+Update this use case
+save (a file etc)
+update
+parameter value
+Adding Path Parameters
+Adding Query Parameters
+Adding Header
+F9 Full Screen Editing
+Advanced parameter settings
+Advanced parameter settings are only valid for json field values.
+File uploads are no longer supported due to Chrome's latest security policy restrictions.
+Adding Form Parameters
+How to view http request data in YApi new version
+Format checks against return data defined as json schema
+Automatic HTML preview
+Test script that asserts the returned result, see the documentation for how to use it.
+&nbsp;If &nbsp;if enabled:&nbsp;
+Note: The Test script will only be executed for automated tests.
+Project replication success
+Confirmation Copy
+Project?
+recognize
+cancel
+Project Title:
+Project Name
+unfollow
+Add to follow
+Replication projects
+note
+an actual example
+maximum value
+minimum value
+maximum number
+minimum quantity
+Maximum length
+Minimum Length
+enumeration
+Remarks on Enumeration
+Are the elements all different?
+type
+names
+genre
+Must it
+must
+non-essential
+default value
+Additional information
+item
+clusters
+interface
+interface set
+user
+other
+Select all
+dynamic (science)
+Details of the changes
+All of the above
+View More
+Api change log
+Note: Green indicates new content, red indicates deleted content.
+Select Api for query.
+Please enter your user name
+The current user does not exist.
+Create Success!
+New Projects
+Project name
+item
+subgroup
+Please select the group to which the project belongs!
+Base path&nbsp;
+The base path of the interface, null is the root path
+Please enter the basic path of the project
+description
+Description should not exceed 144 words!
+Permissions
+privately-owned
+Only team leaders and project developers can index and view project information
+Create project
+My concern.
+Project list
+List of members
+Group dynamics
+group setting
+Welcome to YApi ~
+here.
+"Personal space."
+is a group that is visible only to you; you have full access to this group and can explore YApi's features within it.
+Adding groups
+INTRODUCTION:
+Search Category
+Subgroup Name.
+Please enter the group name
+INTRODUCTION.
+Please enter a group description
+Team Leader.
+Modified successfully!
+Delete successfully
+Confirmation of deletion
+Grouping?
+Warning: This is a very dangerous operation that will delete all the items and interfaces under this group and cannot be restored!
+Please enter the name of the group to confirm this operation:
+The name of the group is incorrect.
+Subgroup Name.
+Please enter the group name
+INTRODUCTION.
+Please enter a group description
+Interface Custom Fields&nbsp;
+Additional fields can be added to the interface Data
+Please enter a custom field name
+The custom field name cannot be null.
+Opened.
+turn on
+surname Guan
+Preservation
+hazardous operations
+Check
+Delete group
+Once a group is deleted, the data cannot be recovered, so proceed with caution!
+Only the Super Admin has permission to delete groups.
+Delete
+Panel members (
+) people
+Adding members
+team leader
+developer (of a project)
+visitors
+Are you sure you want to delete it?
+I'm sure.
+Username:
+Permissions:
+My concerns
+My project
+Subgroups total (
+) projects
+Adding items
+You do not have permission, please contact the group leader or administrator.
+Modified successfully!
+Environment Name
+Please enter your environmental domain name
+The environment domain name cannot be "prd"
+Please enter the environment name
+environmental domain name
+Modification projects
+Project name
+Please enter the project name!
+Online Domain Name&nbsp;
+The mock data will be accessed according to the configured online domain name.
+Please enter the domain name of the project line!
+Base Path&nbsp;
+A null base path means the root path
+Please enter the basic path of the project!
+Description of the project
+Please enter a description!
+Add environment configuration
+User documentation
+Efficient, easy-to-use, powerful API management platform
+Designed to provide developers, product and testers with a more elegant interface management service.
+Login / Register
+A management platform for API developers
+YApi makes interface development easier and more efficient, makes interface management more readable and maintainable, and makes teamwork more rational.
+Project Management
+Provide basic project grouping, project management, interface management features
+interface management
+friendly interface documentation , based on websocket collaborative interface editing and multi-user class postman test tool , so that multi-user collaboration doubles the development efficiency .
+Based on Mockjs, simple to use and powerful
+Powerful Mock Service
+All the Mock services you want are here.
+Mock rules
+The ease of writing interfaces by learning a few simple Mock template rules will greatly increase the efficiency of defining interfaces. And don't worry about writing mock data: all data can be generated randomly in real time.
+Generated mock data can be used directly with ajax requests or through server proxies (without changing a single line of project code)
+Superintendent (* N)
+- Creating groups
+- distribution team leader
+- Managing all member information
+Team leader (* N)
+- Create project
+- Managing information for clusters or projects
+- Managing Developers and Members
+Developer(* N) / Member(* N)
+- Group creation is not allowed
+- Do not allow changes to group or project information
+Flattened management model
+The logic of interface management is complex and the frequency of operation is high, which will seriously slow down the production efficiency.
+YAPI introduces the idea of flat management mode into the rights management of the product. Permissions are assigned to a number of team leaders, and the super administrator only needs to manage the team leader, which actually manages YAPI's major groups and projects." Team Leader". The Team Leader is responsible for the subgroup or project and is usually the BU Leader/Project Leader.
+Ready to use it?
+Sign up for an account and get started. Check out the documentation for more information.
+Login successful!
+Please enter the correct email!
+General Login
+Please enter your password!
+Login
+login
+register
+The administrator has disabled the registration, please contact the administrator
+Successful registration!
+The password you entered twice is not the same!
+Please enter your username!
+Please enter your email!
+Please enter your password!
+Please enter your password again!
+Register
+dynamic (science)
+testing
+set up
+Mock address.
+Download Mock Data
+user
+clusters
+interface
+item
+Log type
+All of the above
+View More
+Efficient, easy-to-use, deployable API management platform
+Mock address.
+Download Mock Data
+Interface list
+Test Sets
+verification result
+interface name
+interface path
+Request Method
+state
+Filter the set of interfaces that meet the criteria
+Completed
+incomplete
+Select the items to import.
+Update Success
+Click to edit
+corresponding interface
+Update save changes
+Interface collection profile update successful
+data anomaly
+verify that sth has passed
+Report not yet generated
+Update Success
+Copied successfully to the clipboard
+Configuration Test Set Success
+Use case name
+Each use case has a unique key that is used to get the response data for the matched interface, such as using the
+variable parameter
+function
+state
+request an exception
+verification failure
+interface path
+Jump to corresponding interface
+test report
+General rule configuration
+Check the HttpCode:&nbsp;
+Check if the http code is 200
+turn on
+surname Guan
+Checking return json:&nbsp;
+Check the return data value of the interface, e.g. check if code is equal to 0.
+field name
+be on duty
+Check the return data structure:&nbsp;
+This check will only work if the response is defined in a json-schema style
+Global Test Scripts:&nbsp;
+When running automation tests, the global script is called first, only when the global script passes the test, the case custom test script will be run
+Test Collection&nbsp;
+Click to view document
+To run automated tests on the YApi server, make sure that the YApi server has access to the automated test environment domain, as the test environment cannot be a private network.
+Server-side testing
+Start testing.
+Please install the cross-request chrome plugin
+Custom Test Scripts
+Whether to open:&nbsp;
+Server-side automation test
+Select environment
+Use the environment selected by the test case by default
+Output format.
+message notification
+A message is sent to project team members when the test fails
+Download data
+Test data will be downloaded locally when it is turned on.
+duplicate
+Note: Accessing this URL will allow you to test all use cases, so make sure the YApi server has access to the environment's configured domain!
+collective name
+Please enter a collection name!
+INTRODUCTION
+Modify Collection Success
+Add Collection Success
+You confirm to delete this test set
+Tip: This operation will delete all the test cases in the collection, and the test cases cannot be restored after deletion.
+recognize
+cancel
+Deleting a collection successfully
+Cloning Test Set Success
+This test set is the last set
+Hint: It is not recommended to delete
+Cloning use case success
+You confirm to delete this test case
+Please note: Use cases cannot be restored after deletion.
+Deleting a use case successfully
+Import collection success
+Deleting use cases
+cloning use case
+Search test collections
+Adding collections
+Deleting collections
+Edit Collection
+import interface
+clone collection (math.)
+Importing an interface to a collection
+taxonomy
+Please enter a category name!
+Category Name
+note
+cancel
+submit
+Interface classification
+interface name
+interface
+interface path
+Please enter the interface path!
+Note
+Detailed interface data can be added on the edit page.
+cancel
+submit
+Save successfully
+Failed websocket connection will cause multiple people to edit the same interface conflict.
+The interface is being edited. Please try again later...
+Loading, please wait...
+Tag Settings
+save (a file etc)
+YApi - efficient, easy-to-use, powerful visual interface management platform
+preview
+edit
+run
+Leaving the page will lose the current edit, sure you want to leave?
+You're about to leave the editing page.
+Abolition
+determine
+Something is wrong with the return body json format, please check!
+Something is wrong with the response Body json format, please check!
+The request parameter json-schema format is incorrect.
+Returning data in an incorrect json-schema format
+Parsing error:
+Parameter Name
+essential
+inessential
+Parameter Examples
+note
+parameter value
+Batch adding parameters
+introduce into
+One name:examples per line
+Basic settings
+interface name
+interface
+Select Category
+Please select a category
+Interface Path&nbsp;
+1. support dynamic routing, for example:
+2. supports the QueryRouter for controller=xxx, non-router Query parameters can be defined to Request Settings - &#62;Query
+The basic path of the interface can be changed in the project settings.
+Please enter the interface path!
+Please select tag
+tag settings
+Tag settings
+state
+Completed
+incomplete
+Please enter
+Request parameter settings
+Adding Query Parameters
+Batch Add
+Adding Header
+Adding form parameters
+Project -> Settings turn on json5
+turn on
+surname Guan
+Based on Json5, the parameter description information is implemented as comments.
+For "Global Edit" or "Exit Fullscreen" press F9.
+Return data settings&nbsp;
+Template
+preview
+Based on mockjs and json5, use annotations to write parameter descriptions
+Please contact us for details on how to use it.
+View Document
+For "Global Edit", "Global Edit" or "Exit Fullscreen" please press
+Notes
+Other
+Message Notification&nbsp;
+To enable message notifications, you can change it in the project settings.
+Open Interface&nbsp;
+The user can choose to export only the open interfaces during data export.
+save (a file etc)
+Interface collection profile update successful
+Interface added successfully
+Modified successfully
+interface name
+interface path
+open interface
+Interface classification
+state
+Completed
+incomplete
+not set
+All interfaces
+Total (
+) individual
+Adding an interface
+Interface added successfully
+Interface category added successfully
+Interface category update success
+Are you sure you want to delete this interface?
+Please note: After the interface is deleted, it cannot be restored.
+recognize
+cancel
+Are you sure you want to delete this interface category?
+Tip: This operation will delete all the interfaces under the category, the interface can not be restored after deletion!
+search interface
+Add Category
+Adding an interface
+modify a classification
+Delete Interface
+Replication Interface
+All interfaces
+Delete Classification
+Add Collection Success
+Add to collection
+Interface use case name.
+Please enter the name of the interface use case
+Please select the collection to add to.
+No collections yet, please add!
+Adding a new collection
+Set Name.
+Please enter a collection name
+INTRODUCTION.
+Please enter a collection description
+Additions
+Added successfully
+Save to set
+Parameter Name
+Parameter Type
+copy
+document
+Must it
+illustrate
+note
+negate
+be
+Copied successfully to the clipboard
+( global mock & strict mode )
+(strict model)
+( global mock )
+parameter value
+incomplete
+Completed
+Basic Information
+Interface Name.
+Create&ensp;Build&ensp;People.
+&emsp;&emsp;Status.
+Updated on.
+Interface path.
+Copy Path
+Mock address.
+request parameter
+Path parameters.
+Back to data
+interface
+dynamic (science)
+data management
+Member management
+set up
+Please select the way to import data.
+Please select the default category of your upload.
+Are you sure you want to sync the data?
+Yes.
+cancel
+Please note: After data synchronization, the original modified data may be lost.
+The url cannot be empty.
+Data Import&nbsp;
+Click to view document
+Please select the default category for data import.
+Data Synchronization&nbsp;
+Normal Mode
+Do not import an existing interface
+Smart Merge
+Existing interface that will merge the response of the returned data, if swagger data is imported, retaining the changes to the data structure
+complete coverage
+No old data is retained, new data is used entirely, and the interface definition is left entirely to the back-end definition.
+Enable url import&nbsp;
+swagger url import
+upload
+Uploading...
+Click or drag the file to the upload area
+Data Export
+Please select the way to export data
+All interfaces
+public interface
+export
+Add wiki&nbsp;
+html and markdown data exported with wiki data when opened.
+new environment
+Modified successfully!
+Environment settings were unsuccessful
+Are you sure you want to delete this environment variable?
+Yes.
+cancel
+Environment List&nbsp;
+Add your project's environment configuration here.
+Adding environment variables
+Please enter the header name
+Please enter the parameter content
+Name of environment
+new environment
+Please enter the environment name
+environmental domain name
+Please enter your environmental domain name!
+Spaces are not allowed in the environment domain name!
+Please enter your environment domain name!
+Click to view document
+Preservation
+Project members (
+) people
+message notification
+turn on
+surname Guan
+Adding members
+Batch Import Members
+team leader
+developer (of a project)
+visitors
+Are you sure you want to delete it?
+I'm sure.
+Username:
+Permissions:
+Project Name:
+Please select project name
+Subgroup members
+I
+Modified successfully!
+Confirm deletion
+Project?
+Warning: This is a very dangerous operation that will delete all interfaces under this project and cannot be restored!
+Please enter the project name to confirm this operation:
+The project name is incorrect.
+Deleted successfully!
+Project ID
+Project name
+item
+subgroup
+Please select the group to which the project belongs!
+Interface Basic Path&nbsp;
+A null base path means the root path
+Please enter the basic path!
+MOCK Address&nbsp;
+Please check the documentation for the detailed usage.
+description
+tag information&nbsp;
+Defining tag information and filtering interfaces
+mock strict mode&nbsp;
+When enabled, mock requests will check query, body form mandatory fields and json schema.
+turn on
+surname Guan
+Open json5&nbsp;
+Write json fields to interface body and return values when enabled
+Message notification is enabled by default.
+competence
+privately-owned
+Only team leaders and project developers can index and view project information
+overt
+Anyone can index and view project information
+Preservation
+hazardous operations
+Check
+Delete item
+Once an item is deleted, the data cannot be recovered, so proceed with caution!
+Only the team leader and administrator have permission to delete items.
+Delete
+Please enter the tag description information
+Save successfully
+Save failed,
+Whether to open&nbsp;
+Click to view document
+turn on
+surname Guan
+Mock script.
+save (a file etc)
+Save successfully
+Save failed,
+Pre-request Script
+Pre-response Script
+save (a file etc)
+Copied successfully to the clipboard
+Regenerate the key
+After the regeneration, the previous key will not be used, do you want to confirm the regeneration?
+recognize
+cancel
+Update Success
+Tool identification
+Each project has a uniquely identified token, which users can use to request the project openapi.
+Openapi.
+refresh (a page)
+To ensure the security and privacy of the data within the project, do not easily expose this token to users outside the project group.
+open interface.
+Detailed interface documentation
+/api/open/import_data [import_data]
+/api/interface/getCatMenu [Get All Categories]
+Project configuration
+Environmental configuration
+Request Configuration
+token configuration
+Global mock script
+This user has been deleted
+user management
+username
+user role
+Updated Date
+function
+Confirm to delete this user?
+Confirmation
+cancel
+remove
+Total users.
+place
+Please enter your user name
+modify
+Manage :
+Update User Information Success
+The password is different twice.
+Change password successfully
+keeper
+member
+username
+cancel
+identify
+The old code.
+New code.
+Confirm password
+personal setting
+Data setting
+Click to upload an avatar
+user id
+characters
+login method
+Site Login
+Third Party Login
+Account creation time
+Update account hours
+cipher
+Click on the avatar to replace it (only jpg, png format images up to 200kb in size are supported).
+Images can only be formatted as jpg, png!
+The image must be less than 200kb!

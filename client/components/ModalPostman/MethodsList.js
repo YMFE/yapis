@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Icon, Input, Select, Tooltip } from 'antd';
 import _ from 'underscore';
+import intl from "react-intl-universal";
+
 const Option = Select.Option;
 
 // 深拷贝
@@ -10,17 +12,17 @@ function deepEqual(state) {
 }
 
 const METHODS_LIST = [
-  { name: 'md5', type: false, params: [], desc: 'md5加密' },
-  { name: 'lower', type: false, params: [], desc: '所有字母变成小写' },
-  { name: 'length', type: false, params: [], desc: '数据长度' },
-  { name: 'substr', type: true, component: 'doubleInput', params: [], desc: '截取部分字符串' },
-  { name: 'sha', type: true, component: 'select', params: ['sha1'], desc: 'sha加密' },
-  { name: 'base64', type: false, params: [], desc: 'base64加密' },
-  { name: 'unbase64', type: false, params: [], desc: 'base64解密' },
-  { name: 'concat', type: true, component: 'input', params: [], desc: '连接字符串' },
-  { name: 'lconcat', type: true, component: 'input', params: [], desc: '左连接' },
-  { name: 'upper', type: false, desc: '所有字母变成大写' },
-  { name: 'number', type: false, desc: '字符串转换为数字类型' }
+  { name: 'md5', type: false, params: [], desc: intl.get('ModalPostman.MethodsList.md5加密') },
+  { name: 'lower', type: false, params: [], desc: intl.get('ModalPostman.MethodsList.所有字母变成小写') },
+  { name: 'length', type: false, params: [], desc: intl.get('ModalPostman.MethodsList.数据长度') },
+  { name: 'substr', type: true, component: 'doubleInput', params: [], desc: intl.get('ModalPostman.MethodsList.截取部分字符串') },
+  { name: 'sha', type: true, component: 'select', params: ['sha1'], desc: intl.get('ModalPostman.MethodsList.sha加密') },
+  { name: 'base64', type: false, params: [], desc: intl.get('ModalPostman.MethodsList.base64加密') },
+  { name: 'unbase64', type: false, params: [], desc: intl.get('ModalPostman.MethodsList.base64解密') },
+  { name: 'concat', type: true, component: 'input', params: [], desc: intl.get('ModalPostman.MethodsList.连接字符串') },
+  { name: 'lconcat', type: true, component: 'input', params: [], desc: intl.get('ModalPostman.MethodsList.左连接') },
+  { name: 'upper', type: false, desc: intl.get('ModalPostman.MethodsList.所有字母变成大写') },
+  { name: 'number', type: false, desc: intl.get('ModalPostman.MethodsList.字符串转换为数字类型') }
 ];
 
 class MethodsList extends Component {
@@ -63,7 +65,7 @@ class MethodsList extends Component {
     return (
       <Input
         size="small"
-        placeholder="请输入参数"
+        placeholder={intl.get('ModalPostman.MethodsList.请输入参数')}
         value={params[0]}
         onChange={e => this.handleParamsChange(e.target.value, clickIndex, paramsIndex, 0)}
       />
@@ -101,7 +103,7 @@ class MethodsList extends Component {
     return (
       <Select
         value={params[0] || 'sha1'}
-        placeholder="请选择"
+        placeholder={intl.get('ModalPostman.MethodsList.请选择')}
         style={{ width: 150 }}
         size="small"
         onChange={e => this.handleParamsChange(e, clickIndex, paramsIndex, 0)}
@@ -153,7 +155,7 @@ class MethodsList extends Component {
 
     return (
       <div className="modal-postman-form-method">
-        <h3 className="methods-title title">方法</h3>
+        <h3 className="methods-title title">{intl.get('ModalPostman.MethodsList.方法')}</h3>
         {showList.map((item, index) => {
           return (
             <Row
@@ -181,7 +183,7 @@ class MethodsList extends Component {
         {moreFlag && (
           <div className="show-more" onClick={this.showMore}>
             <Icon type="down" />
-            <span style={{ paddingLeft: '4px' }}>更多</span>
+            <span style={{ paddingLeft: '4px' }}>{intl.get('ModalPostman.MethodsList.更多')}</span>
           </div>
         )}
       </div>
