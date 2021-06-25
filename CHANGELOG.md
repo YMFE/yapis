@@ -1,3 +1,8 @@
+## v1.9.2
+* fix: 修复高级 mock 无效的bug
+* opti: 对登录 email 空格的过滤
+* fix: 修复deepMath 增加对原型属性比较
+
 ## v1.9.1
 * 修复因 mongodb 一个废弃报错导致部署不成功问题
 

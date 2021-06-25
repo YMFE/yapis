@@ -590,6 +590,7 @@ class projectController extends baseController {
     } else {
       follow = follow.map(item => {
         item = item.toObject();
+        item._id = item.projectid
         item.follow = true;
         return item;
       });

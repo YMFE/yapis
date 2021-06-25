@@ -85,7 +85,9 @@ exports.isDeepMatch = function(obj, properties) {
   }
 
   let match = true;
-  for (var i in properties) {
+  let keys = Object.keys(properties)
+  for (let index=0; index< keys.length; index++) {
+    let i = keys[index];
     if (!Compare(obj[i], properties[i])) {
       match = false;
       break;

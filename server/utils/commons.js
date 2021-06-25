@@ -13,6 +13,7 @@ const json5 = require('json5');
 const _ = require('underscore');
 const Ajv = require('ajv');
 const Mock = require('mockjs');
+const sandboxFn = require('./sandbox')
 
 
 
@@ -282,17 +283,13 @@ exports.verifyPath = path => {
  */
 exports.sandbox = (sandbox, script) => {
   try {
-    const { NodeVM } = require('vm2');
-    sandbox = sandbox || {};
-    const vm = new NodeVM({
-      require: {
-        external: true
-      },
-      sandbox: sandbox,
-      timeout: 3000
-    })
-
-    vm.run(script)
+    const vm = require('vm');
+    sandbox = sandbox || {};	
+    script = new vm.Script(script);	
+    const context = new vm.createContext(sandbox);	
+    script.runInContext(context, {	
+      timeout: 3000	
+    });	      
     return sandbox
   } catch (err) {
     throw err
@@ -580,7 +577,7 @@ ${JSON.stringify(schema, null, 2)}`)
       // script 是断言
       if (globalScript) {
         logs.push('执行脚本：' + globalScript)
-        result = yapi.commons.sandbox(context, globalScript);
+        result = await sandboxFn(context, globalScript);
       }
     }
 
@@ -589,7 +586,7 @@ ${JSON.stringify(schema, null, 2)}`)
     // script 是断言
     if (script) {
       logs.push('执行脚本:' + script)
-      result = yapi.commons.sandbox(context, script);
+      result = await sandboxFn(context, script);
     }
     result.logs = logs;
     return yapi.commons.resReturn(result);
@@ -617,7 +614,7 @@ exports.getUserdata = async function getUserdata(uid, role) {
 };
 
 // 处理mockJs脚本
-exports.handleMockScript = function (script, context) {
+exports.handleMockScript = async function (script, context) {
   let sandbox = {
     header: context.ctx.header,
     query: context.ctx.query,
@@ -636,7 +633,7 @@ exports.handleMockScript = function (script, context) {
       var parts = Cookie.split('=');
       sandbox.cookie[parts[0].trim()] = (parts[1] || '').trim();
     });
-  sandbox = yapi.commons.sandbox(sandbox, script);
+  sandbox = await sandboxFn(sandbox, script);
   sandbox.delay = isNaN(sandbox.delay) ? 0 : +sandbox.delay;
 
   context.mockJson = sandbox.mockJson;
