@@ -108,6 +108,7 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 * 新浪
 * VIPKID
 * 马蜂窝
+* 旷视科技
 
 ### Authors
 * [hellosean1025](https://github.com/hellosean1025)
