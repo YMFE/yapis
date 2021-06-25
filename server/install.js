@@ -136,7 +136,7 @@ function setupSql() {
 
       result.then(
         function() {
-          fs.ensureFileSync(yapi.path.join(yapi.WEBROOT_RUNTIME, 'init.lock'));
+          fs.ensureFileSync(yapi.path.join(yapi.WEBROOT_RUNTIME, 'data', 'init.lock'));
           console.log(
             `初始化管理员账号成功,账号名："${yapi.WEBCONFIG.adminAccount}"，密码："ymfe.org"`
           ); // eslint-disable-line
