@@ -436,7 +436,7 @@ export default class InterfaceColMenu extends Component {
       } else {
         return {
           expands: this.state.expands ? this.state.expands : ['col_' + interfaceColList[0]._id],
-          selects: ['root']
+          selects: ['col_' + interfaceColList[0]._id]
         };
       }
     };
