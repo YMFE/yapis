@@ -68,9 +68,24 @@ function escapeStr(str, isToc) {
 
 function createBaseMessage(basepath, inter) {
   // 基本信息
+  let desc = inter.desc;
+  if (_.isUndefined(desc)) {
+    desc = '';
+  }
+  if (desc.indexOf("@GetMapping") != -1|| desc.indexOf("@PostMapping") != -1) {
+    desc = ''
+  }
+  desc = desc.replace("<p><br data-tomark-pass=\"\"><br>\n<br data-tomark-pass=\"\"></p>", "");
+  desc = desc.replace("/\\n/gm", "");
+  desc = desc.trim();
+  if(desc.length > 0) {
+    desc = `**接口描述：**\n${desc}\n`;
+  } else {
+    desc = '';
+  }
   let baseMessage = `### 基本信息\n\n**Path：** ${basepath + inter.path}\n\n**Method：** ${
     inter.method
-  }\n\n**接口描述：**\n${_.isUndefined(inter.desc) ? '' : inter.desc}\n`;
+  }\n\n${desc}`;
   return baseMessage;
 }
 
@@ -119,7 +134,9 @@ function createReqQuery(req_query) {
 }
 
 function createReqBody(req_body_type, req_body_form, req_body_other, req_body_is_json_schema) {
-  if (req_body_type === 'form' && req_body_form.length) {
+  let arr = ['form', 'json'];
+  let index = arr.indexOf(req_body_type);
+  if (index > -1 && req_body_form.length) {
     let bodyTable = `**Body**\n\n`;
     bodyTable += `| 参数名称  | 参数类型  |  是否必须 | 示例  | 备注  |\n| ------------ | ------------ | ------------ | ------------ | ------------ |\n`;
     let req_body = req_body_form;
@@ -130,10 +147,7 @@ function createReqBody(req_body_type, req_body_form, req_body_other, req_body_is
     }
     return `${bodyTable}\n\n`;
   } else if (req_body_other) {
-    if (req_body_is_json_schema) {
-      let reqBody = createSchemaTable(req_body_other);
-      return `**Body**\n\n` + reqBody;
-    } else {
+    if (!req_body_is_json_schema) {
       //other
       return `**Body**\n\n` + '```javascript' + `\n${req_body_other || ''}` + '\n```';
     }
@@ -144,9 +158,13 @@ function createReqBody(req_body_type, req_body_form, req_body_other, req_body_is
 function tableHeader(columns) {
   let header = ``;
   columns.map(item => {
-    header += `<th key=${item.key}>${item.title}</th>`;
+      header += ` | ${item.title} `;
   });
-
+    header += `|\n`;
+    columns.map(item => {
+      header += `| ------------`
+    })
+    header += `|\n`;
   return header;
 }
 
@@ -160,7 +178,7 @@ function handleObject(text) {
     let value = text[item];
     tpl += _.isUndefined(text[item])
       ? ''
-      : `<p key=${index}><span style="font-weight: '700'">${name}: </span><span>${value.toString()}</span></p>`;
+            : `${name}: ${value.toString()}`;
   });
 
   return tpl;
@@ -181,26 +199,30 @@ function tableCol(col, columns, level) {
       case 'type':
         text =
           value === 'array'
-            ? `<span>${col.sub ? col.sub.itemType || '' : 'array'} []</span>`
-            : `<span>${value}</span>`;
+                        ? `${col.sub ? col.sub.itemType || '' : 'array'} []`
+                        : `${value}`;
         break;
       case 'required':
         text = value ? '必须' : '非必须';
         break;
       case 'desc':
         text = _.isUndefined(col.childrenDesc)
-          ? `<span style="white-space: pre-wrap">${value}</span>`
-          : `<span style="white-space: pre-wrap">${col.childrenDesc}</span>`;
+          ? `${value}`
+          : `${col.childrenDesc}`;
         break;
       case 'name':
-        text = `<span style="padding-left: ${20 * level}px"><span style="color: #8c8a8a">${
-          level > 0 ? '├─' : ''
-        }</span> ${value}</span>`;
+                if (level > 0) {
+                    for (var x = 0; x < level; x ++) {
+                        text += "├─";
+                    }
+                }
+
+                text += `${value}`;
         break;
       default:
         text = value;
     }
-    tpl += `<td key=${index}>${text}</td>`;
+      tpl += ` | ${text} `;
   });
 
   return tpl;
@@ -211,7 +233,7 @@ function tableBody(dataSource, columns, level) {
   let tpl = ``;
   dataSource.map(col => {
     let child = null;
-    tpl += `<tr key=${col.key}>${tableCol(col, columns, level)}</tr>`;
+        tpl += `${tableCol(col, columns, level)} |\n`;
     if (!_.isUndefined(col.children) && _.isArray(col.children)) {
       let index = level + 1;
       child = tableBody(col.children, columns, index);
@@ -225,18 +247,9 @@ function tableBody(dataSource, columns, level) {
 function createSchemaTable(body) {
   let template = ``;
   let dataSource = schema.schemaTransformToTable(json_parse(body));
-  template += `<table>
-  <thead class="ant-table-thead">
-    <tr>
-      ${tableHeader(columns)}
-    </tr>
-  </thead>`;
-
-  template += `<tbody className="ant-table-tbody">${tableBody(dataSource, columns, 0)}
-               </tbody>
-              </table>
-            `;
-
+    template += `${tableHeader(columns)}`;
+    template += `${tableBody(dataSource, columns, 0)}`;
+    console.log("table  is %s", template);
   return template;
 }
 
@@ -258,7 +271,7 @@ function createInterMarkdown(basepath, listItem, isToc) {
   let mdTemplate = ``;
   const toc = `[TOC]\n\n`;
   // 接口名称
-  mdTemplate += `\n## ${escapeStr(`${listItem.title}\n<a id=${listItem.title}> </a>`, isToc)}\n`;
+  mdTemplate += `\n## ${escapeStr(`${listItem.title}\n`, isToc)}\n`;
   isToc && (mdTemplate += toc);
   // 基本信息
   mdTemplate += createBaseMessage(basepath, listItem);
