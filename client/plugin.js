@@ -118,6 +118,21 @@ hooks = {
     listener: []
   },
   /**
+   * 在测试集里运行，每次集合测试完毕后调用
+   * 返回值为测试用例结果明细
+   * {
+      colId: collection id,
+      curUid: current user id,
+      startTime: collection test start time,
+      endTime:collection test end time
+   * }
+   */
+  after_col_test:{
+    type: 'listener',
+    mulit: true,
+    listener: []
+  },
+  /**
    * header下拉菜单 menu 钩子
    * @param HeaderMenu
    *

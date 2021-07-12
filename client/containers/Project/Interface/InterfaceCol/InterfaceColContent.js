@@ -245,6 +245,7 @@ class InterfaceColContent extends Component {
   };
 
   executeTests = async () => {
+    let startTime = new Date().getTime()+ '';
     for (let i = 0, l = this.state.rows.length, newRows, curitem; i < l; i++) {
       let { rows } = this.state;
 
@@ -296,6 +297,14 @@ class InterfaceColContent extends Component {
       newRows[i] = curitem;
       this.setState({ rows: newRows });
     }
+
+    await plugin.emitHook('after_col_test', this.reports, {
+      colId:this.props.currColId,
+      curUid: this.props.curUid,
+      startTime: startTime,
+      endTime: new Date().getTime()+ ''
+    });
+
     await axios.post('/api/col/up_col', {
       col_id: this.props.currColId,
       test_report: JSON.stringify(this.reports)
